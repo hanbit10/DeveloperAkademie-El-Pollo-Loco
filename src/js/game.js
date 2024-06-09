@@ -7,4 +7,5 @@ function init() {
   ctx = canvas.getContext("2d")
 
   console.log("my Character", world.character)
+  console.log("enemy", world.enemies[1])
 }
