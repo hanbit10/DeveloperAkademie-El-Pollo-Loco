@@ -5,6 +5,7 @@ class MovableObject {
   width = 100
   img
   imageCache = [] 
+  currentImage =0
 
   loadImage(path) {
     this.img = new Image()
@@ -17,6 +18,15 @@ class MovableObject {
       img.src = path
       this.imageCache[path] = img
     })
+  }
+
+  animate() {
+    setInterval(() => {
+      let i = this.currentImage % this.IMAGES_WALKING.length
+      let path = this.IMAGES_WALKING[i]
+      this.img = this.imageCache[path]
+      this.currentImage++
+    }, 130)
   }
 
   moveRight() {
