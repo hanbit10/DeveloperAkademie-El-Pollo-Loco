@@ -1,4 +1,4 @@
-class MovableObject extends DrawableObject {
+class MoveableObject extends DrawableObject {
   gravity = false
   speedY = 0;
   acceleration = 2.5
@@ -15,7 +15,11 @@ class MovableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    return this.y < 180
+    if((this instanceof ThrowableObject)) {
+      return true
+    } else {
+      return this.y < 180
+    }
   }
 
   moveRight() {
@@ -29,8 +33,6 @@ class MovableObject extends DrawableObject {
   jump(){
     this.speedY = 30
   }
-
-
 
   isColliding(mo) {
     return  this.x + this.width >= mo.x && 

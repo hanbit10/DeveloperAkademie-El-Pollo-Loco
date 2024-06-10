@@ -1,4 +1,4 @@
-class Character extends MovableObject {
+class Character extends MoveableObject {
   height = 270;
   y = 80;
   IMAGES_WALKING = [
@@ -38,6 +38,19 @@ class Character extends MovableObject {
     "/assets/img/2_character_pepe/4_hurt/H-43.png",
   ]
 
+  IMAGES_IDLE = [
+    "/assets/img/2_character_pepe/1_idle/idle/I-1.png",
+    "/assets/img/2_character_pepe/1_idle/idle/I-2.png",
+    "/assets/img/2_character_pepe/1_idle/idle/I-3.png",
+    "/assets/img/2_character_pepe/1_idle/idle/I-4.png",
+    "/assets/img/2_character_pepe/1_idle/idle/I-5.png",
+    "/assets/img/2_character_pepe/1_idle/idle/I-6.png",
+    "/assets/img/2_character_pepe/1_idle/idle/I-7.png",
+    "/assets/img/2_character_pepe/1_idle/idle/I-8.png",
+    "/assets/img/2_character_pepe/1_idle/idle/I-9.png",
+    "/assets/img/2_character_pepe/1_idle/idle/I-10.png",
+  ]
+
   world;
   speed = 5
   otherDirection = false
@@ -49,6 +62,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_JUMPING)
     this.loadImages(this.IMAGES_DEAD)
     this.loadImages(this.IMAGES_HURT)
+    this.loadImages(this.IMAGES_IDLE)
     this.applyGravity()
     this.animate()
   }
@@ -61,7 +75,6 @@ class Character extends MovableObject {
         this.otherDirection = false
         this.walking_sound.play()
       }
-
       if(this.world.keyboard.LEFT && this.x > 0 ) {
         this.moveLeft()
         this.otherDirection = true
@@ -85,7 +98,10 @@ class Character extends MovableObject {
           this.jump()
         }
       }
-
     }, 100)
+
+    setInterval(() => {
+      this.playAnimation(this.IMAGES_IDLE)
+    }, 200)
   }
 }
