@@ -7,7 +7,6 @@ function init() {
 }
 
 document.addEventListener('keydown', (e) => {
-  // console.log(e)
   if(e.key == "ArrowRight") {
     keyboard.RIGHT = true
   }
@@ -30,7 +29,6 @@ document.addEventListener('keydown', (e) => {
 }) 
 
 document.addEventListener('keyup', (e) => {
-  // console.log(e)
   if(e.key == "ArrowRight") {
     keyboard.RIGHT = false
   }
