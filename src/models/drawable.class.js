@@ -24,13 +24,25 @@ class DrawableObject {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
   }
 
-  drawFrame(ctx) {
-    if(this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
+  drawFrame(ctx, mo) {
+    if(this instanceof Chicken || this instanceof Endboss || this instanceof ChickenNormal) {
       ctx.beginPath();
       ctx.lineWidth = "5"
       ctx.strokeStyle = "blue"
-      ctx.rect(this.x, this.y, this.width, this.height)
+      ctx.rect(this.x, this.y, mo.frameWidth, mo.frameHeight)
       ctx.stroke()
     }
+    if(this instanceof Character) {
+      this.setCharacterFrame(ctx, mo)
+    }
+  }
+
+  setCharacterFrame(ctx, mo){
+    ctx.beginPath();
+    ctx.lineWidth = "5"
+    ctx.strokeStyle = "transparent"
+    ctx.strokeOpacity = 0
+    ctx.rect(this.x+25, this.y+130, mo.frameWidth, mo.frameHeight)
+    ctx.stroke()
   }
 }
