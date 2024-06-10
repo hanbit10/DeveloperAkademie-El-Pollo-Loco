@@ -10,6 +10,7 @@ class Character extends MovableObject {
   ]
   world;
   speed = 5
+  otherDirection = false
 
   constructor(){
     super().loadImage("/assets/img/2_character_pepe/2_walk/W-21.png")
@@ -25,9 +26,10 @@ class Character extends MovableObject {
       }
 
       if(this.world.keyboard.LEFT) {
-        this.x = this.x+this.speed
+        this.x = this.x-this.speed
         this.otherDirection = true
       }
+      this.world.camera_x = -this.x
     }, 1000/60)
 
     setInterval(() => {

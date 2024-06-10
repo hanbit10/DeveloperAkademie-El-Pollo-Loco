@@ -6,7 +6,6 @@ class MovableObject {
   img
   imageCache = [] 
   currentImage = 0
-  otherDirection = false
 
   loadImage(path) {
     this.img = new Image()
@@ -22,7 +21,7 @@ class MovableObject {
   }
 
   moveRight() {
-    console.log("moveRight")
+    // console.log("moveRight")
   }
 
   moveLeft(speed) {
@@ -32,6 +31,6 @@ class MovableObject {
   }
 
   jump(){
-    console.log("jump")
+    // console.log("jump")
   }
 }
