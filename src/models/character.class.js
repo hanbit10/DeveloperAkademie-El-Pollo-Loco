@@ -11,6 +11,7 @@ class Character extends MovableObject {
   world;
   speed = 5
   otherDirection = false
+  walking_sound = new Audio("/assets/audio/414921__straget__a-walk-with-stop.wav")
 
   constructor(){
     super().loadImage("/assets/img/2_character_pepe/2_walk/W-21.png")
@@ -20,14 +21,17 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
+      this.walking_sound.pause()
       if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x ) {
         this.x = this.x+this.speed
         this.otherDirection = false
+        this.walking_sound.play()
       }
 
       if(this.world.keyboard.LEFT && this.x > 0 ) {
         this.x = this.x-this.speed
         this.otherDirection = true
+        this.walking_sound.play()
       }
       this.world.camera_x = -this.x + 100
     }, 1000/60)
