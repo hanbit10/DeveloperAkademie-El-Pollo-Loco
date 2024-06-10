@@ -1,8 +1,9 @@
 class World {
   character = new Character()
-  enemies = level1.enemies
-  clouds = level1.clouds
-  backgroundObjects = level1.backgroundObjects
+  level = level1
+  enemies = this.level.enemies
+  clouds = this.level.clouds
+  backgroundObjects = this.level.backgroundObjects
   camera_x = 0
 
 
