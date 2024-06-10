@@ -38,13 +38,13 @@ class Character extends MovableObject {
     setInterval(() => {
       this.walking_sound.pause()
       if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x ) {
-        this.x = this.x+this.speed
+        this.moveRight()
         this.otherDirection = false
         this.walking_sound.play()
       }
 
       if(this.world.keyboard.LEFT && this.x > 0 ) {
-        this.x = this.x-this.speed
+        this.moveLeft()
         this.otherDirection = true
         this.walking_sound.play()
       }
@@ -54,11 +54,12 @@ class Character extends MovableObject {
     setInterval(() => {
       if(this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING)
-      } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      } 
+      if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_WALKING)
-      } else if(this.world.keyboard.UP) {
-        this.speedY = 20
-        
+      } 
+      if(this.world.keyboard.UP && !this.isAboveGround()) {
+        this.jump()
       }
     }, 100)
   }

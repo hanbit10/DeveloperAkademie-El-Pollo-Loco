@@ -37,17 +37,18 @@ class MovableObject {
   }
 
   moveRight() {
-    // console.log("moveRight")
+    this.x = this.x+this.speed
+
+
   }
 
   moveLeft(speed) {
-    setInterval(() => {
-      this.x -= speed
-    }, 1000/60)
+    this.x = this.x-this.speed
+
   }
 
   jump(){
-    // console.log("jump")
+    this.speedY = 30
   }
 
   playAnimation(images) {
