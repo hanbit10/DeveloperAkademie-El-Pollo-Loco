@@ -1,11 +1,4 @@
-class MovableObject {
-  x = 100
-  y = 280
-  height = 150
-  width = 100
-  img
-  imageCache = [] 
-  currentImage = 0
+class MovableObject extends DrawableObject {
   gravity = false
   speedY = 0;
   acceleration = 2.5
@@ -25,19 +18,6 @@ class MovableObject {
     return this.y < 180
   }
 
-  loadImage(path) {
-    this.img = new Image()
-    this.img.src = path
-  }
-
-  loadImages(arr) {
-    arr.forEach((path) => {
-      let img = new Image()
-      img.src = path
-      this.imageCache[path] = img
-    })
-  }
-
   moveRight() {
     this.x = this.x+this.speed
   }
@@ -48,10 +28,6 @@ class MovableObject {
 
   jump(){
     this.speedY = 30
-  }
-
-  draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
   }
 
   drawFrame(ctx) {
