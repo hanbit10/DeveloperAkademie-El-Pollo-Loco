@@ -26,7 +26,7 @@ class MoveableObject extends DrawableObject {
     this.x = this.x+this.speed
   }
 
-  moveLeft(speed) {
+  moveLeft() {
     this.x = this.x-this.speed
   }
 
@@ -39,7 +39,7 @@ class MoveableObject extends DrawableObject {
             this.y + this.height >= mo.y &&
             this.x <= mo.x&& 
             this.y < mo.y + mo.height
-}
+  }
 
   playAnimation(images) {
     let i = this.currentImage % images.length

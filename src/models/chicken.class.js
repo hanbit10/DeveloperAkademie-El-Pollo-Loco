@@ -3,6 +3,8 @@ class Chicken extends MoveableObject {
   width = 60
   y = 380
   speed = 0.15 + Math.random()*0.2
+  frameWidth = this.height
+  frameHeight = this.width
 
   IMAGES_WALKING = ["/assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
     "/assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",

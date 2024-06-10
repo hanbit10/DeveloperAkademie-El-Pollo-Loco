@@ -24,7 +24,7 @@ class World {
 
   run(){
     setInterval(() => {
-      // this.checkCollisions()
+      this.checkCollisions()
       this.checkThrowObjects()
     }, 100)
   }
@@ -74,7 +74,7 @@ class World {
       this.flipImage(mo)
     }
     mo.draw(this.ctx)
-    mo.drawFrame(this.ctx)
+    mo.drawFrame(this.ctx, mo)
     if(mo.otherDirection){
       this.flipImageBack(mo)
     }
