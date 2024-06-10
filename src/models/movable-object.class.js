@@ -1,23 +1,69 @@
-class MovableObject {
-  x = 100
-  y = 280
-  height = 150
-  width = 100
-  img 
+class MoveableObject extends DrawableObject {
+  gravity = false
+  speedY = 0;
+  acceleration = 2.5
+  energy = 100
+  lastHit = 1
 
-  loadImage(path) {
-    this.img = new Image()
-    this.img.src = path
+  applyGravity() {
+    setInterval(() => {
+      if(this.isAboveGround() || this.speedY > 0) {
+        this.y -= this.speedY
+        this.speedY -= this.acceleration
+      }
+    },1000/25)
   }
+
+  isAboveGround() {
+    if((this instanceof ThrowableObject)) {
+      return true
+    } else {
+      return this.y < 180
+    }
+  }
+
   moveRight() {
-    console.log("moveRight")
+    this.x = this.x+this.speed
   }
 
-  moveLeft(){
-    console.log("moveLeft")
+  moveLeft(speed) {
+    this.x = this.x-this.speed
   }
 
   jump(){
-    console.log("jump")
+    this.speedY = 30
+  }
+
+  isColliding(mo) {
+    return  this.x + this.width >= mo.x && 
+            this.y + this.height >= mo.y &&
+            this.x <= mo.x&& 
+            this.y < mo.y + mo.height
+}
+
+  playAnimation(images) {
+    let i = this.currentImage % images.length
+    let path = images[i]
+    this.img = this.imageCache[path]
+    this.currentImage++
+  }
+
+  hit(){
+    this.energy -= 2;
+    if(this.energy < 0) {
+      this.energy = 0
+    } else {
+      this.lastHit = new Date().getTime()
+    }
+  }
+
+  isDead(){
+    return this.energy == 0
+  }
+
+  isHurt(){
+    let timepassed = new Date().getTime() - this.lastHit
+    timepassed = timepassed / 1000
+    return timepassed < 1
   }
 }
