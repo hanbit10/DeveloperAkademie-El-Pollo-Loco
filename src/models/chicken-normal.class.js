@@ -1,18 +1,18 @@
-class Chicken extends MoveableObject {
-  height = 60
-  width = 60
+class ChickenNormal extends MoveableObject {
+  height = 70
+  width = 70
   y = 380
-  speed = 0.15 + Math.random()*0.2
+  speed = 0.55 + Math.random()*2
   frameWidth = this.height
   frameHeight = this.width
 
   IMAGES_WALKING = [
-    "/assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
-    "/assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
-    "/assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
+    "/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+    "/assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
+    "/assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ]
   constructor() {
-    super().loadImage("/assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png")
+    super().loadImage("/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png")
     this.loadImages(this.IMAGES_WALKING)
     this.x = 700
     this.animate()

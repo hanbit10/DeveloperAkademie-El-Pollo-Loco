@@ -25,7 +25,7 @@ class DrawableObject {
   }
 
   drawFrame(ctx, mo) {
-    if(this instanceof Chicken || this instanceof Endboss) {
+    if(this instanceof Chicken || this instanceof Endboss || this instanceof ChickenNormal) {
       ctx.beginPath();
       ctx.lineWidth = "5"
       ctx.strokeStyle = "blue"
