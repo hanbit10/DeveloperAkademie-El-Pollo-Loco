@@ -29,7 +29,6 @@ class Character extends MoveableObject {
     "/assets/img/2_character_pepe/5_dead/D-54.png",
     "/assets/img/2_character_pepe/5_dead/D-55.png",
     "/assets/img/2_character_pepe/5_dead/D-56.png",
-    "/assets/img/2_character_pepe/5_dead/D-57.png",
   ]
 
   IMAGES_HURT = [
@@ -84,7 +83,6 @@ class Character extends MoveableObject {
   }
 
   animate() {
-
     setInterval(() => {
       this.walking_sound.pause()
       if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x ) {
@@ -101,34 +99,33 @@ class Character extends MoveableObject {
     }, 1000/60)
 
     setInterval(() => {
-      if(this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD)
-      } else if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT)
-      }  else {
-        if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      if(this.world.keyboard.KEYUSED) {
+        this.playAnimation(this.IMAGES_IDLE)
+      } else if(!this.world.keyboard.KEYUSED) {
+        this.playAnimation(this.IMAGES_IDLE_LONG)
+      } 
+      
+      if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
           this.playAnimation(this.IMAGES_WALKING)
         } 
-        if(this.world.keyboard.UP && !this.isAboveGround()) {
+        
+      if(this.world.keyboard.UP && !this.isAboveGround()) {
           this.jump()
         }
-      }
+      
     }, 100)
 
     setInterval(() => {
-      if(this.world.keyboard.KEYUSED) {
-        this.playAnimation(this.IMAGES_IDLE)
-      }
+      if(this.isDead()) {
+        this.playAnimation(this.IMAGES_DEAD)
+      } 
 
-      if(!this.world.keyboard.KEYUSED) {
-        this.playAnimation(this.IMAGES_IDLE_LONG)
-      }
-      console.log(this.world.keyboard.KEYUSED)
-    }, 200)
-
-    setInterval(() => {
       if(this.isAboveGround()) {
         this.playJumpAnimation(this.IMAGES_JUMPING)
+      }
+
+      if (this.isHurt()) {
+        this.playAnimation(this.IMAGES_HURT)
       }
     },100)
   }

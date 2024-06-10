@@ -31,7 +31,7 @@ document.addEventListener('keydown', (e) => {
   if(e.key == "d") {
     keyboard.D = true
   }
-  console.log(e)
+  // console.log(e)
   clearTimeout(clickedTime)
   startTimer()
   keyboard.KEYUSED = true
