@@ -76,4 +76,15 @@ class MovableObject {
     this.img = this.imageCache[path]
     this.currentImage++
   }
+
+  hit(){
+    this.energy -= 2;
+    if(this.energy < 0) {
+      this.energy = 0
+    }
+  }
+
+  isDead(){
+    return this.energy == 0
+  }
 }
