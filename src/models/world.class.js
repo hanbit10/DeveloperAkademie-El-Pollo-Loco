@@ -1,5 +1,6 @@
 class World {
   character = new Character()
+  statusBar = new StatusBar()
   level = level1
   enemies = this.level.enemies
   clouds = this.level.clouds
@@ -25,7 +26,7 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if(this.character.isColliding(enemy)) {
           this.character.hit()
-          console.log("character energy =", this.character.energy)
+          this.statusBar.setPercentage(this.character.energy)
         }
       })
     }, 200)
@@ -34,7 +35,13 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.ctx.translate(this.camera_x, 0)
     this.addObjectsToMap(this.backgroundObjects)
+
+    this.ctx.translate(-this.camera_x, 0)
+    this.addToMap(this.statusBar)
+    this.ctx.translate(this.camera_x, 0)
+
     this.addObjectsToMap(this.clouds)
+
     this.addObjectsToMap(this.enemies)
     this.addToMap(this.character)
     this.ctx.translate(-this.camera_x, 0)
