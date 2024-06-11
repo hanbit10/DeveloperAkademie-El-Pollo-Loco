@@ -14,10 +14,10 @@ class Chicken extends MoveableObject {
 
   buck_sound = new Audio("/assets/audio/chicken/small-chicken/buck.wav")
 
-  constructor() {
+  constructor(x) {
     super().loadImage("/assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png")
     this.loadImages(this.IMAGES_WALKING)
-    this.x = 700
+    this.x = x+Math.random()*100
     this.animate()
   }
   animate(){
