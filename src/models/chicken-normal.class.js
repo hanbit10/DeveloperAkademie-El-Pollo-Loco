@@ -11,6 +11,8 @@ class ChickenNormal extends MoveableObject {
     "/assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
     "/assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ]
+
+  buck_sound = "/assets/audio/chicken/big-chicken/buck.wav"
   constructor() {
     super().loadImage("/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png")
     this.loadImages(this.IMAGES_WALKING)
@@ -19,6 +21,7 @@ class ChickenNormal extends MoveableObject {
   }
   animate(){
     setInterval(() => {
+      this.buck_sound.play()
       let i = this.currentImage % this.IMAGES_WALKING.length
       let path = this.IMAGES_WALKING[i]
       this.img = this.imageCache[path]

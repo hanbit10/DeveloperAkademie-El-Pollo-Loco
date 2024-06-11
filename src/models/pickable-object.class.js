@@ -1,0 +1,3 @@
+class PickableObject extends DrawableObject {
+  
+}
