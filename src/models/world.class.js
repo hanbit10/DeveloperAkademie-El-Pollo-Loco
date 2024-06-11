@@ -5,6 +5,7 @@ class World {
   level = level1
   enemies = this.level.enemies
   clouds = this.level.clouds
+  pickableObjects = this.level.pickable
   backgroundObjects = this.level.backgroundObjects
   camera_x = 0
 
@@ -54,6 +55,7 @@ class World {
 
     this.addObjectsToMap(this.clouds)
     this.addObjectsToMap(this.throwableObjects)
+    this.addObjectsToMap(this.pickableObjects)
 
     this.addObjectsToMap(this.enemies)
     this.addToMap(this.character)

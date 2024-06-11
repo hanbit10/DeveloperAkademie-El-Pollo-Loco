@@ -21,7 +21,6 @@ class ChickenNormal extends MoveableObject {
   }
   animate(){
     setInterval(() => {
-      this.buck_sound.play()
       let i = this.currentImage % this.IMAGES_WALKING.length
       let path = this.IMAGES_WALKING[i]
       this.img = this.imageCache[path]

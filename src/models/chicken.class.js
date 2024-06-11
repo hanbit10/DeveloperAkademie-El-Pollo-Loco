@@ -12,7 +12,7 @@ class Chicken extends MoveableObject {
     "/assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
   ]
 
-  buck_sound = "/assets/audio/chicken/small-chicken/buck.wav"
+  buck_sound = new Audio("/assets/audio/chicken/small-chicken/buck.wav")
 
   constructor() {
     super().loadImage("/assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png")
@@ -28,7 +28,7 @@ class Chicken extends MoveableObject {
       this.currentImage++
     }, 130)
 
-    setInterval(() => {
+    setInterval(() => { 
       this.moveLeft(this.speed)
     }, 1000/60)
   }
