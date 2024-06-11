@@ -15,7 +15,7 @@ class MoveableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    if((this instanceof ThrowableObject)) {
+    if((this instanceof ThrowableObject || this instanceof Chicken)) {
       return true
     } else {
       return this.y < 180

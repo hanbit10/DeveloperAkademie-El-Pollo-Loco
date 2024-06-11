@@ -21,6 +21,7 @@ class ThrowableObject extends MoveableObject {
 
   throwCondition = "throwing"
 
+
   constructor(x, y){
     super().loadImage("/assets/img/6_salsa_bottle/salsa_bottle.png")
     this.loadImages(this.BOTTLE_THROW)
@@ -31,18 +32,21 @@ class ThrowableObject extends MoveableObject {
   }
   throwableCondition(condition) {
     this.throwCondition = condition
+
     if(this.throwCondition == "breaking") {
+
       this.break_sound.play()
       this.speedY = 0
       let count = 0
-      setInterval(() => {
-        console.log(count)
+      let breaked = setInterval(() => {
         this.playAnimation(this.BOTTLE_BREAK)
         if(count >= 6) {
           this.loadImage(this.BOTTLE_BREAK[5])
         }
+        clearInterval(breaked)
         count++
       }, 150)
+      this.bottleBroken = true
     } else if(this.throwCondition == "throwing") {     
       this.throw_sound.play()
       this.speedY = 10 
