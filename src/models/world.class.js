@@ -26,16 +26,17 @@ class World {
 
   run(){
     setInterval(() => {
-      this.checkCollisions()
       this.checkThrowObjects()
+      this.checkCollisions()
     }, 100)
   }
 
   checkThrowObjects(){
-      if(this.keyboard.D) {
-        let bottle = new ThrowableObject(this.character.x, this.character.y, this.keyboard.D)
-        this.throwableObjects.push(bottle)
-      }
+    if(this.keyboard.D) {
+      let bottle = new ThrowableObject(this.character.x, this.character.y)
+      this.throwableObjects.push(bottle)
+      bottle.throwableCondition("throwing")
+    }
   } 
   checkCollisions(){
     this.level.enemies.forEach((enemy) => {
@@ -43,6 +44,13 @@ class World {
         this.character.hit()
         this.statusBar.setPercentage(this.character.energy)
       }
+
+      this.throwableObjects.forEach((throwableObject) => {
+        if(throwableObject.isColliding(enemy)) {
+          console.log("collided")
+          throwableObject.throwableCondition("breaking")
+        }
+      })
     })
 
     this.level.coins.forEach((coin) => {
