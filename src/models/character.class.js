@@ -66,7 +66,9 @@ class Character extends MoveableObject {
   world;
   speed = 5
   otherDirection = false
-  walking_sound = new Audio("/assets/audio/414921__straget__a-walk-with-stop.wav")
+  walking_sound = new Audio("/assets/audio/character/walking.flac")
+  jump_sound = new Audio("/assets/audio/character/jump.wav")
+  gothit_sound = new Audio("/assets/audio/character/gothit2.wav")
   frameWidth = 40
   frameHeight = 120
   jumpImage = 0
@@ -85,6 +87,7 @@ class Character extends MoveableObject {
   animate() {
     setInterval(() => {
       this.walking_sound.pause()
+
       if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x ) {
         this.moveRight()
         this.otherDirection = false
@@ -95,6 +98,10 @@ class Character extends MoveableObject {
         this.otherDirection = true
         this.walking_sound.play()
       }
+      if(this.isAboveGround()) {
+        this.walking_sound.pause()
+      } 
+
       this.world.camera_x = -this.x + 100
     }, 1000/60)
 
@@ -111,8 +118,8 @@ class Character extends MoveableObject {
         
       if(this.world.keyboard.UP && !this.isAboveGround()) {
           this.jump()
-        }
-      
+          this.jump_sound.play()
+      }
     }, 100)
 
     setInterval(() => {
@@ -125,7 +132,9 @@ class Character extends MoveableObject {
       }
 
       if (this.isHurt()) {
+        console.log(this.isHurt())
         this.playAnimation(this.IMAGES_HURT)
+        this.gothit_sound.play()
       }
     },100)
   }

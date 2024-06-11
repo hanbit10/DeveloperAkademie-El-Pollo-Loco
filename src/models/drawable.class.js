@@ -25,7 +25,7 @@ class DrawableObject {
   }
 
   drawFrame(ctx, mo) {
-    if(this instanceof Chicken || this instanceof Endboss || this instanceof ChickenNormal) {
+    if(this instanceof Chicken || this instanceof Endboss || this instanceof ChickenNormal || this instanceof Coin || this instanceof Bottle) {
       ctx.beginPath();
       ctx.lineWidth = "5"
       ctx.strokeStyle = "blue"
@@ -39,9 +39,9 @@ class DrawableObject {
 
   setCharacterFrame(ctx, mo){
     ctx.beginPath();
-    ctx.lineWidth = "5"
-    ctx.strokeStyle = "transparent"
-    ctx.strokeOpacity = 0
+    ctx.lineWidth = "2"
+    ctx.strokeStyle = "blue"
+    // ctx.strokeOpacity = 0
     ctx.rect(this.x+25, this.y+130, mo.frameWidth, mo.frameHeight)
     ctx.stroke()
   }

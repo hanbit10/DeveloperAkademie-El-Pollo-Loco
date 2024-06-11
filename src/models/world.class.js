@@ -5,6 +5,8 @@ class World {
   level = level1
   enemies = this.level.enemies
   clouds = this.level.clouds
+  coins = this.level.coins
+  bottles = this.level.bottles
   backgroundObjects = this.level.backgroundObjects
   camera_x = 0
 
@@ -54,7 +56,8 @@ class World {
 
     this.addObjectsToMap(this.clouds)
     this.addObjectsToMap(this.throwableObjects)
-
+    this.addObjectsToMap(this.coins)
+    this.addObjectsToMap(this.bottles)
     this.addObjectsToMap(this.enemies)
     this.addToMap(this.character)
     this.ctx.translate(-this.camera_x, 0)
