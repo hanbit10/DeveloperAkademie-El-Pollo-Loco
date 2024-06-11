@@ -44,6 +44,18 @@ class World {
         this.statusBar.setPercentage(this.character.energy)
       }
     })
+
+    this.level.coins.forEach((coin) => {
+      if(this.character.isColliding(coin)) {
+        coin.collect()
+      }
+
+    })
+    this.level.bottles.forEach((bottle) => {
+      if(this.character.isColliding(bottle)) {
+        bottle.collect()
+      }
+    })
   }
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
