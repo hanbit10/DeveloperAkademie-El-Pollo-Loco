@@ -47,13 +47,13 @@ class World {
 
     this.level.coins.forEach((coin) => {
       if(this.character.isColliding(coin)) {
-        coin.collect()
+        coin.collect("coin")
       }
 
     })
     this.level.bottles.forEach((bottle) => {
       if(this.character.isColliding(bottle)) {
-        bottle.collect()
+        bottle.collect("bottle")
       }
     })
   }
