@@ -9,6 +9,8 @@ class World {
   bottles = this.level.bottles
   backgroundObjects = this.level.backgroundObjects
   camera_x = 0
+  alreadyCollided = [false]
+  enemyDead = [false, false, false, false, false]
 
 
   constructor(canvas, keyboard) {
@@ -26,23 +28,48 @@ class World {
 
   run(){
     setInterval(() => {
-      this.checkCollisions()
       this.checkThrowObjects()
+
+    }, 100)
+
+    setInterval(() => {
+      this.checkCollisions()
     }, 100)
   }
 
   checkThrowObjects(){
-      if(this.keyboard.D) {
-        let bottle = new ThrowableObject(this.character.x, this.character.y, this.keyboard.D)
-        this.throwableObjects.push(bottle)
-      }
+    if(this.keyboard.D) {
+      let bottle = new ThrowableObject(this.character.x, this.character.y)
+      this.throwableObjects.push(bottle)
+      this.alreadyCollided.push(false)
+      bottle.throwableCondition("throwing")
+    }
   } 
   checkCollisions(){
+    let enemies = 0
     this.level.enemies.forEach((enemy) => {
       if(this.character.isColliding(enemy)) {
-        this.character.hit()
-        this.statusBar.setPercentage(this.character.energy)
+        console.log(this.enemyDead[enemies] == false)
+        if(this.enemyDead[enemies] == false) {
+          this.character.hit()
+          this.statusBar.setPercentage(this.character.energy)
+        }
       }
+      let i = 0
+      this.throwableObjects.forEach((throwableObject) => {
+        if(throwableObject.isColliding(enemy)) {
+          if(this.alreadyCollided[i] == false && this.enemyDead[enemies] == false) {
+            // console.log("collided")
+            throwableObject.throwableCondition("breaking")
+          }
+          this.alreadyCollided[i] = true
+          console.log(enemy.id)
+          enemy.dead()
+          this.enemyDead[enemy.id] = true
+        }
+        i++
+      })
+      enemies++
     })
 
     this.level.coins.forEach((coin) => {

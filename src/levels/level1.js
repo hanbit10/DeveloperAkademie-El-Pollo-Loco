@@ -1,10 +1,10 @@
 const level1 = new Level(
   [
-    new Chicken(500),
-    new Chicken(700),
-    new Chicken(1000),
-    new Chicken(1200),
-    new Chicken(1400),
+    new Chicken(0,500),
+    new Chicken(1,700),
+    new Chicken(2,1000),
+    new Chicken(3,1200),
+    new Chicken(4,1400),
   ], 
   [
     new Cloud(),

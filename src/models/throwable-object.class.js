@@ -1,23 +1,94 @@
 class ThrowableObject extends MoveableObject {
 
   throw_sound = new Audio("/assets/audio/character/throw.wav")
+  break_sound = new Audio("/assets/audio/throwable/breaking-bottle.wav")
 
-  constructor(x, y, throwing){
+  BOTTLE_THROW = [
+    "/assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
+    "/assets/img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
+    "/assets/img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
+    "/assets/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
+  ]
+
+  BOTTLE_BREAK = [
+    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
+    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
+    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
+    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
+  ]
+
+  throwCondition = "throwing"
+
+
+  constructor(x, y){
     super().loadImage("/assets/img/6_salsa_bottle/salsa_bottle.png")
-    this.x = x;
-    this.y = y;
+    this.loadImages(this.BOTTLE_THROW)
+    this.loadImages(this.BOTTLE_BREAK)
+    this.x = x+30;
+    this.y = y+50;
     this.height = 100;
-    if(throwing){
-      this.throw()
-      this.throw_sound.play()
-    }
   }
+  throwableCondition(condition) {
+    this.throwCondition = condition
 
-  throw() {
-    this.speedY = 30 
-    this.applyGravity()
-    setInterval(() => {
-      this.x += 10
-    }, 25)
+    if(this.throwCondition == "breaking") {
+
+      this.break_sound.play()
+      this.speedY = 0
+      let count = 0
+      let breaked = setInterval(() => {
+        this.playAnimation(this.BOTTLE_BREAK)
+        if(count >= 6) {
+          this.loadImage(this.BOTTLE_BREAK[5])
+        }
+        clearInterval(breaked)
+        count++
+      }, 150)
+      this.bottleBroken = true
+    } else if(this.throwCondition == "throwing") {     
+      this.throw_sound.play()
+      this.speedY = 10 
+      this.applyGravity()
+      let thrwoingBottle = setInterval(() => {
+        this.playAnimation(this.BOTTLE_THROW)
+        if(this.throwCondition == "breaking") {
+          clearInterval(thrwoingBottle)
+        }
+      }, 100)
+    }
+
+
+  setInterval(() => {
+    if(this.throwCondition == "throwing") {
+      this.x += 15
+    } else if(this.throwCondition == "breaking") {
+      this.x = this.x
+    }
+  },25)
   }
+  // throw() {//#endregion
+  //   console.log(this.breaking)
+  //   this.throw_sound.play()
+  //   this.speedY = 10 
+  //   this.applyGravity()
+  //   setInterval(() => {
+  //     this.x += 15
+  //   }, 25)
+
+  //   setInterval(() => {
+  //     this.playAnimation(this.BOTTLE_THROW)
+  //   }, 70)
+
+  // }
+
+  // break(){
+  //   this.breaking = true
+  //   this.x = this.x
+  //   setInterval(() => {
+  //     this.playAnimation(this.BOTTLE_BREAK)
+  //   }, 100)
+  //   this.break_sound.play()
+  // }
 }
