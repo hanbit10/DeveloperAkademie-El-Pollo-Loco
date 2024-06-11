@@ -33,7 +33,7 @@ class World {
 
   checkThrowObjects(){
       if(this.keyboard.D) {
-        let bottle = new ThrowableObject(this.character.x, this.character.y)
+        let bottle = new ThrowableObject(this.character.x, this.character.y, this.keyboard.D)
         this.throwableObjects.push(bottle)
       }
   } 
@@ -42,6 +42,18 @@ class World {
       if(this.character.isColliding(enemy)) {
         this.character.hit()
         this.statusBar.setPercentage(this.character.energy)
+      }
+    })
+
+    this.level.coins.forEach((coin) => {
+      if(this.character.isColliding(coin)) {
+        coin.collect()
+      }
+
+    })
+    this.level.bottles.forEach((bottle) => {
+      if(this.character.isColliding(bottle)) {
+        bottle.collect()
       }
     })
   }
