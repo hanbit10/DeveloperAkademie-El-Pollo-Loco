@@ -11,7 +11,7 @@ class World {
   camera_x = 0;
   alreadyCollided = [false];
   enemiesDead = this.level.enemiesDead;
-  levelCleared = [false, false, false];
+  // levelCleared = [false, false, false];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -30,7 +30,6 @@ class World {
     setInterval(() => {
       this.checkThrowObjects();
       this.checkCollisions();
-      this.checkLevels();
     }, 100);
 
     setInterval(() => {
@@ -38,18 +37,18 @@ class World {
     }, 100);
   }
 
-  checkLevels() {
-    let level1Enemies = this.enemiesDead.slice(0, 6);
-    let check1 = level1Enemies.every((element) => element == true);
-    if (check1) {
-      if (!this.levelCleared[0]) {
-        console.log("level 1 cleared");
-        this.level.level_start_x = this.level.level_end_x - 500;
-        this.level.level_end_x = this.level.level_end_x * 2;
-        this.levelCleared[0] = true;
-      }
-    }
-  }
+  // checkLevels() {
+  //   let level1Enemies = this.enemiesDead.slice(0, 6);
+  //   let check1 = level1Enemies.every((element) => element == true);
+  //   if (check1) {
+  //     if (!this.levelCleared[0]) {
+  //       console.log("level 1 cleared");
+  //       this.level.level_start_x = this.level.level_end_x - 500;
+  //       this.level.level_end_x = this.level.level_end_x * 2;
+  //       this.levelCleared[0] = true;
+  //     }
+  //   }
+  // }
 
   checkThrowObjects() {
     if (this.keyboard.D) {

@@ -13,10 +13,11 @@ class ChickenNormal extends MoveableObject {
   ];
 
   buck_sound = "/assets/audio/chicken/big-chicken/buck.wav";
-  constructor(id, x) {
+  constructor(id, x, minX) {
     super().loadImage("/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.x = x;
+    this.minX = minX;
     this.id = id;
     this.animate();
   }

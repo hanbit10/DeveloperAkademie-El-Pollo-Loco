@@ -5,12 +5,18 @@ const level1 = new Level(
     new Chicken(2, 1000),
     new Chicken(3, 1200),
     new Chicken(4, 1400),
-    new ChickenNormal(5, 600),
+    new ChickenNormal(5, 600, 0),
     new Chicken(6, 2100),
     new Chicken(7, 2100),
     new Chicken(8, 2100),
+    new ChickenNormal(9, 2100, 0),
+    new ChickenNormal(10, 2100, 0),
+    new ChickenNormal(11, 2100, 0),
+    new ChickenNormal(12, 2100, 0),
+    new ChickenNormal(13, 2100, 0),
+    new Endboss(2400),
   ],
-  [false, false, false, false, false, false, false, false, false],
+  [false, false, false, false, false, false, false, false, false, false, false, false, false],
   [new Cloud()],
   [
     new BackgroundObject("/assets/img/5_background/layers/air.png", -719),
@@ -52,7 +58,7 @@ const level1 = new Level(
     new Coin(1000, 200),
     new Coin(1600, 200),
   ],
-  [new Bottle(200), new Bottle(250), new Bottle(300), new Bottle(400)],
+  [new Bottle(200), new Bottle(250), new Bottle(400), new Bottle(600), new Bottle(800)],
   0,
-  1440
+  2440
 );
