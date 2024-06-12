@@ -5,7 +5,12 @@ const level1 = new Level(
     new Chicken(2,1000),
     new Chicken(3,1200),
     new Chicken(4,1400),
+    new ChickenNormal(5, 600),
+    new Chicken(6,2100),
+    new Chicken(7,2100),
+    new Chicken(8,2100),
   ], 
+  [false, false, false, false, false, false, false, false, false],
   [
     new Cloud(),
   ],
@@ -35,7 +40,7 @@ const level1 = new Level(
     new BackgroundObject("/assets/img/5_background/layers/2_second_layer/1.png", 720*4),
     new BackgroundObject("/assets/img/5_background/layers/1_first_layer/1.png", 720*4),
   ],
-  [new Coin(200, 250), new Coin(250, 200), new Coin(300, 200), new Coin(350, 200), new Coin(400, 250), new Coin(850, 350), new Coin(900, 350), new Coin(950, 350), new Coin(950, 350), new Coin(950, 350), new Coin(1000, 200)],
+  [new Coin(200, 250), new Coin(250, 200), new Coin(300, 200), new Coin(350, 200), new Coin(400, 250), new Coin(850, 350), new Coin(900, 350), new Coin(950, 350), new Coin(950, 350), new Coin(950, 350), new Coin(1000, 200), new Coin(1600, 200)],
   [new Bottle(200), new Bottle(250), new Bottle(300), new Bottle(400)],
   0,
   1440

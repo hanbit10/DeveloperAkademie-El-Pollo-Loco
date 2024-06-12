@@ -10,7 +10,7 @@ class World {
   backgroundObjects = this.level.backgroundObjects
   camera_x = 0
   alreadyCollided = [false]
-  enemiesDead = [false, false, false, false, false]
+  enemiesDead = this.level.enemiesDead
   levelCleared = [false, false, false]
 
 
@@ -40,7 +40,7 @@ class World {
   }
 
   checkLevels(){
-    let level1Enemies = this.enemiesDead.slice(0, 5);
+    let level1Enemies = this.enemiesDead.slice(0, 6);
     let check1 = level1Enemies.every(element => element == true);
     if(check1){
       if(!this.levelCleared[0]) {
@@ -82,7 +82,6 @@ class World {
             throwableObject.throwableCondition("breaking")
           }
           this.alreadyCollided[i] = true
-          // console.log(enemy.id)
           enemy.dead()
           this.enemiesDead[enemy.id] = true
         }
