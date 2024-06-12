@@ -38,6 +38,14 @@ class MoveableObject extends DrawableObject {
     return this.x + this.width - 40 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
   }
 
+  isTooFar(mo) {
+    return this.x + this.width + 300 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+  }
+
+  isClose(mo) {
+    return this.x + this.width + 100 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+  }
+
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];

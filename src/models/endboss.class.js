@@ -38,7 +38,7 @@ class Endboss extends MoveableObject {
 
   hurt_sound = new Audio("/assets/audio/chicken/boss-chicken/hurt.wav");
   killed_sound = new Audio("/assets/audio/chicken/boss-chicken/killed.wav");
-
+  characterTooFar = true;
   constructor(x) {
     super().loadImage("/assets/img/4_enemie_boss_chicken/2_alert/G5.png");
     this.loadImages(this.IMAGES_ALERT);
@@ -56,7 +56,6 @@ class Endboss extends MoveableObject {
         playOnce = false;
       }
       if (this.isHurt()) {
-        console.log("playOnce", playOnce);
         if (playOnce == false) {
           this.hurt_sound.play();
           playOnce = true;
@@ -80,5 +79,15 @@ class Endboss extends MoveableObject {
         count++;
       }
     }, 200);
+
+    let moving = setInterval(() => {
+      if (this.characterTooFar) {
+        this.moveLeft();
+      }
+    }, 1000 / 60);
+  }
+
+  checkingCharacter(status) {
+    console.log(status);
   }
 }

@@ -33,8 +33,20 @@ class World {
     }, 100);
 
     setInterval(() => {
-      // this.checkCollisions()
-    }, 100);
+      this.checkFarness();
+    }, 500);
+  }
+
+  checkFarness() {
+    this.level.enemies.forEach((enemy) => {
+      if (enemy instanceof Endboss) {
+        if (this.character.isClose(enemy)) {
+          enemy.checkingCharacter("close");
+        } else if (this.character.isTooFar(enemy)) {
+          enemy.checkingCharacter("tooFar");
+        }
+      }
+    });
   }
 
   // checkLevels() {
