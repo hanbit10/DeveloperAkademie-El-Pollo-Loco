@@ -28,9 +28,10 @@ class ThrowableObject extends MoveableObject {
     this.y = y + 50;
     this.height = 100;
   }
-  throwableCondition(condition) {
+  throwableCondition(condition, enemyDead) {
     this.throwCondition = condition;
-    if (this.throwCondition == "breaking") {
+    console.log(enemyDead);
+    if (this.throwCondition == "breaking" && !enemyDead) {
       this.break_sound.play();
       this.speedY = 0;
       let count = 0;
@@ -39,7 +40,7 @@ class ThrowableObject extends MoveableObject {
         if (count >= 6) {
           this.loadImage(this.BOTTLE_BREAK[5]);
         }
-        clearInterval(breaked);
+        // clearInterval(breaked);
         count++;
       }, 150);
       this.bottleBroken = true;
@@ -57,9 +58,9 @@ class ThrowableObject extends MoveableObject {
 
     setInterval(() => {
       // console.log(this.movingLeft)
-      if (this.throwCondition == "throwing") {
+      if (this.throwCondition == "throwing" || enemyDead) {
         this.x += 15;
-      } else if (this.throwCondition == "breaking") {
+      } else if (this.throwCondition == "breaking" && !enemyDead) {
         this.x = this.x;
       } else if (this.throwCondition == "throwingLeft") {
         this.x -= 15;

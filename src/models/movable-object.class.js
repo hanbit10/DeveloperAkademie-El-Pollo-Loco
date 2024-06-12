@@ -45,8 +45,8 @@ class MoveableObject extends DrawableObject {
     this.currentImage++;
   }
 
-  hit() {
-    this.energy -= 2;
+  hit(dmg) {
+    this.energy -= dmg;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
