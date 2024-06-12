@@ -17,7 +17,6 @@ class Chicken extends MoveableObject {
     "/assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
     "/assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
   ];
-  ];
 
   buck_sound = new Audio("/assets/audio/chicken/small-chicken/buck.wav");
   killed_sound = new Audio("/assets/audio/chicken/small-chicken/killed2.wav");
@@ -35,7 +34,6 @@ class Chicken extends MoveableObject {
     this.id = id;
     this.animate();
   }
-  animate() {
   animate() {
     this.animateImgs = setInterval(() => {
       this.buck_sound.volume = 0.2;
@@ -66,8 +64,5 @@ class Chicken extends MoveableObject {
     setTimeout(() => {
       this.y = 600;
     }, 2000);
-      this.y = 600;
-    }, 2000);
   }
 }
-
