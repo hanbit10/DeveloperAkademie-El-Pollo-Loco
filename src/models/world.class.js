@@ -79,9 +79,15 @@ class World {
             // console.log("collided")
             throwableObject.throwableCondition("breaking");
           }
-          this.alreadyCollided[i] = true;
-          enemy.dead();
-          this.enemiesDead[enemy.id] = true;
+          if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
+            this.alreadyCollided[i] = true;
+            enemy.dead();
+            this.enemiesDead[enemy.id] = true;
+          } else if (enemy instanceof Endboss) {
+            this.alreadyCollided[i] = true;
+            enemy.hit();
+            this.enemiesDead[enemy.id] = true;
+          }
         }
         i++;
       });
