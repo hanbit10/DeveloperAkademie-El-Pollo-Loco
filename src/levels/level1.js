@@ -26,6 +26,7 @@ const level1 = new Level(
     new BackgroundObject("/assets/img/5_background/layers/2_second_layer/1.png", 0),
     new BackgroundObject("/assets/img/5_background/layers/1_first_layer/1.png", 0),
     new BackgroundObject("/assets/img/5_background/layers/3_third_layer/2.png", 720),
+    new BackgroundObject("/assets/img/5_background/layers/3_third_layer/2.png", 720),
     new BackgroundObject("/assets/img/5_background/layers/2_second_layer/2.png", 720),
     new BackgroundObject("/assets/img/5_background/layers/1_first_layer/2.png", 720),
     new BackgroundObject("/assets/img/5_background/layers/3_third_layer/1.png", 720 * 2),
@@ -55,4 +56,6 @@ const level1 = new Level(
   [new Bottle(200), new Bottle(250), new Bottle(300), new Bottle(400)],
   0,
   1440
+);
+
 );
