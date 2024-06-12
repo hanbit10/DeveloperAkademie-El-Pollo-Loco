@@ -39,11 +39,11 @@ class MoveableObject extends DrawableObject {
   }
 
   isTooFar(mo) {
-    return this.x + this.width + 300 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+    return this.x + this.width + 400 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
   }
 
   isClose(mo) {
-    return this.x + this.width + 100 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+    return this.x + this.width + 50 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
   }
 
   playAnimation(images) {

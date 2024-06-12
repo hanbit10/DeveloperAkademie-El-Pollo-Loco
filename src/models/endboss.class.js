@@ -38,7 +38,8 @@ class Endboss extends MoveableObject {
 
   hurt_sound = new Audio("/assets/audio/chicken/boss-chicken/hurt.wav");
   killed_sound = new Audio("/assets/audio/chicken/boss-chicken/killed.wav");
-  characterTooFar = true;
+  characterTooFar = false;
+  // endbossWalk = false;
   constructor(x) {
     super().loadImage("/assets/img/4_enemie_boss_chicken/2_alert/G5.png");
     this.loadImages(this.IMAGES_ALERT);
@@ -51,7 +52,10 @@ class Endboss extends MoveableObject {
     let playOnce = false;
     let playKilledOnce = false;
     let bossAlive = setInterval(() => {
-      if (!this.isHurt()) {
+      // if (!this.isHurt() && this.endbossWalk == true) {
+      //   this.playAnimation(this.IMAGES_WALKING);
+      // }
+      if (!this.isHurt() && this.endbossWalk == false) {
         this.playAnimation(this.IMAGES_ALERT);
         playOnce = false;
       }
@@ -83,11 +87,17 @@ class Endboss extends MoveableObject {
     let moving = setInterval(() => {
       if (this.characterTooFar) {
         this.moveLeft();
+        // this.endbossWalk = true;
       }
     }, 1000 / 60);
   }
 
   checkingCharacter(status) {
-    console.log(status);
+    if (status == "tooFar") {
+      this.characterTooFar = true;
+    } else if (status == "close") {
+    } else if (status == "saveZone") {
+      this.characterTooFar = false;
+    }
   }
 }

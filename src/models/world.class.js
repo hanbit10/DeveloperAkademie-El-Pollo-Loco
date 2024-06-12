@@ -44,6 +44,8 @@ class World {
           enemy.checkingCharacter("close");
         } else if (this.character.isTooFar(enemy)) {
           enemy.checkingCharacter("tooFar");
+        } else {
+          enemy.checkingCharacter("saveZone");
         }
       }
     });
