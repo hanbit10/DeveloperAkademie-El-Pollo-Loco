@@ -42,7 +42,11 @@ class World {
       let bottle = new ThrowableObject(this.character.x, this.character.y)
       this.throwableObjects.push(bottle)
       this.alreadyCollided.push(false)
-      bottle.throwableCondition("throwing")
+      if(!this.character.otherDirection) {
+        bottle.throwableCondition("throwing")
+      } else {
+        bottle.throwableCondition("throwingLeft")
+      }
     }
   } 
   checkCollisions(){

@@ -32,9 +32,7 @@ class ThrowableObject extends MoveableObject {
   }
   throwableCondition(condition) {
     this.throwCondition = condition
-
     if(this.throwCondition == "breaking") {
-
       this.break_sound.play()
       this.speedY = 0
       let count = 0
@@ -47,7 +45,7 @@ class ThrowableObject extends MoveableObject {
         count++
       }, 150)
       this.bottleBroken = true
-    } else if(this.throwCondition == "throwing") {     
+    } else if(this.throwCondition == "throwing" || this.throwCondition == "throwingLeft") {     
       this.throw_sound.play()
       this.speedY = 10 
       this.applyGravity()
@@ -61,10 +59,13 @@ class ThrowableObject extends MoveableObject {
 
 
   setInterval(() => {
+    // console.log(this.movingLeft)
     if(this.throwCondition == "throwing") {
       this.x += 15
     } else if(this.throwCondition == "breaking") {
       this.x = this.x
+    } else if(this.throwCondition == "throwingLeft") {
+      this.x -= 15
     }
   },25)
   }
