@@ -57,5 +57,3 @@ const level1 = new Level(
   0,
   1440
 );
-
-);
