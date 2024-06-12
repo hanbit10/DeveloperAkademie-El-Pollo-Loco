@@ -29,7 +29,7 @@ class ChickenNormal extends MoveableObject {
     }, 130);
 
     this.moving = setInterval(() => {
-      this.moveLeft(this.speed);
+      this.moveLeft();
     }, 1000 / 60);
   }
 
