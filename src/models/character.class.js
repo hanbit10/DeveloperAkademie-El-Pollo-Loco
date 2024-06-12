@@ -86,7 +86,7 @@ class Character extends MoveableObject {
 
   animate() {
     setInterval(() => {
-      console.log(this.movingLeft)
+      // console.log(this.movingLeft)
       this.walking_sound.pause()
 
       if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x ) {
@@ -94,7 +94,7 @@ class Character extends MoveableObject {
         this.otherDirection = false
         this.walking_sound.play()
       }
-      if(this.world.keyboard.LEFT && this.x > 0 ) {
+      if(this.world.keyboard.LEFT && this.x > this.world.level.level_start_x ) {
         this.moveLeft()
         this.otherDirection = true
         this.walking_sound.play()
@@ -133,7 +133,7 @@ class Character extends MoveableObject {
       }
 
       if (this.isHurt()) {
-        console.log(this.isHurt())
+        // console.log(this.isHurt())
         this.playAnimation(this.IMAGES_HURT)
         // this.gothit_sound.play()
       }
@@ -141,7 +141,7 @@ class Character extends MoveableObject {
   }
 
   playJumpAnimation(images){
-    console.log(this.jumpImage)
+    // console.log(this.jumpImage)
     let i = this.jumpImage % images.length
     let path = images[i]
     this.img = this.imageCache[path]

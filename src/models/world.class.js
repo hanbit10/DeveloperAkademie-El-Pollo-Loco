@@ -10,7 +10,8 @@ class World {
   backgroundObjects = this.level.backgroundObjects
   camera_x = 0
   alreadyCollided = [false]
-  enemyDead = [false, false, false, false, false]
+  enemiesDead = [false, false, false, false, false]
+  levelCleared = [false, false, false]
 
 
   constructor(canvas, keyboard) {
@@ -29,12 +30,26 @@ class World {
   run(){
     setInterval(() => {
       this.checkThrowObjects()
-
+      this.checkCollisions()
+      this.checkLevels()
     }, 100)
 
     setInterval(() => {
-      this.checkCollisions()
+      // this.checkCollisions()
     }, 100)
+  }
+
+  checkLevels(){
+    let level1Enemies = this.enemiesDead.slice(0, 5);
+    let check1 = level1Enemies.every(element => element == true);
+    if(check1){
+      if(!this.levelCleared[0]) {
+        console.log("level 1 cleared")
+        this.level.level_start_x = this.level.level_end_x-500
+        this.level.level_end_x = this.level.level_end_x*2
+        this.levelCleared[0] = true
+      }
+    }
   }
 
   checkThrowObjects(){
@@ -53,8 +68,8 @@ class World {
     let enemies = 0
     this.level.enemies.forEach((enemy) => {
       if(this.character.isColliding(enemy)) {
-        console.log(this.enemyDead[enemies] == false)
-        if(this.enemyDead[enemies] == false) {
+        // console.log(this.enemyDead[enemies] == false)
+        if(this.enemiesDead[enemies] == false) {
           this.character.hit()
           this.statusBar.setPercentage(this.character.energy)
         }
@@ -62,14 +77,14 @@ class World {
       let i = 0
       this.throwableObjects.forEach((throwableObject) => {
         if(throwableObject.isColliding(enemy)) {
-          if(this.alreadyCollided[i] == false && this.enemyDead[enemies] == false) {
+          if(this.alreadyCollided[i] == false && this.enemiesDead[enemies] == false) {
             // console.log("collided")
             throwableObject.throwableCondition("breaking")
           }
           this.alreadyCollided[i] = true
-          console.log(enemy.id)
+          // console.log(enemy.id)
           enemy.dead()
-          this.enemyDead[enemy.id] = true
+          this.enemiesDead[enemy.id] = true
         }
         i++
       })
