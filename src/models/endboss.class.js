@@ -36,6 +36,9 @@ class Endboss extends MoveableObject {
     "/assets/img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+  hurt_sound = new Audio("/assets/audio/chicken/boss-chicken/hurt.wav");
+  killed_sound = new Audio("/assets/audio/chicken/boss-chicken/killed.wav");
+
   constructor(x) {
     super().loadImage("/assets/img/4_enemie_boss_chicken/2_alert/G5.png");
     this.loadImages(this.IMAGES_ALERT);
@@ -45,11 +48,19 @@ class Endboss extends MoveableObject {
     this.animate();
   }
   animate() {
+    let playOnce = false;
+    let playKilledOnce = false;
     let bossAlive = setInterval(() => {
       if (!this.isHurt()) {
         this.playAnimation(this.IMAGES_ALERT);
+        playOnce = false;
       }
       if (this.isHurt()) {
+        console.log("playOnce", playOnce);
+        if (playOnce == false) {
+          this.hurt_sound.play();
+          playOnce = true;
+        }
         this.playAnimation(this.IMAGES_HURT);
       }
     }, 200);
@@ -57,7 +68,11 @@ class Endboss extends MoveableObject {
     let count = 0;
     let bossDead = setInterval(() => {
       if (this.isDead()) {
+        if (playKilledOnce == false) {
+          this.killed_sound.play();
+        }
         clearInterval(bossAlive);
+        playKilledOnce = true;
         this.playAnimation(this.IMAGES_DEAD);
         if (count >= 2) {
           this.loadImage(this.IMAGES_DEAD[2]);

@@ -76,7 +76,6 @@ class World {
       this.throwableObjects.forEach((throwableObject) => {
         if (throwableObject.isColliding(enemy)) {
           if (this.alreadyCollided[i] == false && this.enemiesDead[enemies] == false) {
-            // console.log("collided")
             throwableObject.throwableCondition("breaking", this.enemiesDead[enemy.id]);
           }
           if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
@@ -85,8 +84,10 @@ class World {
             this.enemiesDead[enemy.id] = true;
           } else if (enemy instanceof Endboss) {
             this.alreadyCollided[i] = true;
-            enemy.hit(20);
-            this.enemiesDead[enemy.id] = true;
+            enemy.hit(3);
+            if (enemy.energy <= 0) {
+              this.enemiesDead[enemy.id] = true;
+            }
           }
         }
         i++;

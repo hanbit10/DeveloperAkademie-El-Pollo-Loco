@@ -40,7 +40,6 @@ class ThrowableObject extends MoveableObject {
         if (count >= 6) {
           this.loadImage(this.BOTTLE_BREAK[5]);
         }
-        // clearInterval(breaked);
         count++;
       }, 150);
       this.bottleBroken = true;

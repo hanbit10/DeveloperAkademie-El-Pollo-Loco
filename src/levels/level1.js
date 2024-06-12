@@ -14,7 +14,7 @@ const level1 = new Level(
     new ChickenNormal(11, 2100),
     new ChickenNormal(12, 2100),
     new ChickenNormal(13, 2100),
-    new Endboss(2400),
+    new Endboss(700),
   ],
   [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
   [new Cloud()],
