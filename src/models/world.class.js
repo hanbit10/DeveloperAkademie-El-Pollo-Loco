@@ -14,19 +14,19 @@ class World {
   levelCleared = [false, false, false];
 
   constructor(canvas, keyboard) {
-    this.ctx = canvas.getContext("2d");
-    this.canvas = canvas;
-    this.keyboard = keyboard;
+    this.ctx = canvas.getContext('2d')
+    this.canvas = canvas
+    this.keyboard = keyboard
     this.draw();
-    this.setWorld();
-    this.run();
+    this.setWorld()
+    this.run()
+  }
+  
+  setWorld(){
+    this.character.world = this
   }
 
-  setWorld() {
-    this.character.world = this;
-  }
-
-  run() {
+  run(){
     setInterval(() => {
       this.checkThrowObjects();
       this.checkCollisions();
@@ -62,9 +62,9 @@ class World {
         bottle.throwableCondition("throwingLeft");
       }
     }
-  }
-  checkCollisions() {
-    let enemies = 0;
+  } 
+  checkCollisions(){
+    let enemies = 0
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         // console.log(this.enemyDead[enemies] == false)
@@ -73,81 +73,81 @@ class World {
           this.statusBar.setPercentage(this.character.energy);
         }
       }
-      let i = 0;
+      let i = 0
       this.throwableObjects.forEach((throwableObject) => {
         if (throwableObject.isColliding(enemy)) {
           if (this.alreadyCollided[i] == false && this.enemiesDead[enemies] == false) {
             // console.log("collided")
-            throwableObject.throwableCondition("breaking");
+            throwableObject.throwableCondition("breaking")
           }
           this.alreadyCollided[i] = true;
           enemy.dead();
           this.enemiesDead[enemy.id] = true;
         }
-        i++;
-      });
-      enemies++;
-    });
+        i++
+      })
+      enemies++
+    })
 
     this.level.coins.forEach((coin) => {
-      if (this.character.isColliding(coin)) {
-        coin.collect("coin");
+      if(this.character.isColliding(coin)) {
+        coin.collect("coin")
       }
-    });
+
+    })
     this.level.bottles.forEach((bottle) => {
-      if (this.character.isColliding(bottle)) {
-        bottle.collect("bottle");
+      if(this.character.isColliding(bottle)) {
+        bottle.collect("bottle")
       }
-    });
+    })
   }
   draw() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToMap(this.backgroundObjects);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.ctx.translate(this.camera_x, 0)
+    this.addObjectsToMap(this.backgroundObjects)
 
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBar);
-    this.ctx.translate(this.camera_x, 0);
+    this.ctx.translate(-this.camera_x, 0)
+    this.addToMap(this.statusBar)
+    this.ctx.translate(this.camera_x, 0)
 
-    this.addObjectsToMap(this.clouds);
-    this.addObjectsToMap(this.throwableObjects);
-    this.addObjectsToMap(this.coins);
-    this.addObjectsToMap(this.bottles);
-    this.addObjectsToMap(this.enemies);
-    this.addToMap(this.character);
-    this.ctx.translate(-this.camera_x, 0);
+    this.addObjectsToMap(this.clouds)
+    this.addObjectsToMap(this.throwableObjects)
+    this.addObjectsToMap(this.coins)
+    this.addObjectsToMap(this.bottles)
+    this.addObjectsToMap(this.enemies)
+    this.addToMap(this.character)
+    this.ctx.translate(-this.camera_x, 0)
     //draw wird immer aufgerufen
     let self = this;
-    requestAnimationFrame(function () {
-      self.draw();
-    });
+    requestAnimationFrame(function() {
+      self.draw()})
   }
 
-  addObjectsToMap(objs) {
-    objs.forEach((obj) => {
-      this.addToMap(obj);
-    });
+  addObjectsToMap(objs){
+    objs.forEach(obj => {
+      this.addToMap(obj)
+    })
   }
-  addToMap(mo) {
-    if (mo.otherDirection) {
-      this.flipImage(mo);
+  addToMap(mo){
+    if(mo.otherDirection){
+      this.flipImage(mo)
     }
-    mo.draw(this.ctx);
-    mo.drawFrame(this.ctx, mo);
-    if (mo.otherDirection) {
-      this.flipImageBack(mo);
+    mo.draw(this.ctx)
+    mo.drawFrame(this.ctx, mo)
+    if(mo.otherDirection){
+      this.flipImageBack(mo)
     }
   }
 
   flipImage(mo) {
-    this.ctx.save();
-    this.ctx.translate(mo.width, 0);
-    this.ctx.scale(-1, 1);
-    mo.x = mo.x * -1;
+    this.ctx.save()
+    this.ctx.translate(mo.width, 0)
+    this.ctx.scale(-1, 1)
+    mo.x = mo.x*-1
   }
 
   flipImageBack(mo) {
-    mo.x = mo.x * -1;
-    this.ctx.restore();
+    mo.x = mo.x *-1
+    this.ctx.restore()
   }
 }

@@ -1,17 +1,16 @@
 class Endboss extends MoveableObject {
-  height = 340;
-  width = 300;
-  y = 140;
-  speed = 0.15 + Math.random() * 0.2;
-  frameWidth = this.height;
-  frameHeight = this.width;
+  height = 340
+  width = 300
+  y = 140
+  speed = 0.15 + Math.random()*0.2
+  frameWidth = this.height
+  frameHeight = this.width
 
-  IMAGES_WALKING = [
-    "/assets/img/4_enemie_boss_chicken/1_walk/G1.png",
+  IMAGES_WALKING = ["/assets/img/4_enemie_boss_chicken/1_walk/G1.png",
     "/assets/img/4_enemie_boss_chicken/1_walk/G2.png",
     "/assets/img/4_enemie_boss_chicken/1_walk/G3.png",
     "/assets/img/4_enemie_boss_chicken/1_walk/G4.png",
-  ];
+  ]
 
   IMAGES_ALERT = [
     "/assets/img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -22,16 +21,16 @@ class Endboss extends MoveableObject {
     "/assets/img/4_enemie_boss_chicken/2_alert/G10.png",
     "/assets/img/4_enemie_boss_chicken/2_alert/G11.png",
     "/assets/img/4_enemie_boss_chicken/2_alert/G12.png",
-  ];
+  ]
   constructor() {
-    super().loadImage("/assets/img/4_enemie_boss_chicken/2_alert/G5.png");
-    this.loadImages(this.IMAGES_ALERT);
-    this.x = 200 + Math.random() * 500;
-    this.animate();
+    super().loadImage("/assets/img/4_enemie_boss_chicken/2_alert/G5.png")
+    this.loadImages(this.IMAGES_ALERT)
+    this.x = 200+Math.random()*500
+    this.animate()
   }
-  animate() {
+  animate(){    
     setInterval(() => {
-      this.playAnimation(this.IMAGES_ALERT);
-    }, 300);
+        this.playAnimation(this.IMAGES_ALERT)
+    }, 300)
   }
 }
