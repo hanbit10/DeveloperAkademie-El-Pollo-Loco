@@ -16,7 +16,7 @@ const level1 = new Level(
     new ChickenNormal(13, 2100, 0),
     new Endboss(400),
   ],
-  [false, false, false, false, false, false, false, false, false, false, false, false, false],
+  [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
   [new Cloud()],
   [
     new BackgroundObject("/assets/img/5_background/layers/air.png", -719),

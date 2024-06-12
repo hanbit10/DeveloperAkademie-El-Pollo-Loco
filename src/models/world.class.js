@@ -68,7 +68,7 @@ class World {
       if (this.character.isColliding(enemy)) {
         // console.log(this.enemyDead[enemies] == false)
         if (this.enemiesDead[enemies] == false) {
-          this.character.hit();
+          this.character.hit(2);
           this.statusBar.setPercentage(this.character.energy);
         }
       }
@@ -77,7 +77,7 @@ class World {
         if (throwableObject.isColliding(enemy)) {
           if (this.alreadyCollided[i] == false && this.enemiesDead[enemies] == false) {
             // console.log("collided")
-            throwableObject.throwableCondition("breaking");
+            throwableObject.throwableCondition("breaking", this.enemiesDead[enemy.id]);
           }
           if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
             this.alreadyCollided[i] = true;
@@ -85,7 +85,7 @@ class World {
             this.enemiesDead[enemy.id] = true;
           } else if (enemy instanceof Endboss) {
             this.alreadyCollided[i] = true;
-            enemy.hit();
+            enemy.hit(20);
             this.enemiesDead[enemy.id] = true;
           }
         }
