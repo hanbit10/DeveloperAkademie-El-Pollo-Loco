@@ -35,6 +35,7 @@ class Endboss extends MoveableObject {
     "/assets/img/4_enemie_boss_chicken/5_dead/G25.png",
     "/assets/img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
+
   constructor(x) {
     super().loadImage("/assets/img/4_enemie_boss_chicken/2_alert/G5.png");
     this.loadImages(this.IMAGES_ALERT);
