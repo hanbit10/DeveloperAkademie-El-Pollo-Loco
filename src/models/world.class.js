@@ -52,6 +52,17 @@ class World {
     });
   }
 
+  checkGame() {
+    if (this.character.isDead()) {
+      this.gameOver();
+    }
+  }
+
+  gameOver() {
+    this.background_sound.pause();
+    this.background_sound.currentTime = 0;
+  }
+
   checkBuy() {
     if (this.keyboard.B && this.character.coin > 0) {
       this.character.collected("bottle");
