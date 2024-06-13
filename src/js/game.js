@@ -31,6 +31,10 @@ document.addEventListener("keydown", (e) => {
   if (e.key == "d") {
     keyboard.D = true;
   }
+
+  if (e.key == "b") {
+    keyboard.B = true;
+  }
   // console.log(e)
   clearTimeout(clickedTime);
   startTimer();
@@ -60,6 +64,10 @@ document.addEventListener("keyup", (e) => {
 
   if (e.key == "d") {
     keyboard.D = false;
+  }
+
+  if (e.key == "b") {
+    keyboard.B = false;
   }
 });
 

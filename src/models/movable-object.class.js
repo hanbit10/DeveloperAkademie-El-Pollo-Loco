@@ -4,6 +4,7 @@ class MoveableObject extends DrawableObject {
   acceleration = 2.5;
   energy = 100;
   coin = 0;
+  bottle = 0;
   lastHit = 1;
 
   applyGravity() {
@@ -68,6 +69,18 @@ class MoveableObject extends DrawableObject {
     if (type == "coin") {
       this.coin += 10;
     }
+
+    if (type == "bottle") {
+      this.bottle += 20;
+    }
+  }
+
+  buyBottle() {
+    this.coin -= 20;
+  }
+
+  throwBottle() {
+    this.bottle -= 20;
   }
 
   isDead() {

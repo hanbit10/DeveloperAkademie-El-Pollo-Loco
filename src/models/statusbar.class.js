@@ -17,6 +17,15 @@ class StatusBar extends DrawableObject {
     "/assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/100.png",
   ];
 
+  BOTTLE_STATUS_BAR = [
+    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png",
+    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/20.png",
+    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/40.png",
+    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/60.png",
+    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/80.png",
+    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/100.png",
+  ];
+
   ENDBOSS_HEALTH_BAR = [
     "/assets/img/7_statusbars/2_statusbar_endboss/green/green0.png",
     "/assets/img/7_statusbars/2_statusbar_endboss/green/green20.png",
@@ -32,6 +41,7 @@ class StatusBar extends DrawableObject {
     super();
     this.loadImages(this.CHARACTER_HEALTH_BAR);
     this.loadImages(this.COIN_STATUS_BAR);
+    this.loadImages(this.BOTTLE_STATUS_BAR);
     this.loadImages(this.ENDBOSS_HEALTH_BAR);
     this.height = 60;
     this.width = 200;
@@ -47,6 +57,10 @@ class StatusBar extends DrawableObject {
       this.x = 500;
       this.y = 15;
       this.setBossPercentage(100);
+    } else if (type == "bottle") {
+      this.x = 20;
+      this.y = 110;
+      this.setBottlePercentage(0);
     }
   }
 
@@ -65,6 +79,12 @@ class StatusBar extends DrawableObject {
   setCoinPercentage(percentage) {
     this.percentage = percentage;
     let path = this.COIN_STATUS_BAR[this.reseolveImageIndex()];
+    this.img = this.imageCache[path];
+  }
+
+  setBottlePercentage(percentage) {
+    this.percentage = percentage;
+    let path = this.BOTTLE_STATUS_BAR[this.reseolveImageIndex()];
     this.img = this.imageCache[path];
   }
 
