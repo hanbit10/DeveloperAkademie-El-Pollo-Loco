@@ -29,16 +29,13 @@ class World {
 
   run() {
     setInterval(() => {
+      this.checkJump();
       this.checkCollisions();
     }, 50);
 
     setInterval(() => {
-      this.checkJump();
-    }, 50);
-
-    setInterval(() => {
       this.checkThrowObjects();
-    }, 500);
+    }, 200);
 
     setInterval(() => {
       this.checkFarness();
@@ -105,7 +102,7 @@ class World {
 
     let enemies = 0;
     this.level.enemies.forEach((enemy) => {
-      // console.log(this.jumpAttack);
+      console.log(this.jumpAttack);
       if (this.character.isColliding(enemy) && !this.jumpAttack) {
         if (this.enemiesDead[enemies] == false && !this.jumpAttack) {
           this.character.hit(2);
@@ -113,7 +110,7 @@ class World {
         }
       }
 
-      if (this.character.isJumpAttack(enemy) && this.jumpAttack) {
+      if (this.character.isColliding(enemy) && this.jumpAttack) {
         if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
           enemy.dead();
           this.enemiesDead[enemy.id] = true;
