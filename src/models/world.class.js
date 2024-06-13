@@ -1,6 +1,6 @@
 class World {
   character = new Character();
-  statusBar = new StatusBar();
+  statusBar = [new StatusBar("character"), new StatusBar("coin"), new StatusBar("endboss")];
   throwableObjects = [new ThrowableObject()];
   level = level1;
   enemies = this.level.enemies;
@@ -106,7 +106,7 @@ class World {
       if (this.character.isColliding(enemy) && !this.jumpAttack) {
         if (this.enemiesDead[enemies] == false && !this.jumpAttack) {
           this.character.hit(2);
-          this.statusBar.setPercentage(this.character.energy);
+          this.statusBar[0].setPercentage(this.character.energy);
         }
       }
 
@@ -128,7 +128,8 @@ class World {
             this.enemiesDead[enemy.id] = true;
           } else if (enemy instanceof Endboss) {
             this.alreadyCollided[i] = true;
-            enemy.hit(3);
+            enemy.hit(1);
+            this.statusBar[2].setBossPercentage(enemy.energy);
             if (enemy.energy <= 0) {
               this.enemiesDead[enemy.id] = true;
             }
@@ -142,6 +143,9 @@ class World {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
         coin.collect("coin");
+        // console.log(coin.energy);
+        this.character.collected("coin");
+        this.statusBar[1].setCoinPercentage(this.character.coin);
       }
     });
     this.level.bottles.forEach((bottle) => {
@@ -156,7 +160,7 @@ class World {
     this.addObjectsToMap(this.backgroundObjects);
 
     this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBar);
+    this.addObjectsToMap(this.statusBar);
     this.ctx.translate(this.camera_x, 0);
 
     this.addObjectsToMap(this.clouds);

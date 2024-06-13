@@ -3,6 +3,7 @@ class MoveableObject extends DrawableObject {
   speedY = 0;
   acceleration = 2.5;
   energy = 100;
+  coin = 0;
   lastHit = 1;
 
   applyGravity() {
@@ -61,6 +62,12 @@ class MoveableObject extends DrawableObject {
       this.lastHit = new Date().getTime();
     }
     // console.log(this.energy);
+  }
+
+  collected(type) {
+    if (type == "coin") {
+      this.coin += 10;
+    }
   }
 
   isDead() {
