@@ -12,6 +12,7 @@ class World {
   alreadyCollided = [false];
   enemiesDead = this.level.enemiesDead;
   // levelCleared = [false, false, false];
+  jumpAttack = false;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -28,13 +29,31 @@ class World {
 
   run() {
     setInterval(() => {
-      this.checkThrowObjects();
+      this.checkJump();
       this.checkCollisions();
-    }, 100);
+    }, 50);
 
     setInterval(() => {
-      // this.checkCollisions()
-    }, 100);
+      this.checkThrowObjects();
+    }, 200);
+
+    setInterval(() => {
+      this.checkFarness();
+    }, 500);
+  }
+
+  checkFarness() {
+    this.level.enemies.forEach((enemy) => {
+      if (enemy instanceof Endboss) {
+        if (this.character.isClose(enemy)) {
+          enemy.checkingCharacter("close");
+        } else if (this.character.isTooFar(enemy)) {
+          enemy.checkingCharacter("tooFar");
+        } else {
+          enemy.checkingCharacter("saveZone");
+        }
+      }
+    });
   }
 
   // checkLevels() {
@@ -50,6 +69,16 @@ class World {
   //   }
   // }
 
+  checkJump() {
+    if (this.character.isAboveGround()) {
+      setTimeout(() => {
+        this.jumpAttack = true;
+      }, 250);
+    } else {
+      this.jumpAttack = false;
+    }
+  }
+
   checkThrowObjects() {
     if (this.keyboard.D) {
       let bottle = new ThrowableObject(this.character.x, this.character.y);
@@ -63,20 +92,34 @@ class World {
     }
   }
   checkCollisions() {
+    // if (this.character.isAboveGround()) {
+    //   setTimeout(() => {
+    //     this.jumpAttack = true;
+    //   }, 250);
+    // } else {
+    //   this.jumpAttack = false;
+    // }
+
     let enemies = 0;
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        // console.log(this.enemyDead[enemies] == false)
-        if (this.enemiesDead[enemies] == false) {
+      // console.log(this.jumpAttack);
+      if (this.character.isColliding(enemy) && !this.jumpAttack) {
+        if (this.enemiesDead[enemies] == false && !this.jumpAttack) {
           this.character.hit(2);
           this.statusBar.setPercentage(this.character.energy);
+        }
+      }
+
+      if (this.character.isColliding(enemy) && this.jumpAttack) {
+        if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
+          enemy.dead();
+          this.enemiesDead[enemy.id] = true;
         }
       }
       let i = 0;
       this.throwableObjects.forEach((throwableObject) => {
         if (throwableObject.isColliding(enemy)) {
           if (this.alreadyCollided[i] == false && this.enemiesDead[enemies] == false) {
-            // console.log("collided")
             throwableObject.throwableCondition("breaking", this.enemiesDead[enemy.id]);
           }
           if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
@@ -85,8 +128,10 @@ class World {
             this.enemiesDead[enemy.id] = true;
           } else if (enemy instanceof Endboss) {
             this.alreadyCollided[i] = true;
-            enemy.hit(20);
-            this.enemiesDead[enemy.id] = true;
+            enemy.hit(3);
+            if (enemy.energy <= 0) {
+              this.enemiesDead[enemy.id] = true;
+            }
           }
         }
         i++;

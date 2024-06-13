@@ -35,7 +35,15 @@ class MoveableObject extends DrawableObject {
   }
 
   isColliding(mo) {
-    return this.x + this.width - 40 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+    return this.x + this.width - 40 >= mo.x && this.y + this.height >= mo.y && this.x - 25 <= mo.x && this.y < mo.y + mo.height;
+  }
+
+  isTooFar(mo) {
+    return this.x + this.width + 400 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+  }
+
+  isClose(mo) {
+    return this.x + this.width + 100 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
   }
 
   playAnimation(images) {
@@ -52,6 +60,7 @@ class MoveableObject extends DrawableObject {
     } else {
       this.lastHit = new Date().getTime();
     }
+    // console.log(this.energy);
   }
 
   isDead() {

@@ -30,20 +30,19 @@ class ThrowableObject extends MoveableObject {
   }
   throwableCondition(condition, enemyDead) {
     this.throwCondition = condition;
-    console.log(enemyDead);
+    // console.log(enemyDead);
     if (this.throwCondition == "breaking" && !enemyDead) {
       this.break_sound.play();
       this.speedY = 0;
       let count = 0;
+      this.bottleBroken = true;
       let breaked = setInterval(() => {
         this.playAnimation(this.BOTTLE_BREAK);
         if (count >= 6) {
           this.loadImage(this.BOTTLE_BREAK[5]);
         }
-        // clearInterval(breaked);
         count++;
       }, 150);
-      this.bottleBroken = true;
     } else if (this.throwCondition == "throwing" || this.throwCondition == "throwingLeft") {
       this.throw_sound.play();
       this.speedY = 10;
