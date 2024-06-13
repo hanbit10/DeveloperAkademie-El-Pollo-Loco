@@ -135,7 +135,7 @@ class Character extends MoveableObject {
       if (this.isHurt()) {
         // console.log(this.isHurt())
         this.playAnimation(this.IMAGES_HURT);
-        // this.gothit_sound.play()
+        this.gothit_sound.play();
       }
     }, 100);
   }

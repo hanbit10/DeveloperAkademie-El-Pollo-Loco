@@ -14,15 +14,17 @@ class World {
   // levelCleared = [false, false, false];
   jumpAttack = false;
   bossShown = false;
-  background_sound = new Audio("/assets/audio/background.mp3");
+  background_sound = new Audio("/assets/audio/game-background.wav");
+  boss_background_sound = new Audio("/assets/audio/boss-background.wav");
+  GAME_OVER = new Outro();
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    // this.background_sound.volume = 0.5;
-    // this.background_sound.play();
-    // this.background_sound.loop = true;
+    this.background_sound.volume = 0.5;
+    this.background_sound.play();
+    this.background_sound.loop = true;
     this.draw();
     this.setWorld();
     this.run();
@@ -47,20 +49,15 @@ class World {
       this.checkFarness();
     }, 500);
 
-    setInterval(() => {
-      this.checkGame();
-    });
-  }
-
-  checkGame() {
-    if (this.character.isDead() || this.enemies[16].isDead()) {
-      this.gameOver();
-    }
+    // setInterval(() => {
+    //   this.checkGame();
+    // });
   }
 
   gameOver() {
     this.background_sound.pause();
     this.background_sound.currentTime = 0;
+    this.GAME_OVER;
   }
 
   checkBuy() {
@@ -162,7 +159,7 @@ class World {
             this.enemiesDead[enemy.id] = true;
           } else if (enemy instanceof Endboss) {
             this.alreadyCollided[i] = true;
-            enemy.hit(1);
+            enemy.hit(1.4);
             this.statusBar[2].setBossPercentage(enemy.energy);
             if (enemy.energy <= 0) {
               this.enemiesDead[enemy.id] = true;
@@ -205,7 +202,10 @@ class World {
     this.addToMap(this.statusBar[0]);
     this.addToMap(this.statusBar[1]);
     this.addToMap(this.statusBar[3]);
-    if (this.character.x > 1100 || this.bossShown) {
+    if (this.character.x > 1400 || this.bossShown) {
+      this.background_sound.pause();
+      this.boss_background_sound.play();
+      this.boss_background_sound.loop = true;
       this.addToMap(this.statusBar[2]);
       this.bossShown = true;
     }
@@ -214,6 +214,12 @@ class World {
     this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0);
     //draw wird immer aufgerufen
+
+    if (this.character.isDead() || this.enemies[16].isDead()) {
+      console.log("the character is dead!");
+      this.gameOver();
+    }
+
     let self = this;
     requestAnimationFrame(function () {
       self.draw();

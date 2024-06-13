@@ -51,7 +51,7 @@ class MoveableObject extends DrawableObject {
   }
 
   isClose(mo) {
-    return this.x + this.width + 100 >= mo.x && this.x <= mo.x; //&& this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+    return this.x + this.width + 120 >= mo.x && this.x <= mo.x; //&& this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
   }
 
   playAnimation(images) {
