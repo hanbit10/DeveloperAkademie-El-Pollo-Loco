@@ -53,7 +53,7 @@ class World {
   }
 
   checkGame() {
-    if (this.character.isDead()) {
+    if (this.character.isDead() || this.enemies[16].isDead()) {
       this.gameOver();
     }
   }
