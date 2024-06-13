@@ -46,10 +46,6 @@ class MoveableObject extends DrawableObject {
     return this.x + this.width + 100 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
   }
 
-  isJumpAttack(mo) {
-    return this.x + this.width - 60 >= mo.x && this.y + this.height == mo.y && this.x - 60 <= mo.x;
-  }
-
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
