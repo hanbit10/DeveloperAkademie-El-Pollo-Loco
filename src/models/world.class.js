@@ -14,11 +14,15 @@ class World {
   // levelCleared = [false, false, false];
   jumpAttack = false;
   bossShown = false;
+  background_sound = new Audio("/assets/audio/background.mp3");
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    // this.background_sound.volume = 0.5;
+    // this.background_sound.play();
+    // this.background_sound.loop = true;
     this.draw();
     this.setWorld();
     this.run();
@@ -42,6 +46,21 @@ class World {
     setInterval(() => {
       this.checkFarness();
     }, 500);
+
+    setInterval(() => {
+      this.checkGame();
+    });
+  }
+
+  checkGame() {
+    if (this.character.isDead() || this.enemies[16].isDead()) {
+      this.gameOver();
+    }
+  }
+
+  gameOver() {
+    this.background_sound.pause();
+    this.background_sound.currentTime = 0;
   }
 
   checkBuy() {
@@ -176,22 +195,21 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.backgroundObjects);
 
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBar[0]);
-    this.addToMap(this.statusBar[1]);
-    this.addToMap(this.statusBar[3]);
-
-    if (this.character.x > 1100 || this.bossShown) {
-      this.addToMap(this.statusBar[2]);
-      this.bossShown = true;
-    }
-    this.ctx.translate(this.camera_x, 0);
-
     this.addObjectsToMap(this.clouds);
     this.addObjectsToMap(this.coins);
     this.addObjectsToMap(this.bottles);
     this.addObjectsToMap(this.enemies);
     this.addObjectsToMap(this.throwableObjects);
+
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusBar[0]);
+    this.addToMap(this.statusBar[1]);
+    this.addToMap(this.statusBar[3]);
+    if (this.character.x > 1100 || this.bossShown) {
+      this.addToMap(this.statusBar[2]);
+      this.bossShown = true;
+    }
+    this.ctx.translate(this.camera_x, 0);
 
     this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0);
