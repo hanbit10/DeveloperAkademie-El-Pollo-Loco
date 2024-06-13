@@ -14,6 +14,7 @@ class ChickenNormal extends MoveableObject {
 
   buck_sound = new Audio("/assets/audio/chicken/normal-chicken/buck.mp3");
   killed_sound = new Audio("/assets/audio/chicken/normal-chicken/killed.wav");
+
   constructor(id, x) {
     super().loadImage("/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -23,11 +24,11 @@ class ChickenNormal extends MoveableObject {
   }
   animate() {
     this.animateImgs = setInterval(() => {
-      this.buck_sound.volume = 0.03;
-      let resp = this.buck_sound.play();
-      if (resp !== undefined) {
-        resp.then((_) => {}).catch((error) => {});
-      }
+      // this.buck_sound.volume = 0.03;
+      // let resp = this.buck_sound.play();
+      // if (resp !== undefined) {
+      //   resp.then((_) => {}).catch((error) => {});
+      // }
       let i = this.currentImage % this.IMAGES_WALKING.length;
       let path = this.IMAGES_WALKING[i];
       this.img = this.imageCache[path];

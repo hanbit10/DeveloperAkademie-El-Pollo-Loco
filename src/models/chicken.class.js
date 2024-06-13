@@ -25,11 +25,11 @@ class Chicken extends MoveableObject {
   }
   animate() {
     this.animateImgs = setInterval(() => {
-      this.buck_sound.volume = 0.1;
-      let resp = this.buck_sound.play();
-      if (resp !== undefined) {
-        resp.then((_) => {}).catch((error) => {});
-      }
+      // this.buck_sound.volume = 0.1;
+      // let resp = this.buck_sound.play();
+      // if (resp !== undefined) {
+      //   resp.then((_) => {}).catch((error) => {});
+      // }
       let i = this.currentImage % this.IMAGES_WALKING.length;
       let path = this.IMAGES_WALKING[i];
       this.img = this.imageCache[path];

@@ -35,7 +35,7 @@ class MoveableObject extends DrawableObject {
   }
 
   isColliding(mo) {
-    return this.x + this.width - 40 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+    return this.x + this.width - 40 >= mo.x && this.y + this.height >= mo.y && this.x - 25 <= mo.x && this.y < mo.y + mo.height;
   }
 
   isTooFar(mo) {
@@ -44,6 +44,10 @@ class MoveableObject extends DrawableObject {
 
   isClose(mo) {
     return this.x + this.width + 100 >= mo.x && this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+  }
+
+  isJumpAttack(mo) {
+    return this.x + this.width - 40 >= mo.x && this.y + this.height == mo.y && this.x <= mo.x;
   }
 
   playAnimation(images) {
