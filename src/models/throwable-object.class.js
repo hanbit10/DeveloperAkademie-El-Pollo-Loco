@@ -19,7 +19,7 @@ class ThrowableObject extends MoveableObject {
   ];
 
   throwCondition = "throwing";
-
+  throwableBottle;
   constructor(x, y) {
     super().loadImage("/assets/img/6_salsa_bottle/salsa_bottle.png");
     this.loadImages(this.BOTTLE_THROW);
@@ -47,10 +47,10 @@ class ThrowableObject extends MoveableObject {
       this.throw_sound.play();
       this.speedY = 10;
       this.applyGravity();
-      let thrwoingBottle = setInterval(() => {
+      this.thrwoingBottle = setInterval(() => {
         this.playAnimation(this.BOTTLE_THROW);
         if (this.throwCondition == "breaking") {
-          clearInterval(thrwoingBottle);
+          clearInterval(this.thrwoingBottle);
         }
       }, 100);
     }

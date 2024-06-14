@@ -2,32 +2,80 @@ class World {
   character = new Character();
   statusBar = [new StatusBar("character"), new StatusBar("coin"), new StatusBar("endboss"), new StatusBar("bottle")];
   throwableObjects = [new ThrowableObject()];
-  level = level1;
+  camera_x = 0;
+  alreadyCollided = [false];
+  jumpAttack = false;
+  bossShown = false;
+  background_sound = new Audio("/assets/audio/game-background.wav");
+  boss_background_sound = new Audio("/assets/audio/boss-background.wav");
+  gameover_sound = new Audio("/assets/audio/gameover.wav");
+  gameoverPlayed = false;
+  GAME_OVER = new Outro();
+  level = getLevel();
   enemies = this.level.enemies;
   clouds = this.level.clouds;
   coins = this.level.coins;
   bottles = this.level.bottles;
   backgroundObjects = this.level.backgroundObjects;
-  camera_x = 0;
-  alreadyCollided = [false];
-  enemiesDead = this.level.enemiesDead;
-  // levelCleared = [false, false, false];
-  jumpAttack = false;
-  bossShown = false;
-  background_sound = new Audio("/assets/audio/game-background.wav");
-  boss_background_sound = new Audio("/assets/audio/boss-background.wav");
-  GAME_OVER = new Outro();
-
+  // enemiesDead = this.level.enemiesDead;
+  playBackground = false;
+  run1;
+  run2;
+  run3;
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.background_sound.volume = 0.5;
-    this.background_sound.play();
-    this.background_sound.loop = true;
+    // this.background_sound.volume = 0.5;
+    // this.background_sound.play();
+    // this.background_sound.loop = true;
     this.draw();
     this.setWorld();
     this.run();
+  }
+
+  gameOverSetting = false;
+  reset() {
+    // this.level = getLevel();
+    this.gameOverSetting = false;
+    this.character.energy = 100;
+    // this.background_sound.srcObject = null;
+    // this.character.walking_sound.srcObject = null;
+    // this.character.jump_sound.srcObject = null;
+    // this.character.gothit_sound.srcObject = null;
+    // this.enemies.forEach((enemy) => {
+    //   if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
+    //     enemy.killed_sound.srcObject = null;
+    //     enemy.buck_sound.srcObject = null;
+    //     clearInterval(enemy.animateImgs);
+    //     clearInterval(enemy.moving);
+    //   }
+    //   if (enemy instanceof Endboss) {
+    //     enemy.killed_sound.srcObject = null;
+    //     enemy.hurt_sound.srcObject = null;
+    //     enemy.attack_sound.srcObject = null;
+    //     clearInterval(enemy.bossAlive);
+    //     clearInterval(enemy.bossDead);
+    //     clearInterval(enemy.moving);
+    //   }
+    // });
+    // this.clouds.forEach((cloud) => {
+    //   clearInterval(cloud.animation);
+    // });
+    // clearInterval(this.character.animate1);
+    // clearInterval(this.character.animate2);
+    // clearInterval(this.character.animate3);
+    // clearInterval(this.run1);
+    // clearInterval(this.run2);
+    // clearInterval(this.run3);
+    // console.log(this.character);
+    // // Object.assign(this.character, null);
+    // for (const key in this.character) {
+    //   delete this.character[key];
+    // }
+    // // this.character = new Character();
+    // Object.assign(this, null);
+    // Object.assign(this, new World(this.canvas, this.keyboard));
   }
 
   setWorld() {
@@ -35,29 +83,29 @@ class World {
   }
 
   run() {
-    setInterval(() => {
+    this.run1 = setInterval(() => {
+      this.playBackgroundMusic();
       this.checkJump();
       this.checkCollisions();
     }, 50);
 
-    setInterval(() => {
+    this.run2 = setInterval(() => {
       this.checkThrowObjects();
       this.checkBuy();
     }, 200);
 
-    setInterval(() => {
+    this.run3 = setInterval(() => {
       this.checkFarness();
     }, 500);
-
-    // setInterval(() => {
-    //   this.checkGame();
-    // });
   }
 
-  gameOver() {
-    this.background_sound.pause();
-    this.background_sound.currentTime = 0;
-    this.GAME_OVER;
+  playBackgroundMusic() {
+    if (!this.playBackground) {
+      this.background_sound.volume = 0.5;
+      this.background_sound.play();
+      this.background_sound.loop = true;
+      this.playBackground = true;
+    }
   }
 
   checkBuy() {
@@ -135,7 +183,7 @@ class World {
     this.level.enemies.forEach((enemy) => {
       // console.log(this.jumpAttack);
       if (this.character.isColliding(enemy) && !this.jumpAttack) {
-        if (this.enemiesDead[enemies] == false && !this.jumpAttack) {
+        if (enemy.deadSetting == false && !this.jumpAttack) {
           this.character.hit(2);
           this.statusBar[0].setPercentage(this.character.energy);
         }
@@ -144,25 +192,28 @@ class World {
       if (this.character.isColliding(enemy) && this.jumpAttack) {
         if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
           enemy.dead();
-          this.enemiesDead[enemy.id] = true;
+          enemy.deadSetting = true;
+          // this.enemiesDead[enemy.id] = true;
         }
       }
       let i = 0;
       this.throwableObjects.forEach((throwableObject) => {
         if (throwableObject.isColliding(enemy)) {
-          if (this.alreadyCollided[i] == false && this.enemiesDead[enemies] == false) {
-            throwableObject.throwableCondition("breaking", this.enemiesDead[enemy.id]);
+          if (this.alreadyCollided[i] == false && enemy.deadSetting == false) {
+            throwableObject.throwableCondition("breaking", enemy.deadSetting);
           }
           if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
             this.alreadyCollided[i] = true;
             enemy.dead();
-            this.enemiesDead[enemy.id] = true;
+            // this.enemiesDead[enemy.id] = true;
+            enemy.deadSetting = true;
           } else if (enemy instanceof Endboss) {
             this.alreadyCollided[i] = true;
-            enemy.hit(1.4);
+            enemy.hit(5.4);
             this.statusBar[2].setBossPercentage(enemy.energy);
             if (enemy.energy <= 0) {
-              this.enemiesDead[enemy.id] = true;
+              // this.enemiesDead[enemy.id] = true;
+              enemy.deadSetting = true;
             }
           }
         }
@@ -186,6 +237,21 @@ class World {
         this.statusBar[3].setBottlePercentage(this.character.bottle);
       }
     });
+  }
+
+  gameOver() {
+    this.background_sound.pause();
+    this.background_sound.currentTime = 0;
+    this.boss_background_sound.pause();
+    this.boss_background_sound.currentTime = 0;
+    if (!this.gameoverPlayed) {
+      this.gameover_sound.play();
+      this.gameoverPlayed = true;
+    }
+    this.addObjectsToMap(this.backgroundObjects);
+    this.addToMap(this.GAME_OVER);
+    // this.draw();
+    // this.GAME_OVER;
   }
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -214,9 +280,15 @@ class World {
     this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0);
     //draw wird immer aufgerufen
-
+    console.log(this.character.isDead());
     if (this.character.isDead() || this.enemies[16].isDead()) {
-      console.log("the character is dead!");
+      // console.log(this.character.isDead());
+      // console.log("the character is dead!");
+      // this.gameOver();
+      this.gameOverSetting = true;
+    }
+
+    if (this.gameOverSetting) {
       this.gameOver();
     }
 

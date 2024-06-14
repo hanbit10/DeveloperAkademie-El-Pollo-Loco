@@ -16,6 +16,7 @@ class Chicken extends MoveableObject {
   killed_sound = new Audio("/assets/audio/chicken/small-chicken/killed.wav");
   moving;
   animateImgs;
+  deadSetting = false;
   constructor(id, x) {
     super().loadImage("/assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -25,11 +26,6 @@ class Chicken extends MoveableObject {
   }
   animate() {
     this.animateImgs = setInterval(() => {
-      // this.buck_sound.volume = 0.1;
-      // let resp = this.buck_sound.play();
-      // if (resp !== undefined) {
-      //   resp.then((_) => {}).catch((error) => {});
-      // }
       let i = this.currentImage % this.IMAGES_WALKING.length;
       let path = this.IMAGES_WALKING[i];
       this.img = this.imageCache[path];

@@ -72,6 +72,9 @@ class Character extends MoveableObject {
   frameWidth = 40;
   frameHeight = 120;
   jumpImage = 0;
+  animate1;
+  animate2;
+  animate3;
   constructor() {
     super().loadImage("/assets/img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -85,7 +88,7 @@ class Character extends MoveableObject {
   }
 
   animate() {
-    setInterval(() => {
+    this.animate1 = setInterval(() => {
       // console.log(this.movingLeft)
       this.walking_sound.pause();
 
@@ -106,7 +109,7 @@ class Character extends MoveableObject {
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
 
-    setInterval(() => {
+    this.animate2 = setInterval(() => {
       if (this.world.keyboard.KEYUSED) {
         this.playAnimation(this.IMAGES_IDLE);
       } else if (!this.world.keyboard.KEYUSED) {
@@ -123,7 +126,7 @@ class Character extends MoveableObject {
       }
     }, 100);
 
-    setInterval(() => {
+    this.animate3 = setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
       }

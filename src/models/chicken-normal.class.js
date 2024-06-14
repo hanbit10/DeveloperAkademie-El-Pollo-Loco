@@ -5,7 +5,7 @@ class ChickenNormal extends MoveableObject {
   speed = 0.55 + Math.random() * 2;
   frameWidth = this.width;
   frameHeight = this.height;
-
+  deadSetting = false;
   IMAGES_WALKING = [
     "/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
     "/assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",

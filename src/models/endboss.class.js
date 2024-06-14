@@ -48,6 +48,11 @@ class Endboss extends MoveableObject {
   attack_sound = new Audio("/assets/audio/chicken/boss-chicken/attack.wav");
   characterTooFar = false;
   bossAttack = false;
+  deadSetting = false;
+
+  bossAlive;
+  moving;
+  bossDead;
 
   constructor(x) {
     super().loadImage("/assets/img/4_enemie_boss_chicken/2_alert/G5.png");
@@ -64,7 +69,7 @@ class Endboss extends MoveableObject {
     let playKilledOnce = false;
     let endbossWalk = false;
 
-    let bossAlive = setInterval(() => {
+    this.bossAlive = setInterval(() => {
       // console.log("bossAttack", this.bossAttack);
       if (this.bossAttack) {
         this.playAnimation(this.IMAGES_ATTACK);
@@ -88,10 +93,10 @@ class Endboss extends MoveableObject {
     }, 200);
 
     let count = 0;
-    let bossDead = setInterval(() => {
+    this.bossDead = setInterval(() => {
       if (this.isDead()) {
-        clearInterval(moving);
-        clearInterval(bossAlive);
+        clearInterval(this.moving);
+        clearInterval(this.bossAlive);
         if (playKilledOnce == false) {
           this.killed_sound.play();
         }
@@ -104,7 +109,7 @@ class Endboss extends MoveableObject {
       }
     }, 200);
 
-    let moving = setInterval(() => {
+    this.moving = setInterval(() => {
       if (this.characterTooFar) {
         this.moveLeft();
         endbossWalk = true;
