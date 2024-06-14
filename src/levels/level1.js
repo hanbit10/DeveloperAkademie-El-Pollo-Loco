@@ -19,7 +19,6 @@ function getLevel() {
       new ChickenNormal(15, 2100),
       new Endboss(2100),
     ],
-    [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
     [new Cloud(), new Cloud()],
     [
       new BackgroundObject("/assets/img/5_background/layers/air.png", -719),

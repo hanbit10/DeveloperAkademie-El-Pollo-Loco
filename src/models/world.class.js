@@ -17,7 +17,6 @@ class World {
   coins = this.level.coins;
   bottles = this.level.bottles;
   backgroundObjects = this.level.backgroundObjects;
-  // enemiesDead = this.level.enemiesDead;
   playBackground = false;
   run1;
   run2;
@@ -39,6 +38,18 @@ class World {
     // this.level = getLevel();
     this.gameOverSetting = false;
     this.character.energy = 100;
+    this.enemies.forEach((enemy) => {
+      enemy.reset();
+    });
+    this.clouds.forEach((cloud) => {
+      cloud.reset();
+    });
+    this.coins.forEach((coin) => {
+      coin.reset();
+    });
+    this.bottles.forEach((bottle) => {
+      bottle.reset();
+    });
     // this.background_sound.srcObject = null;
     // this.character.walking_sound.srcObject = null;
     // this.character.jump_sound.srcObject = null;

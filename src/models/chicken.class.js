@@ -21,6 +21,7 @@ class Chicken extends MoveableObject {
     super().loadImage("/assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.x = x + Math.random() * 100;
+    this.xCache = x;
     this.id = id;
     this.animate();
   }
@@ -51,5 +52,10 @@ class Chicken extends MoveableObject {
     setTimeout(() => {
       this.y = 600;
     }, 2000);
+  }
+
+  reset() {
+    this.deadSetting = true;
+    this.x = this.xCache + Math.random() * 100;
   }
 }

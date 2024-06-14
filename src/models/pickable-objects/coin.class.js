@@ -8,6 +8,7 @@ class Coin extends PickableObject {
     super();
     this.x = x;
     this.y = y;
+    this.yCache = y;
     this.loadImage(this.coin);
   }
 }

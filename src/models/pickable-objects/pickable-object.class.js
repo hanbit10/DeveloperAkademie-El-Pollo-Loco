@@ -16,4 +16,8 @@ class PickableObject extends DrawableObject {
       this.bottle_collect.play();
     }
   }
+
+  reset() {
+    this.y = this.yCache;
+  }
 }

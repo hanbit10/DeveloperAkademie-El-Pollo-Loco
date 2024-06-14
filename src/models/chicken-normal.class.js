@@ -19,6 +19,7 @@ class ChickenNormal extends MoveableObject {
     super().loadImage("/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.x = x;
+    this.xCache = x;
     this.id = id;
     this.animate();
   }
@@ -54,5 +55,10 @@ class ChickenNormal extends MoveableObject {
     setTimeout(() => {
       this.y = 600;
     }, 2000);
+  }
+
+  reset() {
+    this.deadSetting = true;
+    this.x = this.xCache;
   }
 }

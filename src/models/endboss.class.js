@@ -62,6 +62,7 @@ class Endboss extends MoveableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_ATTACK);
     this.x = x;
+    this.xCache = x;
     this.animate();
   }
   animate() {
@@ -130,5 +131,10 @@ class Endboss extends MoveableObject {
       this.characterTooFar = false;
       this.bossAttack = false;
     }
+  }
+
+  reset() {
+    this.deadSetting = false;
+    this.x = this.xCache;
   }
 }
