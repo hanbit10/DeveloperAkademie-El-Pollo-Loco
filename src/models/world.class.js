@@ -218,14 +218,12 @@ class World {
             this.alreadyCollided[i] = true;
             enemy.energy = 0;
             enemy.dead();
-            // this.enemiesDead[enemy.id] = true;
             enemy.deadSetting = true;
           } else if (enemy instanceof Endboss) {
             this.alreadyCollided[i] = true;
             enemy.hit(5.4);
             this.statusBar[2].setPercentage(enemy.energy, "boss");
             if (enemy.energy <= 0) {
-              // this.enemiesDead[enemy.id] = true;
               enemy.dead();
               enemy.deadSetting = true;
             }
