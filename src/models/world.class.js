@@ -9,8 +9,11 @@ class World {
   background_sound = new Audio("/assets/audio/game-background.wav");
   boss_background_sound = new Audio("/assets/audio/boss-background.wav");
   gameover_sound = new Audio("/assets/audio/gameover.wav");
-
+  gamewon_sound = new Audio("/assets/audio/youwon.mp3");
   GAME_OVER = new Outro();
+  GAME_WON = new Intro();
+  GAME_MENU = new StartScreen();
+
   level = getLevel();
   enemies = this.level.enemies;
   clouds = this.level.clouds;
@@ -36,17 +39,26 @@ class World {
   gameOverPlayed = false;
   gameOverSetting = false;
   gameOverTiming = false;
-  reset() {
-    // this.level = getLevel();
 
-    // this.background_sound.play();
-    // this.background_sound.loop = true;
+  gameWonPlayed = false;
+  gameWonSetting = false;
+  gameWonTiming = false;
+
+  gameMenu = false;
+
+  reset() {
     this.gameOverSetting = false;
     setTimeout(() => {
       this.gameOverTiming = false;
     }, 2000);
 
+    this.gameWonSetting = false;
+    setTimeout(() => {
+      this.gameWonTiming = false;
+    }, 2000);
+
     this.gameOverPlayed = false;
+    this.gameWonPlayed = false;
     this.character.reset();
     this.background_sound.play();
     this.bossShown = false;
@@ -68,43 +80,6 @@ class World {
     this.bottles.forEach((bottle) => {
       bottle.reset();
     });
-    // this.background_sound.srcObject = null;
-    // this.character.walking_sound.srcObject = null;
-    // this.character.jump_sound.srcObject = null;
-    // this.character.gothit_sound.srcObject = null;
-    // this.enemies.forEach((enemy) => {
-    //   if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
-    //     enemy.killed_sound.srcObject = null;
-    //     enemy.buck_sound.srcObject = null;
-    //     clearInterval(enemy.animateImgs);
-    //     clearInterval(enemy.moving);
-    //   }
-    //   if (enemy instanceof Endboss) {
-    //     enemy.killed_sound.srcObject = null;
-    //     enemy.hurt_sound.srcObject = null;
-    //     enemy.attack_sound.srcObject = null;
-    //     clearInterval(enemy.bossAlive);
-    //     clearInterval(enemy.bossDead);
-    //     clearInterval(enemy.moving);
-    //   }
-    // });
-    // this.clouds.forEach((cloud) => {
-    //   clearInterval(cloud.animation);
-    // });
-    // clearInterval(this.character.animate1);
-    // clearInterval(this.character.animate2);
-    // clearInterval(this.character.animate3);
-    // clearInterval(this.run1);
-    // clearInterval(this.run2);
-    // clearInterval(this.run3);
-    // console.log(this.character);
-    // // Object.assign(this.character, null);
-    // for (const key in this.character) {
-    //   delete this.character[key];
-    // }
-    // // this.character = new Character();
-    // Object.assign(this, null);
-    // Object.assign(this, new World(this.canvas, this.keyboard));
   }
 
   setWorld() {
@@ -160,19 +135,6 @@ class World {
     });
   }
 
-  // checkLevels() {
-  //   let level1Enemies = this.enemiesDead.slice(0, 6);
-  //   let check1 = level1Enemies.every((element) => element == true);
-  //   if (check1) {
-  //     if (!this.levelCleared[0]) {
-  //       console.log("level 1 cleared");
-  //       this.level.level_start_x = this.level.level_end_x - 500;
-  //       this.level.level_end_x = this.level.level_end_x * 2;
-  //       this.levelCleared[0] = true;
-  //     }
-  //   }
-  // }
-
   checkJump() {
     if (this.character.isAboveGround()) {
       setTimeout(() => {
@@ -200,17 +162,8 @@ class World {
     }
   }
   checkCollisions() {
-    // if (this.character.isAboveGround()) {
-    //   setTimeout(() => {
-    //     this.jumpAttack = true;
-    //   }, 250);
-    // } else {
-    //   this.jumpAttack = false;
-    // }
-
     let enemies = 0;
     this.level.enemies.forEach((enemy) => {
-      // console.log(this.jumpAttack);
       if (this.character.isColliding(enemy) && !this.jumpAttack) {
         if (enemy.deadSetting == false && !this.jumpAttack) {
           this.character.hit(2);
@@ -279,61 +232,88 @@ class World {
       this.gameover_sound.play();
       this.gameOverPlayed = true;
     }
+  }
 
-    // this.draw();
-    // this.GAME_OVER;
+  gameWon() {
+    this.background_sound.pause();
+    this.background_sound.currentTime = 0;
+    this.boss_background_sound.pause();
+    this.boss_background_sound.currentTime = 0;
+    if (!this.gameWonPlayed) {
+      this.gamewon_sound.play();
+      this.gameWonPlayed = true;
+    }
   }
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToMap(this.backgroundObjects);
 
-    this.addObjectsToMap(this.clouds);
-    this.addObjectsToMap(this.coins);
-    this.addObjectsToMap(this.bottles);
-    this.addObjectsToMap(this.enemies);
-    this.addObjectsToMap(this.throwableObjects);
+    if (this.gameMenu) {
+      this.ctx.translate(this.camera_x, 0);
+      this.addObjectsToMap(this.backgroundObjects);
+      this.addObjectsToMap(this.clouds);
+      this.addObjectsToMap(this.coins);
+      this.addObjectsToMap(this.bottles);
+      this.addObjectsToMap(this.enemies);
+      this.addObjectsToMap(this.throwableObjects);
 
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBar[0]);
-    this.addToMap(this.statusBar[1]);
-    this.addToMap(this.statusBar[3]);
-    if (this.character.x > 1400 || this.bossShown) {
-      this.background_sound.pause();
-      this.boss_background_sound.play();
-      this.boss_background_sound.loop = true;
-      this.addToMap(this.statusBar[2]);
-      this.bossShown = true;
-    }
-    this.ctx.translate(this.camera_x, 0);
+      this.ctx.translate(-this.camera_x, 0);
+      this.addToMap(this.statusBar[0]);
+      this.addToMap(this.statusBar[1]);
+      this.addToMap(this.statusBar[3]);
 
-    this.addToMap(this.character);
-    this.ctx.translate(-this.camera_x, 0);
-    //draw wird immer aufgerufen
-    // console.log(this.enemies[16].isDead());
-    // console.log(this.enemies[16].energy);
+      if (this.character.x > 1400 || this.bossShown) {
+        this.background_sound.pause();
+        this.boss_background_sound.play();
+        this.boss_background_sound.loop = true;
+        this.addToMap(this.statusBar[2]);
+        this.bossShown = true;
+      }
+      this.ctx.translate(this.camera_x, 0);
 
-    if (this.character.isDead() || this.enemies[16].isDead()) {
-      // console.log(this.character.isDead());
-      // console.log("the character is dead!");
-      // this.gameOver();
-      this.gameOverSetting = true;
-    }
+      this.addToMap(this.character);
+      this.ctx.translate(-this.camera_x, 0);
 
-    console.log("gameOverTiming", this.gameOverTiming);
+      if (this.character.isDead()) {
+        this.gameOverSetting = true;
+      }
 
-    if (this.gameOverSetting) {
-      this.gameOver();
-      if (!this.gameOverTiming)
-        setTimeout(() => {
+      if (this.enemies[16].isDead()) {
+        this.gameWonSetting = true;
+      }
+
+      if (this.gameWonSetting) {
+        this.gameWon();
+        if (!this.gameWonTiming)
+          setTimeout(() => {
+            this.addObjectsToMap(this.backgroundObjects);
+            this.addToMap(this.GAME_WON);
+            this.gameWonTiming = true;
+          }, 2000);
+        else {
+          this.addObjectsToMap(this.backgroundObjects);
+          this.addToMap(this.GAME_WON);
+        }
+      }
+
+      console.log("gameOverTiming", this.gameOverTiming);
+
+      if (this.gameOverSetting) {
+        this.gameOver();
+        if (!this.gameOverTiming)
+          setTimeout(() => {
+            this.addObjectsToMap(this.backgroundObjects);
+            this.addToMap(this.GAME_OVER);
+            this.gameOverTiming = true;
+          }, 2000);
+        else {
           this.addObjectsToMap(this.backgroundObjects);
           this.addToMap(this.GAME_OVER);
-          this.gameOverTiming = true;
-        }, 2000);
-      else {
-        this.addObjectsToMap(this.backgroundObjects);
-        this.addToMap(this.GAME_OVER);
+        }
       }
+    }
+
+    if (!this.gameMenu) {
+      this.addToMap(this.GAME_MENU);
     }
 
     let self = this;

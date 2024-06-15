@@ -41,8 +41,6 @@ class ChickenNormal extends MoveableObject {
 
     this.moving = setInterval(() => {
       if (this.x < -200) {
-        clearInterval(this.moving);
-        clearInterval(this.animateImgs);
         this.buck_sound.pause();
       }
       this.moveLeft();
