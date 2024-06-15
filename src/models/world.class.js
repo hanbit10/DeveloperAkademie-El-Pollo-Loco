@@ -103,7 +103,7 @@ class World {
   }
 
   checkBuy() {
-    if (this.keyboard.B && this.character.coin > 0) {
+    if (this.keyboard.B && this.character.coin > 10) {
       this.character.collected("bottle");
       this.character.buyBottle();
       this.statusBar[1].setPercentage(this.character.coin, "coin");
