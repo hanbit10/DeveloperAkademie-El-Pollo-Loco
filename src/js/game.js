@@ -3,6 +3,9 @@ let clickedTime;
 let level;
 let world;
 let canvas;
+const resetButton = document.getElementById("reset-button");
+const menuButton = document.getElementById("menu-button");
+const startButton = document.getElementById("start-button");
 function init() {
   // world = new World(canvas, keyboard);
 
@@ -10,11 +13,41 @@ function init() {
   // level = getLevel();
   world = new World(canvas, keyboard);
 
-  const resetButton = document.getElementById("reset-button");
   resetButton.addEventListener("click", resetSketch);
+
+  menuButton.addEventListener("click", goMenu);
+
+  startButton.addEventListener("click", start);
+
+  setInterval(() => {
+    console.log(world.gameOverSetting);
+    if (world.gameOverSetting || world.gameWonSetting) {
+      menuButton.classList.remove("d-none");
+      resetButton.classList.remove("d-none");
+      startButton.classList.add("d-none");
+    }
+  }, 100);
+}
+
+function goMenu() {
+  world.gameMenu = true;
+  world.gameOverSetting = false;
+  world.gameWonSetting = false;
+  resetButton.classList.add("d-none");
+  menuButton.classList.add("d-none");
+  startButton.classList.remove("d-none");
+}
+
+function start() {
+  startButton.classList.add("d-none");
+  world.gameMenu = false;
+  world.reset();
 }
 
 function resetSketch() {
+  resetButton.classList.add("d-none");
+  menuButton.classList.add("d-none");
+  world.gameMenu = false;
   world.reset();
 }
 

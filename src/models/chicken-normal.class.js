@@ -48,7 +48,7 @@ class ChickenNormal extends MoveableObject {
   }
 
   dead() {
-    console.log(this.isDead());
+    // console.log(this.isDead());
     // this.chickenDead = setInterval(() => {
     //   if (this.isDead()) {
     this.buck_sound.pause();

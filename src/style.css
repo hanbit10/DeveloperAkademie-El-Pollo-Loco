@@ -8,3 +8,7 @@ body {
 canvas {
   background-color: #000;
 }
+
+.d-none {
+  display: none;
+}

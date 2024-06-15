@@ -44,7 +44,7 @@ class World {
   gameWonSetting = false;
   gameWonTiming = false;
 
-  gameMenu = false;
+  gameMenu = true;
 
   reset() {
     this.gameOverSetting = false;
@@ -247,7 +247,7 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    if (this.gameMenu) {
+    if (!this.gameMenu) {
       this.ctx.translate(this.camera_x, 0);
       this.addObjectsToMap(this.backgroundObjects);
       this.addObjectsToMap(this.clouds);
@@ -295,7 +295,7 @@ class World {
         }
       }
 
-      console.log("gameOverTiming", this.gameOverTiming);
+      // console.log("gameOverTiming", this.gameOverTiming);
 
       if (this.gameOverSetting) {
         this.gameOver();
@@ -312,8 +312,9 @@ class World {
       }
     }
 
-    if (!this.gameMenu) {
+    if (this.gameMenu) {
       this.addToMap(this.GAME_MENU);
+      this.background_sound.play();
     }
 
     let self = this;
