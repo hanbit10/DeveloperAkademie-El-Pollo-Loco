@@ -220,6 +220,7 @@ class World {
 
       if (this.character.isColliding(enemy) && this.jumpAttack) {
         if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
+          enemy.energy = 0;
           enemy.dead();
           enemy.deadSetting = true;
           // this.enemiesDead[enemy.id] = true;
