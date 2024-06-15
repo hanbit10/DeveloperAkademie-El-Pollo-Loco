@@ -107,6 +107,13 @@ class Endboss extends MoveableObject {
     }, 1000 / 60);
   }
 
+  pause() {
+    this.speed = 0;
+    // this.killed_sound.pause();
+    // this.attack_sound.pause();
+    // this.hurt_sound.pause();
+  }
+
   dead() {
     this.bossDead = setInterval(() => {
       if (this.isDead()) {

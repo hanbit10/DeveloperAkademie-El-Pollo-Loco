@@ -56,6 +56,12 @@ class Chicken extends MoveableObject {
     }, 2000);
   }
 
+  pause() {
+    this.speed = 0;
+    this.buck_sound.pause();
+    this.killed_sound.pause();
+  }
+
   reset() {
     this.deadSetting = false;
     this.x = this.xCache + Math.random() * 100;

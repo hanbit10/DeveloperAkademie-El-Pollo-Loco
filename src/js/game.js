@@ -20,7 +20,7 @@ function init() {
   startButton.addEventListener("click", start);
 
   setInterval(() => {
-    console.log(world.gameOverSetting);
+    // console.log("gameOverSetting", world.gameOverSetting);
     if (world.gameOverSetting || world.gameWonSetting) {
       menuButton.classList.remove("d-none");
       resetButton.classList.remove("d-none");
