@@ -14,8 +14,6 @@ class World {
   GAME_WON = new Intro();
   GAME_MENU = new StartScreen();
 
-  old_boss_background_sound = new Audio("/assets/audio/boss-background.wav");
-
   background_music = true;
   level = getLevel();
   enemies = this.level.enemies;
@@ -24,9 +22,6 @@ class World {
   bottles = this.level.bottles;
   backgroundObjects = this.level.backgroundObjects;
   playBackground = false;
-  run1;
-  run2;
-  run3;
   voice = true;
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -34,7 +29,6 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
-
     this.run();
   }
 
@@ -63,12 +57,7 @@ class World {
     this.gameWonPlayed = false;
     this.bossShown = false;
     this.character.reset();
-
-    // this.background_sound.volume = 1;
-    // this.boss_background_sound.volume = 0;
-    // this.background_sound.play();
     this.background_sound.currentTime = 0;
-
     this.boss_background_sound.currentTime = 0;
     this.statusBar[0].setPercentage(this.character.energy);
     this.statusBar[1].setCoinPercentage(this.character.coin);
@@ -101,12 +90,12 @@ class World {
   }
 
   run() {
-    this.run1 = setInterval(() => {
+    setInterval(() => {
       this.checkJump();
       this.checkCollisions();
     }, 50);
 
-    this.run2 = setInterval(() => {
+    setInterval(() => {
       this.checkThrowObjects();
       this.checkBuy();
       this.checkFarness();
