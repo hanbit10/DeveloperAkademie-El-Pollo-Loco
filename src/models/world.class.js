@@ -190,7 +190,6 @@ class World {
     }
   }
   checkCollisions() {
-    let enemies = 0;
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) && !this.jumpAttack) {
         if (enemy.deadSetting == false && !this.jumpAttack) {
@@ -227,7 +226,6 @@ class World {
           }
         }
       });
-      enemies++;
     });
 
     this.level.coins.forEach((coin) => {
@@ -237,6 +235,7 @@ class World {
         this.statusBar[1].setPercentage(this.character.coin, "coin");
       }
     });
+
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
         bottle.collect("bottle");
