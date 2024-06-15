@@ -87,6 +87,13 @@ class Character extends MoveableObject {
     this.animate();
   }
 
+  reset() {
+    this.x = 100;
+    this.energy = 100;
+    this.coin = 0;
+    this.bottle = 0;
+  }
+
   animate() {
     this.animate1 = setInterval(() => {
       // console.log(this.movingLeft)

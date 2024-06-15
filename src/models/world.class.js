@@ -9,7 +9,7 @@ class World {
   background_sound = new Audio("/assets/audio/game-background.wav");
   boss_background_sound = new Audio("/assets/audio/boss-background.wav");
   gameover_sound = new Audio("/assets/audio/gameover.wav");
-  gameoverPlayed = false;
+
   GAME_OVER = new Outro();
   level = getLevel();
   enemies = this.level.enemies;
@@ -33,14 +33,32 @@ class World {
     this.run();
   }
 
+  gameOverPlayed = false;
   gameOverSetting = false;
+  gameOverTiming = false;
   reset() {
     // this.level = getLevel();
+
+    // this.background_sound.play();
+    // this.background_sound.loop = true;
     this.gameOverSetting = false;
-    this.character.energy = 100;
+    setTimeout(() => {
+      this.gameOverTiming = false;
+    }, 2000);
+
+    this.gameOverPlayed = false;
+    this.character.reset();
+    this.background_sound.play();
+    this.bossShown = false;
+    this.boss_background_sound.currentTime = 0;
+    this.boss_background_sound.pause();
+    this.statusBar[0].setPercentage(this.character.energy);
+    this.statusBar[1].setCoinPercentage(this.character.coin);
+    this.statusBar[3].setBottlePercentage(this.character.bottle);
     this.enemies.forEach((enemy) => {
       enemy.reset();
     });
+    this.statusBar[2].setBossPercentage(this.enemies[16].energy);
     this.clouds.forEach((cloud) => {
       cloud.reset();
     });
@@ -224,6 +242,7 @@ class World {
             this.statusBar[2].setBossPercentage(enemy.energy);
             if (enemy.energy <= 0) {
               // this.enemiesDead[enemy.id] = true;
+              enemy.dead();
               enemy.deadSetting = true;
             }
           }
@@ -255,12 +274,11 @@ class World {
     this.background_sound.currentTime = 0;
     this.boss_background_sound.pause();
     this.boss_background_sound.currentTime = 0;
-    if (!this.gameoverPlayed) {
+    if (!this.gameOverPlayed) {
       this.gameover_sound.play();
-      this.gameoverPlayed = true;
+      this.gameOverPlayed = true;
     }
-    this.addObjectsToMap(this.backgroundObjects);
-    this.addToMap(this.GAME_OVER);
+
     // this.draw();
     // this.GAME_OVER;
   }
@@ -291,7 +309,9 @@ class World {
     this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0);
     //draw wird immer aufgerufen
-    console.log(this.character.isDead());
+    // console.log(this.enemies[16].isDead());
+    // console.log(this.enemies[16].energy);
+
     if (this.character.isDead() || this.enemies[16].isDead()) {
       // console.log(this.character.isDead());
       // console.log("the character is dead!");
@@ -299,8 +319,20 @@ class World {
       this.gameOverSetting = true;
     }
 
+    console.log("gameOverTiming", this.gameOverTiming);
+
     if (this.gameOverSetting) {
       this.gameOver();
+      if (!this.gameOverTiming)
+        setTimeout(() => {
+          this.addObjectsToMap(this.backgroundObjects);
+          this.addToMap(this.GAME_OVER);
+          this.gameOverTiming = true;
+        }, 2000);
+      else {
+        this.addObjectsToMap(this.backgroundObjects);
+        this.addToMap(this.GAME_OVER);
+      }
     }
 
     let self = this;

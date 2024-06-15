@@ -2,6 +2,7 @@ class Chicken extends MoveableObject {
   height = 60;
   width = 60;
   y = 380;
+  yCache = 380;
   speed = 0.15 + Math.random() * 0.2;
   frameWidth = this.height;
   frameHeight = this.width;
@@ -55,7 +56,8 @@ class Chicken extends MoveableObject {
   }
 
   reset() {
-    this.deadSetting = true;
+    this.deadSetting = false;
     this.x = this.xCache + Math.random() * 100;
+    this.y = this.yCache = 380;
   }
 }

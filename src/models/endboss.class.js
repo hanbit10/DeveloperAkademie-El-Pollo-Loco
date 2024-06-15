@@ -53,6 +53,8 @@ class Endboss extends MoveableObject {
   bossAlive;
   moving;
   bossDead;
+  count = 0;
+  playKilledOnce = false;
 
   constructor(x) {
     super().loadImage("/assets/img/4_enemie_boss_chicken/2_alert/G5.png");
@@ -67,57 +69,61 @@ class Endboss extends MoveableObject {
   }
   animate() {
     let playOnce = false;
-    let playKilledOnce = false;
     let endbossWalk = false;
 
     this.bossAlive = setInterval(() => {
-      // console.log("bossAttack", this.bossAttack);
-      if (this.bossAttack) {
-        this.playAnimation(this.IMAGES_ATTACK);
-        this.x = this.x - 20;
-        this.attack_sound.play();
-      } else {
-        if (!this.isHurt() && endbossWalk == true) {
-          this.playAnimation(this.IMAGES_WALKING);
-        }
-        if (!this.isHurt() && endbossWalk == false) {
-          this.playAnimation(this.IMAGES_ALERT);
-          playOnce = false;
-        }
-        if (this.isHurt()) {
-          if (playOnce == false) {
-            this.hurt_sound.play();
+      if (!this.isDead()) {
+        // console.log("bossAttack", this.bossAttack);
+        if (this.bossAttack) {
+          this.playAnimation(this.IMAGES_ATTACK);
+          this.x = this.x - 20;
+          this.attack_sound.play();
+        } else {
+          if (!this.isHurt() && endbossWalk == true) {
+            this.playAnimation(this.IMAGES_WALKING);
           }
-          this.playAnimation(this.IMAGES_HURT);
+          if (!this.isHurt() && endbossWalk == false) {
+            this.playAnimation(this.IMAGES_ALERT);
+            playOnce = false;
+          }
+          if (this.isHurt()) {
+            if (playOnce == false) {
+              this.hurt_sound.play();
+            }
+            this.playAnimation(this.IMAGES_HURT);
+          }
         }
-      }
-    }, 200);
-
-    let count = 0;
-    this.bossDead = setInterval(() => {
-      if (this.isDead()) {
-        clearInterval(this.moving);
-        clearInterval(this.bossAlive);
-        if (playKilledOnce == false) {
-          this.killed_sound.play();
-        }
-        playKilledOnce = true;
-        this.playAnimation(this.IMAGES_DEAD);
-        if (count >= 1) {
-          this.loadImage("/assets/img/4_enemie_boss_chicken/5_dead/G26.png");
-        }
-        count++;
       }
     }, 200);
 
     this.moving = setInterval(() => {
       if (this.characterTooFar) {
         this.moveLeft();
+
         endbossWalk = true;
       } else {
         endbossWalk = false;
       }
     }, 1000 / 60);
+  }
+
+  dead() {
+    this.bossDead = setInterval(() => {
+      if (this.isDead()) {
+        // clearInterval(this.moving);
+        this.speed = 0;
+        // clearInterval(this.bossAlive);
+        if (this.playKilledOnce == false) {
+          this.killed_sound.play();
+        }
+        this.playKilledOnce = true;
+        this.playAnimation(this.IMAGES_DEAD);
+        if (this.count >= 1) {
+          this.loadImage("/assets/img/4_enemie_boss_chicken/5_dead/G26.png");
+        }
+        this.count++;
+      }
+    }, 200);
   }
 
   checkingCharacter(status) {
@@ -136,5 +142,8 @@ class Endboss extends MoveableObject {
   reset() {
     this.deadSetting = false;
     this.x = this.xCache;
+    this.energy = 100;
+    this.count = 0;
+    this.speed = 0.85 + Math.random() * 0.2;
   }
 }
