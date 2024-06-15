@@ -2,6 +2,7 @@ class Chicken extends MoveableObject {
   height = 60;
   width = 60;
   y = 380;
+  yCache = 380;
   speed = 0.15 + Math.random() * 0.2;
   frameWidth = this.height;
   frameHeight = this.width;
@@ -16,30 +17,27 @@ class Chicken extends MoveableObject {
   killed_sound = new Audio("/assets/audio/chicken/small-chicken/killed.wav");
   moving;
   animateImgs;
+  deadSetting = false;
   constructor(id, x) {
     super().loadImage("/assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.x = x + Math.random() * 100;
+    this.xCache = x;
     this.id = id;
     this.animate();
   }
   animate() {
     this.animateImgs = setInterval(() => {
-      // this.buck_sound.volume = 0.1;
-      // let resp = this.buck_sound.play();
-      // if (resp !== undefined) {
-      //   resp.then((_) => {}).catch((error) => {});
-      // }
-      let i = this.currentImage % this.IMAGES_WALKING.length;
-      let path = this.IMAGES_WALKING[i];
-      this.img = this.imageCache[path];
-      this.currentImage++;
+      if (!this.isDead()) {
+        let i = this.currentImage % this.IMAGES_WALKING.length;
+        let path = this.IMAGES_WALKING[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+      }
     }, 130);
 
     this.moving = setInterval(() => {
       if (this.x < -200) {
-        clearInterval(this.moving);
-        clearInterval(this.animateImgs);
         this.buck_sound.pause();
       }
       this.moveLeft(this.speed);
@@ -50,10 +48,19 @@ class Chicken extends MoveableObject {
     this.buck_sound.pause();
     this.killed_sound.play();
     this.loadImage("/assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png");
-    clearInterval(this.moving);
-    clearInterval(this.animateImgs);
+    // clearInterval(this.moving);
+    // clearInterval(this.animateImgs);
+    this.speed = 0;
     setTimeout(() => {
       this.y = 600;
     }, 2000);
+  }
+
+  reset() {
+    this.deadSetting = false;
+    this.x = this.xCache + Math.random() * 100;
+    this.y = this.yCache;
+    this.energy = 100;
+    this.speed = 0.15 + Math.random() * 0.2;
   }
 }

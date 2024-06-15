@@ -1,10 +1,21 @@
-let canvas;
-let world;
 let keyboard = new Keyboard();
 let clickedTime;
+let level;
+let world;
+let canvas;
 function init() {
+  // world = new World(canvas, keyboard);
+
   canvas = document.getElementById("canvas");
+  // level = getLevel();
   world = new World(canvas, keyboard);
+
+  const resetButton = document.getElementById("reset-button");
+  resetButton.addEventListener("click", resetSketch);
+}
+
+function resetSketch() {
+  world.reset();
 }
 
 document.addEventListener("keydown", (e) => {

@@ -2,10 +2,11 @@ class ChickenNormal extends MoveableObject {
   height = 70;
   width = 70;
   y = 380;
+  yCache = 380;
   speed = 0.55 + Math.random() * 2;
   frameWidth = this.width;
   frameHeight = this.height;
-
+  deadSetting = false;
   IMAGES_WALKING = [
     "/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
     "/assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
@@ -19,6 +20,7 @@ class ChickenNormal extends MoveableObject {
     super().loadImage("/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.x = x;
+    this.xCache = x;
     this.id = id;
     this.animate();
   }
@@ -29,16 +31,16 @@ class ChickenNormal extends MoveableObject {
       // if (resp !== undefined) {
       //   resp.then((_) => {}).catch((error) => {});
       // }
-      let i = this.currentImage % this.IMAGES_WALKING.length;
-      let path = this.IMAGES_WALKING[i];
-      this.img = this.imageCache[path];
-      this.currentImage++;
+      if (!this.isDead()) {
+        let i = this.currentImage % this.IMAGES_WALKING.length;
+        let path = this.IMAGES_WALKING[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+      }
     }, 130);
 
     this.moving = setInterval(() => {
       if (this.x < -200) {
-        clearInterval(this.moving);
-        clearInterval(this.animateImgs);
         this.buck_sound.pause();
       }
       this.moveLeft();
@@ -46,13 +48,27 @@ class ChickenNormal extends MoveableObject {
   }
 
   dead() {
+    console.log(this.isDead());
+    // this.chickenDead = setInterval(() => {
+    //   if (this.isDead()) {
     this.buck_sound.pause();
     this.killed_sound.play();
     this.loadImage("/assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
-    clearInterval(this.moving);
-    clearInterval(this.animateImgs);
+    // clearInterval(this.moving);
+    this.speed = 0;
+    // clearInterval(this.animateImgs);
     setTimeout(() => {
       this.y = 600;
     }, 2000);
+    //   }
+    // }, 200);
+  }
+
+  reset() {
+    this.deadSetting = false;
+    this.x = this.xCache;
+    this.y = this.yCache;
+    this.speed = 0.55 + Math.random() * 2;
+    this.energy = 100;
   }
 }
