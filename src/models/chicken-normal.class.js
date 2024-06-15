@@ -48,7 +48,7 @@ class ChickenNormal extends MoveableObject {
   }
 
   dead() {
-    console.log(this.isDead());
+    // console.log(this.isDead());
     // this.chickenDead = setInterval(() => {
     //   if (this.isDead()) {
     this.buck_sound.pause();
@@ -64,11 +64,27 @@ class ChickenNormal extends MoveableObject {
     // }, 200);
   }
 
+  pause() {
+    this.speed = 0;
+    this.buck_sound.pause();
+    this.killed_sound.pause();
+  }
+
   reset() {
     this.deadSetting = false;
     this.x = this.xCache;
     this.y = this.yCache;
     this.speed = 0.55 + Math.random() * 2;
     this.energy = 100;
+  }
+
+  mute() {
+    this.buck_sound.volume = 0;
+    this.killed_sound.volume = 0;
+  }
+
+  unmute() {
+    this.buck_sound.volume = 1;
+    this.killed_sound.volume = 1;
   }
 }

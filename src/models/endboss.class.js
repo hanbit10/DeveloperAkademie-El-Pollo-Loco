@@ -107,6 +107,13 @@ class Endboss extends MoveableObject {
     }, 1000 / 60);
   }
 
+  pause() {
+    this.speed = 0;
+    // this.killed_sound.pause();
+    // this.attack_sound.pause();
+    // this.hurt_sound.pause();
+  }
+
   dead() {
     this.bossDead = setInterval(() => {
       if (this.isDead()) {
@@ -145,5 +152,17 @@ class Endboss extends MoveableObject {
     this.energy = 100;
     this.count = 0;
     this.speed = 0.85 + Math.random() * 0.2;
+  }
+
+  mute() {
+    this.hurt_sound.volume = 0;
+    this.killed_sound.volume = 0;
+    this.attack_sound.volume = 0;
+  }
+
+  unmute() {
+    this.hurt_sound.volume = 1;
+    this.killed_sound.volume = 1;
+    this.attack_sound.volume = 1;
   }
 }

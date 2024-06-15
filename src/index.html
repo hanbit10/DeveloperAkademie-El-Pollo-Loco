@@ -9,8 +9,40 @@
   </head>
   <body onload="init()">
     <h1>El Pollo Loco</h1>
-    <canvas id="canvas" width="720" height="480"></canvas>
-    <button id="reset-button">reset</button>
+    <div class="container">
+      <div class="content">
+        <!-- <div id="sound" class="sound d-none"> -->
+
+        <!-- </div> -->
+        <div class="row">
+          <img id="voice0" src="/assets/icons/mute.svg" class="mute d-none" alt="" />
+          <img id="voice1" src="/assets/icons/volume-on.svg" class="mute" alt="" />
+          <div id="reset-button" class="btn d-none">Restart</div>
+          <div id="start-button" class="btn">Start</div>
+          <div id="menu-button" class="btn d-none">Go To Menu</div>
+          <div id="controls-button" class="btn">Controls</div>
+        </div>
+        <div id="controls-menu" class="menu d-none">
+          <div class="close-container"><div id="close-btn" class="controls close-btn">X</div></div>
+          <div class="row">
+            <div class="column">
+              <div class="controls">D - Throw a Bottle</div>
+              <div class="controls">B - Buy a Bottle</div>
+            </div>
+            <div class="column">
+              <div class="controls"><img class="controls-img" src="/assets/icons/arrow-up.svg" alt="" /> - Jump</div>
+              <div class="controls"><img class="controls-img" src="/assets/icons/arrow-left.svg" alt="" /> - Move Left</div>
+              <div class="controls"><img class="controls-img" src="/assets/icons/arrow-right.svg" alt="" /> - Move Right</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <canvas id="canvas" width="720" height="480">
+      <!-- <img id="voice0" src="/assets/icons/mute.svg" class="mute d-none" alt="" />
+      <img id="voice1" src="/assets/icons/volume-on.svg" class="mute" alt="" /> -->
+    </canvas>
+
     <script src="/src/models/drawable.class.js"></script>
     <script src="/src/models/movable-object.class.js"></script>
     <script src="/src/models/background-object.class.js"></script>
