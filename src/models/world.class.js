@@ -59,13 +59,13 @@ class World {
     this.character.reset();
     this.background_sound.currentTime = 0;
     this.boss_background_sound.currentTime = 0;
-    this.statusBar[0].setPercentage(this.character.energy);
-    this.statusBar[1].setCoinPercentage(this.character.coin);
-    this.statusBar[3].setBottlePercentage(this.character.bottle);
+    this.statusBar[0].setPercentage(this.character.energy, "character");
+    this.statusBar[1].setPercentage(this.character.coin, "coin");
+    this.statusBar[3].setPercentage(this.character.bottle, "bottle");
     this.enemies.forEach((enemy) => {
       enemy.reset();
     });
-    this.statusBar[2].setBossPercentage(this.enemies[16].energy);
+    this.statusBar[2].setPercentage(this.enemies[16].energy, "boss");
     this.clouds.forEach((cloud) => {
       cloud.reset();
     });
@@ -106,8 +106,8 @@ class World {
     if (this.keyboard.B && this.character.coin > 0) {
       this.character.collected("bottle");
       this.character.buyBottle();
-      this.statusBar[1].setCoinPercentage(this.character.coin);
-      this.statusBar[3].setBottlePercentage(this.character.bottle);
+      this.statusBar[1].setPercentage(this.character.coin, "coin");
+      this.statusBar[3].setPercentage(this.character.bottle, "bottle");
     }
   }
 
@@ -187,11 +187,11 @@ class World {
       if (!this.character.otherDirection && this.character.bottle > 0) {
         bottle.throwableCondition("throwing");
         this.character.throwBottle();
-        this.statusBar[3].setBottlePercentage(this.character.bottle);
+        this.statusBar[3].setPercentage(this.character.bottle, "bottle");
       } else if (this.character.otherDirection && this.character.bottle > 0) {
         bottle.throwableCondition("throwingLeft");
         this.character.throwBottle();
-        this.statusBar[3].setBottlePercentage(this.character.bottle);
+        this.statusBar[3].setPercentage(this.character.bottle, "bottle");
       }
     }
   }
@@ -201,7 +201,7 @@ class World {
       if (this.character.isColliding(enemy) && !this.jumpAttack) {
         if (enemy.deadSetting == false && !this.jumpAttack) {
           this.character.hit(2);
-          this.statusBar[0].setPercentage(this.character.energy);
+          this.statusBar[0].setPercentage(this.character.energy, "character");
         }
       }
 
@@ -227,7 +227,7 @@ class World {
           } else if (enemy instanceof Endboss) {
             this.alreadyCollided[i] = true;
             enemy.hit(5.4);
-            this.statusBar[2].setBossPercentage(enemy.energy);
+            this.statusBar[2].setPercentage(enemy.energy, "boss");
             if (enemy.energy <= 0) {
               // this.enemiesDead[enemy.id] = true;
               enemy.dead();
@@ -244,14 +244,14 @@ class World {
       if (this.character.isColliding(coin)) {
         coin.collect("coin");
         this.character.collected("coin");
-        this.statusBar[1].setCoinPercentage(this.character.coin);
+        this.statusBar[1].setPercentage(this.character.coin, "coin");
       }
     });
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
         bottle.collect("bottle");
         this.character.collected("bottle");
-        this.statusBar[3].setBottlePercentage(this.character.bottle);
+        this.statusBar[3].setPercentage(this.character.bottle, "bottle");
       }
     });
   }

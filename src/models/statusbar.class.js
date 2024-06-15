@@ -35,74 +35,54 @@ class StatusBar extends DrawableObject {
     "/assets/img/7_statusbars/2_statusbar_endboss/green/green100.png",
   ];
 
-  percentage = 100;
+  positioning = {
+    character: { x: 20, y: 10, percentage: 100 },
+    coin: { x: 20, y: 60, percentage: 0 },
+    endboss: { x: 500, y: 15, percentage: 100 },
+    bottle: { x: 20, y: 110, percentage: 0 },
+  };
+
+  statusBars = {
+    character: this.CHARACTER_HEALTH_BAR,
+    boss: this.ENDBOSS_HEALTH_BAR,
+    coin: this.COIN_STATUS_BAR,
+    bottle: this.BOTTLE_STATUS_BAR,
+  };
+
+  percentage;
 
   constructor(type) {
     super();
+    const positions = this.positioning;
+    this.height = 60;
+    this.width = 200;
+    this.loadAllImages();
+    if (positions[type]) {
+      this.x = positions[type].x;
+      this.y = positions[type].y;
+      this.percentage = positions[type].percentage;
+    }
+  }
+
+  loadAllImages() {
     this.loadImages(this.CHARACTER_HEALTH_BAR);
     this.loadImages(this.COIN_STATUS_BAR);
     this.loadImages(this.BOTTLE_STATUS_BAR);
     this.loadImages(this.ENDBOSS_HEALTH_BAR);
-    this.height = 60;
-    this.width = 200;
-    if (type == "character") {
-      this.x = 20;
-      this.y = 10;
-      this.setPercentage(100);
-    } else if (type == "coin") {
-      this.x = 20;
-      this.y = 60;
-      this.setCoinPercentage(0);
-    } else if (type == "endboss") {
-      this.x = 500;
-      this.y = 15;
-      this.setBossPercentage(100);
-    } else if (type == "bottle") {
-      this.x = 20;
-      this.y = 110;
-      this.setBottlePercentage(0);
-    }
   }
 
-  setPercentage(percentage) {
+  setPercentage(percentage, imgPath) {
     this.percentage = percentage;
-    let path = this.CHARACTER_HEALTH_BAR[this.reseolveImageIndex()];
+    let path = this.getStatusImages(imgPath);
     this.img = this.imageCache[path];
   }
 
-  setBossPercentage(percentage) {
-    this.percentage = percentage;
-    let path = this.ENDBOSS_HEALTH_BAR[this.reseolveImageIndex()];
-    this.img = this.imageCache[path];
+  getStatusImages(img) {
+    return this.statusBars[img][this.resolveImageIndex()];
   }
 
-  setCoinPercentage(percentage) {
-    this.percentage = percentage;
-    let path = this.COIN_STATUS_BAR[this.reseolveImageIndex()];
-    this.img = this.imageCache[path];
-  }
-
-  setBottlePercentage(percentage) {
-    this.percentage = percentage;
-    let path = this.BOTTLE_STATUS_BAR[this.reseolveImageIndex()];
-    this.img = this.imageCache[path];
-  }
-
-  reseolveImageIndex() {
-    if (this.percentage >= 100) {
-      return 5;
-    } else if (this.percentage >= 80) {
-      return 4;
-    } else if (this.percentage >= 60) {
-      return 3;
-    } else if (this.percentage >= 40) {
-      return 2;
-    } else if (this.percentage >= 20) {
-      return 1;
-    } else if (this.percentage >= 0) {
-      return 0;
-    } else {
-      return 0;
-    }
+  resolveImageIndex() {
+    const index = Math.floor(this.percentage / 20);
+    return Math.min(index, 5);
   }
 }
