@@ -31,11 +31,9 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    // this.background_sound.volume = 0.5;
-    // this.background_sound.play();
-    // this.background_sound.loop = true;
     this.draw();
     this.setWorld();
+
     this.run();
   }
 
@@ -104,15 +102,6 @@ class World {
     }, 200);
   }
 
-  // playBackgroundMusic() {
-  //   if (!this.playBackground) {
-  //     this.background_sound.volume = 0.5;
-  //     this.background_sound.play();
-  //     this.background_sound.loop = true;
-  //     this.playBackground = true;
-  //   }
-  // }
-
   checkBuy() {
     if (this.keyboard.B && this.character.coin > 0) {
       this.character.collected("bottle");
@@ -177,7 +166,6 @@ class World {
           enemy.energy = 0;
           enemy.dead();
           enemy.deadSetting = true;
-          // this.enemiesDead[enemy.id] = true;
         }
       }
       let i = 0;
@@ -226,9 +214,7 @@ class World {
 
   gameOver() {
     this.background_sound.volume = 0;
-    // this.background_sound.currentTime = 0;
     this.boss_background_sound.volume = 0;
-    // this.boss_background_sound.currentTime = 0;
 
     if (!this.gameOverPlayed) {
       this.gameover_sound.play();
