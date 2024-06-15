@@ -114,13 +114,9 @@ class World {
   checkFarness() {
     this.level.enemies.forEach((enemy) => {
       if (enemy instanceof Endboss) {
-        if (this.character.isClose(enemy)) {
-          enemy.checkingCharacter("close");
-        } else if (this.character.isTooFar(enemy)) {
-          enemy.checkingCharacter("tooFar");
-        } else {
-          enemy.checkingCharacter("saveZone");
-        }
+        if (this.character.isClose(enemy)) enemy.checkingCharacter("close");
+        else if (this.character.isTooFar(enemy)) enemy.checkingCharacter("tooFar");
+        else enemy.checkingCharacter("saveZone");
       }
     });
   }
