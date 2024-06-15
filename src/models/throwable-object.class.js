@@ -20,6 +20,7 @@ class ThrowableObject extends MoveableObject {
 
   throwCondition = "throwing";
   throwableBottle;
+  alreadyCollided = false;
   constructor(x, y) {
     super().loadImage("/assets/img/6_salsa_bottle/salsa_bottle.png");
     this.loadImages(this.BOTTLE_THROW);

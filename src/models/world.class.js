@@ -3,7 +3,6 @@ class World {
   statusBar = [new StatusBar("character"), new StatusBar("coin"), new StatusBar("endboss"), new StatusBar("bottle")];
   throwableObjects = [new ThrowableObject()];
   camera_x = 0;
-  alreadyCollided = [false];
   jumpAttack = false;
   bossShown = false;
   background_sound = new Audio("/assets/audio/game-background.wav");
@@ -179,7 +178,6 @@ class World {
     if (this.keyboard.D && this.character.bottle > 0) {
       let bottle = new ThrowableObject(this.character.x, this.character.y);
       this.throwableObjects.push(bottle);
-      this.alreadyCollided.push(false);
       if (!this.character.otherDirection && this.character.bottle > 0) {
         bottle.throwableCondition("throwing");
         this.character.throwBottle();
@@ -208,19 +206,18 @@ class World {
           enemy.deadSetting = true;
         }
       }
-      let i = 0;
       this.throwableObjects.forEach((throwableObject) => {
         if (throwableObject.isColliding(enemy)) {
-          if (this.alreadyCollided[i] == false && enemy.deadSetting == false) {
+          if (throwableObject.alreadyCollided == false && enemy.deadSetting == false) {
             throwableObject.throwableCondition("breaking", enemy.deadSetting);
           }
           if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
-            this.alreadyCollided[i] = true;
+            throwableObject.alreadyCollided = true;
             enemy.energy = 0;
             enemy.dead();
             enemy.deadSetting = true;
           } else if (enemy instanceof Endboss) {
-            this.alreadyCollided[i] = true;
+            throwableObject.alreadyCollided = true;
             enemy.hit(5.4);
             this.statusBar[2].setPercentage(enemy.energy, "boss");
             if (enemy.energy <= 0) {
@@ -229,7 +226,6 @@ class World {
             }
           }
         }
-        i++;
       });
       enemies++;
     });
