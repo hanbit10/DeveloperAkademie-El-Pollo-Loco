@@ -9,6 +9,7 @@ class Cloud extends MoveableObject {
     this.xCache = this.x;
     this.animate();
   }
+
   animate() {
     this.animation = setInterval(() => {
       this.moveLeft();

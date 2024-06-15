@@ -47,11 +47,11 @@ class MoveableObject extends DrawableObject {
   }
 
   isTooFar(mo) {
-    return this.x + this.width + 400 >= mo.x && this.x <= mo.x; //&& this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+    return this.x + this.width + 400 >= mo.x && this.x <= mo.x;
   }
 
   isClose(mo) {
-    return this.x + this.width + 120 >= mo.x && this.x <= mo.x; //&& this.y + this.height >= mo.y && this.x <= mo.x && this.y < mo.y + mo.height;
+    return this.x + this.width + 120 >= mo.x && this.x <= mo.x;
   }
 
   playAnimation(images) {
@@ -68,17 +68,11 @@ class MoveableObject extends DrawableObject {
     } else {
       this.lastHit = new Date().getTime();
     }
-    // console.log(this.energy);
   }
 
   collected(type) {
-    if (type == "coin") {
-      this.coin += 10;
-    }
-
-    if (type == "bottle") {
-      this.bottle += 20;
-    }
+    if (type == "coin") this.coin += 10;
+    if (type == "bottle") this.bottle += 20;
   }
 
   buyBottle() {

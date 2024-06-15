@@ -47,7 +47,6 @@ class DrawableObject {
     ctx.beginPath();
     ctx.lineWidth = "2";
     ctx.strokeStyle = "blue";
-    // ctx.strokeOpacity = 0
     ctx.rect(this.x + 25, this.y + 130, mo.frameWidth, mo.frameHeight);
     ctx.stroke();
   }

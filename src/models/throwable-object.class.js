@@ -30,17 +30,14 @@ class ThrowableObject extends MoveableObject {
   }
   throwableCondition(condition, enemyDead) {
     this.throwCondition = condition;
-    // console.log(enemyDead);
     if (this.throwCondition == "breaking" && !enemyDead) {
       this.break_sound.play();
       this.speedY = 0;
       let count = 0;
       this.bottleBroken = true;
-      let breaked = setInterval(() => {
+      setInterval(() => {
         this.playAnimation(this.BOTTLE_BREAK);
-        if (count >= 6) {
-          this.loadImage(this.BOTTLE_BREAK[5]);
-        }
+        if (count >= 6) this.loadImage(this.BOTTLE_BREAK[5]);
         count++;
       }, 150);
     } else if (this.throwCondition == "throwing" || this.throwCondition == "throwingLeft") {
@@ -49,46 +46,24 @@ class ThrowableObject extends MoveableObject {
       this.applyGravity();
       this.thrwoingBottle = setInterval(() => {
         this.playAnimation(this.BOTTLE_THROW);
-        if (this.throwCondition == "breaking") {
-          clearInterval(this.thrwoingBottle);
-        }
+        if (this.throwCondition == "breaking") clearInterval(this.thrwoingBottle);
       }, 100);
     }
 
     setInterval(() => {
-      // console.log(this.movingLeft)
-      if (this.throwCondition == "throwing" || enemyDead) {
-        this.x += 15;
-      } else if (this.throwCondition == "breaking" && !enemyDead) {
-        this.x = this.x;
-      } else if (this.throwCondition == "throwingLeft") {
-        this.x -= 15;
-      }
+      this.throwXAchse(enemyDead);
     }, 25);
   }
-  // throw() {//#endregion
-  //   console.log(this.breaking)
-  //   this.throw_sound.play()
-  //   this.speedY = 10
-  //   this.applyGravity()
-  //   setInterval(() => {
-  //     this.x += 15
-  //   }, 25)
 
-  //   setInterval(() => {
-  //     this.playAnimation(this.BOTTLE_THROW)
-  //   }, 70)
-
-  // }
-
-  // break(){
-  //   this.breaking = true
-  //   this.x = this.x
-  //   setInterval(() => {
-  //     this.playAnimation(this.BOTTLE_BREAK)
-  //   }, 100)
-  //   this.break_sound.play()
-  // }
+  throwXAchse(enemyDead) {
+    if (this.throwCondition == "throwing" || enemyDead) {
+      this.x += 15;
+    } else if (this.throwCondition == "breaking" && !enemyDead) {
+      this.x = this.x;
+    } else if (this.throwCondition == "throwingLeft") {
+      this.x -= 15;
+    }
+  }
 
   mute() {
     this.break_sound.volume = 0;
