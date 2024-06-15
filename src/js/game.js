@@ -104,7 +104,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key == "b") {
     keyboard.B = true;
   }
-  // console.log(e)
+
   clearTimeout(clickedTime);
   startTimer();
   keyboard.KEYUSED = true;
