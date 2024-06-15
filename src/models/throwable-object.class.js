@@ -30,7 +30,7 @@ class ThrowableObject extends MoveableObject {
   }
   throwableCondition(condition, enemyDead) {
     this.throwCondition = condition;
-    if (this.throwCondition == "breaking" && !enemyDead) {
+    if (this.isBreaking() && !enemyDead) {
       this.break_sound.play();
       this.speedY = 0;
       let count = 0;
@@ -40,19 +40,27 @@ class ThrowableObject extends MoveableObject {
         if (count >= 6) this.loadImage(this.BOTTLE_BREAK[5]);
         count++;
       }, 150);
-    } else if (this.throwCondition == "throwing" || this.throwCondition == "throwingLeft") {
+    } else if (this.isThrowing()) {
       this.throw_sound.play();
       this.speedY = 10;
       this.applyGravity();
-      this.thrwoingBottle = setInterval(() => {
+      this.throwingBottle = setInterval(() => {
         this.playAnimation(this.BOTTLE_THROW);
-        if (this.throwCondition == "breaking") clearInterval(this.thrwoingBottle);
+        if (this.isBreaking()) clearInterval(this.throwingBottle);
       }, 100);
     }
 
     setInterval(() => {
       this.throwXAchse(enemyDead);
     }, 25);
+  }
+
+  isThrowing() {
+    return this.throwCondition == "throwing" || this.throwCondition == "throwingLeft";
+  }
+
+  isBreaking() {
+    return this.throwCondition == "breaking";
   }
 
   throwXAchse(enemyDead) {
