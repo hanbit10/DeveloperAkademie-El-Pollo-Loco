@@ -31,28 +31,35 @@ class ThrowableObject extends MoveableObject {
   throwableCondition(condition, enemyDead) {
     this.throwCondition = condition;
     if (this.isBreaking() && !enemyDead) {
-      this.break_sound.play();
-      this.speedY = 0;
-      let count = 0;
-      this.bottleBroken = true;
-      setInterval(() => {
-        this.playAnimation(this.BOTTLE_BREAK);
-        if (count >= 6) this.loadImage(this.BOTTLE_BREAK[5]);
-        count++;
-      }, 150);
+      this.breakAnimation();
     } else if (this.isThrowing()) {
-      this.throw_sound.play();
-      this.speedY = 10;
-      this.applyGravity();
-      this.throwingBottle = setInterval(() => {
-        this.playAnimation(this.BOTTLE_THROW);
-        if (this.isBreaking()) clearInterval(this.throwingBottle);
-      }, 100);
+      this.throwAnimation();
     }
-
     setInterval(() => {
       this.throwXAchse(enemyDead);
     }, 25);
+  }
+
+  breakAnimation() {
+    this.bottleBroken = true;
+    this.break_sound.play();
+    this.speedY = 0;
+    let count = 0;
+    setInterval(() => {
+      this.playAnimation(this.BOTTLE_BREAK);
+      if (count >= 6) this.loadImage(this.BOTTLE_BREAK[5]);
+      count++;
+    }, 150);
+  }
+
+  throwAnimation() {
+    this.throw_sound.play();
+    this.speedY = 10;
+    this.applyGravity();
+    this.throwingBottle = setInterval(() => {
+      this.playAnimation(this.BOTTLE_THROW);
+      if (this.isBreaking()) clearInterval(this.throwingBottle);
+    }, 100);
   }
 
   isThrowing() {
