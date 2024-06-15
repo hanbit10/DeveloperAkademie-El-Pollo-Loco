@@ -14,6 +14,9 @@ class World {
   GAME_WON = new Intro();
   GAME_MENU = new StartScreen();
 
+  old_boss_background_sound = new Audio("/assets/audio/boss-background.wav");
+
+  background_music = true;
   level = getLevel();
   enemies = this.level.enemies;
   clouds = this.level.clouds;
@@ -60,12 +63,12 @@ class World {
     this.gameOverPlayed = false;
     this.gameWonPlayed = false;
     this.character.reset();
+    this.background_sound.volume = 1;
+    this.boss_background_sound.volume = 0;
     this.background_sound.play();
-    this.background_sound.loop = true;
+    this.background_sound.currentTime = 0;
     this.bossShown = false;
-    this.boss_background_sound.loop = false;
     this.boss_background_sound.currentTime = 0;
-    this.boss_background_sound.pause();
     this.statusBar[0].setPercentage(this.character.energy);
     this.statusBar[1].setCoinPercentage(this.character.coin);
     this.statusBar[3].setBottlePercentage(this.character.bottle);
@@ -99,18 +102,16 @@ class World {
       this.checkBuy();
       this.checkFarness();
     }, 200);
-
-    // this.run3 = setInterval(() => {}, 500);
   }
 
-  playBackgroundMusic() {
-    if (!this.playBackground) {
-      this.background_sound.volume = 0.5;
-      this.background_sound.play();
-      this.background_sound.loop = true;
-      this.playBackground = true;
-    }
-  }
+  // playBackgroundMusic() {
+  //   if (!this.playBackground) {
+  //     this.background_sound.volume = 0.5;
+  //     this.background_sound.play();
+  //     this.background_sound.loop = true;
+  //     this.playBackground = true;
+  //   }
+  // }
 
   checkBuy() {
     if (this.keyboard.B && this.character.coin > 0) {
@@ -224,12 +225,11 @@ class World {
   }
 
   gameOver() {
-    this.background_sound.loop = false;
-    this.background_sound.pause();
-    this.background_sound.currentTime = 0;
-    this.boss_background_sound.loop = false;
-    this.boss_background_sound.pause();
-    this.boss_background_sound.currentTime = 0;
+    this.background_sound.volume = 0;
+    // this.background_sound.currentTime = 0;
+    this.boss_background_sound.volume = 0;
+    // this.boss_background_sound.currentTime = 0;
+
     if (!this.gameOverPlayed) {
       this.gameover_sound.play();
       this.gameOverPlayed = true;
@@ -242,12 +242,8 @@ class World {
   }
 
   gameWon() {
-    this.background_sound.loop = false;
-    this.background_sound.pause();
-    this.background_sound.currentTime = 0;
-    this.boss_background_sound.loop = false;
-    this.boss_background_sound.pause();
-    this.boss_background_sound.currentTime = 0;
+    this.background_sound.volume = 0;
+    this.boss_background_sound.volume = 0;
     if (!this.gameWonPlayed) {
       this.gamewon_sound.play();
       this.gameWonPlayed = true;
@@ -261,8 +257,10 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     console.log("this.gameMenu", this.gameMenu);
     if (!this.gameMenu) {
-      this.background_sound.play();
-      this.background_sound.loop = true;
+      if (this.background_music) {
+        this.background_sound.play();
+        this.background_sound.loop = true;
+      }
       this.ctx.translate(this.camera_x, 0);
       this.addObjectsToMap(this.backgroundObjects);
       this.addObjectsToMap(this.clouds);
@@ -270,21 +268,23 @@ class World {
       this.addObjectsToMap(this.bottles);
       this.addObjectsToMap(this.enemies);
       this.addObjectsToMap(this.throwableObjects);
-
       this.ctx.translate(-this.camera_x, 0);
       this.addToMap(this.statusBar[0]);
       this.addToMap(this.statusBar[1]);
       this.addToMap(this.statusBar[3]);
 
       if (this.character.x > 1400 || this.bossShown) {
-        this.background_sound.pause();
-        this.boss_background_sound.play();
-        this.boss_background_sound.loop = true;
+        this.background_music = false;
+        if (!this.background_music) {
+          this.boss_background_sound.play();
+          this.boss_background_sound.loop = true;
+          this.background_sound.volume = 0;
+          this.boss_background_sound.volume = 1;
+        }
         this.addToMap(this.statusBar[2]);
         this.bossShown = true;
       }
       this.ctx.translate(this.camera_x, 0);
-
       this.addToMap(this.character);
       this.ctx.translate(-this.camera_x, 0);
 
@@ -326,10 +326,11 @@ class World {
         }
       }
     }
-
     if (this.gameMenu) {
       this.addToMap(this.GAME_MENU);
       this.background_sound.play();
+      this.background_sound.loop = true;
+      this.background_sound.volume = 1;
       this.character.pause();
       this.enemies.forEach((enemy) => {
         enemy.pause();

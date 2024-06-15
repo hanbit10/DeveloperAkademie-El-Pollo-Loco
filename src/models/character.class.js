@@ -96,6 +96,9 @@ class Character extends MoveableObject {
     this.bottle = 0;
     this.speed = 5;
     this.pauseGame = false;
+    this.gothit_sound.volume = 1;
+    this.walking_sound.volume = 1;
+    this.jump_sound.volume = 1;
   }
 
   animate() {
@@ -159,7 +162,9 @@ class Character extends MoveableObject {
   pause() {
     this.speed = 0;
     this.pauseGame = true;
-    // this.gothit_sound.pause();
+    this.gothit_sound.volume = 0;
+    this.walking_sound.volume = 0;
+    this.jump_sound.volume = 0;
     // this.walking_sound.pause();
     // this.jump_sound.pause();
   }
