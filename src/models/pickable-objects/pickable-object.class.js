@@ -20,4 +20,14 @@ class PickableObject extends DrawableObject {
   reset() {
     this.y = this.yCache;
   }
+
+  mute() {
+    this.coin_collect.volume = 0;
+    this.bottle_collect.volume = 0;
+  }
+
+  unmute() {
+    this.coin_collect.volume = 1;
+    this.bottle_collect.volume = 1;
+  }
 }

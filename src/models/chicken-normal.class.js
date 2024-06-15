@@ -77,4 +77,14 @@ class ChickenNormal extends MoveableObject {
     this.speed = 0.55 + Math.random() * 2;
     this.energy = 100;
   }
+
+  mute() {
+    this.buck_sound.volume = 0;
+    this.killed_sound.volume = 0;
+  }
+
+  unmute() {
+    this.buck_sound.volume = 1;
+    this.killed_sound.volume = 1;
+  }
 }

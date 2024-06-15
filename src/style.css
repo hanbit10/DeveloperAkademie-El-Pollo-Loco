@@ -3,10 +3,19 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 canvas {
   background-color: #000;
+}
+
+.mute {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 100px;
+  cursor: pointer;
 }
 
 .d-none {

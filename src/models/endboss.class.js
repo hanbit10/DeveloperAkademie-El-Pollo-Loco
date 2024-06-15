@@ -153,4 +153,16 @@ class Endboss extends MoveableObject {
     this.count = 0;
     this.speed = 0.85 + Math.random() * 0.2;
   }
+
+  mute() {
+    this.hurt_sound.volume = 0;
+    this.killed_sound.volume = 0;
+    this.attack_sound.volume = 0;
+  }
+
+  unmute() {
+    this.hurt_sound.volume = 1;
+    this.killed_sound.volume = 1;
+    this.attack_sound.volume = 1;
+  }
 }

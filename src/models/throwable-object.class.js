@@ -89,4 +89,14 @@ class ThrowableObject extends MoveableObject {
   //   }, 100)
   //   this.break_sound.play()
   // }
+
+  mute() {
+    this.break_sound.volume = 0;
+    this.throw_sound.volume = 0;
+  }
+
+  unmute() {
+    this.break_sound.volume = 1;
+    this.throw_sound.volume = 1;
+  }
 }

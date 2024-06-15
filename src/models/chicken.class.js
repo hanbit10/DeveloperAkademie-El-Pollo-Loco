@@ -69,4 +69,14 @@ class Chicken extends MoveableObject {
     this.energy = 100;
     this.speed = 0.15 + Math.random() * 0.2;
   }
+
+  mute() {
+    this.buck_sound.volume = 0;
+    this.killed_sound.volume = 0;
+  }
+
+  unmute() {
+    this.buck_sound.volume = 1;
+    this.killed_sound.volume = 1;
+  }
 }

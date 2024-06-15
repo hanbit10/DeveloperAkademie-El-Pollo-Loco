@@ -6,6 +6,8 @@ let canvas;
 const resetButton = document.getElementById("reset-button");
 const menuButton = document.getElementById("menu-button");
 const startButton = document.getElementById("start-button");
+const voiceZero = document.getElementById("voice0");
+const voiceOne = document.getElementById("voice1");
 function init() {
   // world = new World(canvas, keyboard);
 
@@ -14,10 +16,10 @@ function init() {
   world = new World(canvas, keyboard);
 
   resetButton.addEventListener("click", resetSketch);
-
   menuButton.addEventListener("click", goMenu);
-
   startButton.addEventListener("click", start);
+  voiceOne.addEventListener("click", muted);
+  voiceZero.addEventListener("click", unmuted);
 
   setInterval(() => {
     // console.log("gameOverSetting", world.gameOverSetting);
@@ -27,6 +29,18 @@ function init() {
       startButton.classList.add("d-none");
     }
   }, 100);
+}
+
+function muted() {
+  voiceOne.classList.add("d-none");
+  voiceZero.classList.remove("d-none");
+  world.mute();
+}
+
+function unmuted() {
+  voiceOne.classList.remove("d-none");
+  voiceZero.classList.add("d-none");
+  world.unmute();
 }
 
 function goMenu() {

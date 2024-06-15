@@ -96,9 +96,9 @@ class Character extends MoveableObject {
     this.bottle = 0;
     this.speed = 5;
     this.pauseGame = false;
-    this.gothit_sound.volume = 1;
-    this.walking_sound.volume = 1;
-    this.jump_sound.volume = 1;
+    // this.gothit_sound.volume = 1;
+    // this.walking_sound.volume = 1;
+    // this.jump_sound.volume = 1;
   }
 
   animate() {
@@ -178,5 +178,17 @@ class Character extends MoveableObject {
     if (135 < this.y) {
       this.jumpImage = 0;
     }
+  }
+
+  mute() {
+    this.gothit_sound.volume = 0;
+    this.walking_sound.volume = 0;
+    this.jump_sound.volume = 0;
+  }
+
+  unmute() {
+    this.gothit_sound.volume = 1;
+    this.walking_sound.volume = 1;
+    this.jump_sound.volume = 1;
   }
 }
