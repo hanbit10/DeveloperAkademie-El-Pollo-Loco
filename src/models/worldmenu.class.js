@@ -63,7 +63,17 @@ class WorldMenu {
 
   showGameMenu() {
     this.addToMap(this.GAME_MENU);
-    this.background_sound.play();
+    let promise = this.background_sound.play();
+    if (promise !== undefined) {
+      promise
+        .then((_) => {
+          // Autoplay started!
+        })
+        .catch((error) => {
+          // Autoplay was prevented.
+          // Show a "Play" button so that user can start playback.
+        });
+    }
     this.background_sound.loop = true;
     if (!this.voice) this.background_sound.volume = 0;
     if (this.voice) this.background_sound.volume = 1;
