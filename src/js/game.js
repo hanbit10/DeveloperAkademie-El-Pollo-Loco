@@ -31,6 +31,7 @@ function init() {
   voiceZero.addEventListener("click", unmuted);
   closeBtn.addEventListener("click", closeControls);
   controlsBtn.addEventListener("click", showControls);
+
   checkMobileControls();
   checkGameFinished();
 }
@@ -125,6 +126,9 @@ function start() {
   startButton.classList.add("d-none");
   world.gameMenu = false;
   world.reset();
+  clearTimeout(clickedTime);
+  keyboard.KEYUSED = true;
+  startTimer();
 }
 
 function resetSketch() {
@@ -132,6 +136,9 @@ function resetSketch() {
   menuButton.classList.add("d-none");
   world.gameMenu = false;
   world.reset();
+  clearTimeout(clickedTime);
+  keyboard.KEYUSED = true;
+  startTimer();
 }
 
 document.addEventListener("keydown", (e) => {
@@ -139,8 +146,8 @@ document.addEventListener("keydown", (e) => {
     keyboard[keyMap[e.key]] = true;
   }
   clearTimeout(clickedTime);
-  startTimer();
   keyboard.KEYUSED = true;
+  startTimer();
 });
 
 document.addEventListener("keyup", (e) => {
