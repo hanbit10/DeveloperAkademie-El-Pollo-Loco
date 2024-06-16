@@ -21,6 +21,14 @@ class ThrowableObject extends MoveableObject {
   throwCondition = "throwing";
   throwableBottle;
   alreadyCollided = false;
+
+  /**
+   * Constructor for creating a ThrowableObject at a specific position.
+   *
+   * @param {number} x - The x-coordinate position
+   * @param {number} y - The y-coordinate position
+   * @return {void} No return value
+   */
   constructor(x, y) {
     super().loadImage("/assets/img/6_salsa_bottle/salsa_bottle.png");
     this.loadImages(this.BOTTLE_THROW);
@@ -31,11 +39,8 @@ class ThrowableObject extends MoveableObject {
   }
   throwableCondition(condition, enemyDead) {
     this.throwCondition = condition;
-    if (this.isBreaking() && !enemyDead) {
-      this.breakAnimation();
-    } else if (this.isThrowing()) {
-      this.throwAnimation();
-    }
+    if (this.isBreaking() && !enemyDead) this.breakAnimation();
+    else if (this.isThrowing()) this.throwAnimation();
     setInterval(() => {
       this.throwXAchse(enemyDead);
     }, 25);
@@ -74,9 +79,9 @@ class ThrowableObject extends MoveableObject {
   throwXAchse(enemyDead) {
     if (this.throwCondition == "throwing" || enemyDead) {
       this.x += 15;
-    } else if (this.throwCondition == "breaking" && !enemyDead) {
+    } else if (this.isBreaking() && !enemyDead) {
       this.x = this.x;
-    } else if (this.throwCondition == "throwingLeft") {
+    } else if (this.throwCondition == "throwingLeft" || enemyDead) {
       this.x -= 15;
     }
   }

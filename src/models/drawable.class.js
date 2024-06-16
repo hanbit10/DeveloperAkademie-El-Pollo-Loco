@@ -25,22 +25,20 @@ class DrawableObject {
   }
 
   drawFrame(ctx, mo) {
-    if (
-      this instanceof Chicken ||
-      this instanceof Endboss ||
-      this instanceof ChickenNormal ||
-      this instanceof Coin ||
-      this instanceof Bottle
-    ) {
+    if (this.gameInstances()) {
       ctx.beginPath();
       ctx.lineWidth = "5";
       ctx.strokeStyle = "blue";
       ctx.rect(this.x, this.y, mo.frameWidth, mo.frameHeight);
       ctx.stroke();
     }
-    if (this instanceof Character) {
-      this.setCharacterFrame(ctx, mo);
-    }
+    if (this instanceof Character) this.setCharacterFrame(ctx, mo);
+  }
+
+  gameInstances() {
+    return (
+      this instanceof Chicken || this instanceof Endboss || this instanceof ChickenNormal || this instanceof Coin || this instanceof Bottle
+    );
   }
 
   setCharacterFrame(ctx, mo) {

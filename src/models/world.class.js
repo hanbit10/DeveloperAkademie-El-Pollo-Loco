@@ -178,56 +178,62 @@ class World {
     if (this.keyboard.D && this.character.bottle > 0) {
       let bottle = new ThrowableObject(this.character.x, this.character.y);
       this.throwableObjects.push(bottle);
-      if (!this.character.otherDirection && this.character.bottle > 0) {
-        bottle.throwableCondition("throwing");
-        this.character.throwBottle();
-        this.statusBar[3].setPercentage(this.character.bottle, "bottle");
-      } else if (this.character.otherDirection && this.character.bottle > 0) {
-        bottle.throwableCondition("throwingLeft");
-        this.character.throwBottle();
-        this.statusBar[3].setPercentage(this.character.bottle, "bottle");
-      }
+      if (this.characterThrowingRight()) bottle.throwableCondition("throwing");
+      else if (this.characterThrowingLeft()) bottle.throwableCondition("throwingLeft");
+      this.character.throwBottle();
+      this.statusBar[3].setPercentage(this.character.bottle, "bottle");
     }
   }
+
+  characterThrowingRight() {
+    return !this.character.otherDirection && this.character.bottle > 0;
+  }
+
+  characterThrowingLeft() {
+    return this.character.otherDirection && this.character.bottle > 0;
+  }
+
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) && !this.jumpAttack) {
-        if (enemy.deadSetting == false && !this.jumpAttack) {
-          this.character.hit(2);
-          this.statusBar[0].setPercentage(this.character.energy, "character");
-        }
+      if (this.characterGetHurtBy(enemy)) {
+        this.character.hit(2);
+        this.statusBar[0].setPercentage(this.character.energy, "character");
       }
-
-      if (this.character.isColliding(enemy) && this.jumpAttack) {
-        if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
-          enemy.energy = 0;
-          enemy.dead();
-          enemy.deadSetting = true;
-        }
-      }
-      this.throwableObjects.forEach((throwableObject) => {
-        if (throwableObject.isColliding(enemy)) {
-          if (throwableObject.alreadyCollided == false && enemy.deadSetting == false) {
-            throwableObject.throwableCondition("breaking", enemy.deadSetting);
-          }
-          if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
-            throwableObject.alreadyCollided = true;
-            enemy.energy = 0;
-            enemy.dead();
-            enemy.deadSetting = true;
-          } else if (enemy instanceof Endboss) {
-            throwableObject.alreadyCollided = true;
-            enemy.hit(5.4);
-            this.statusBar[2].setPercentage(enemy.energy, "boss");
-            if (enemy.energy <= 0) {
-              enemy.dead();
-              enemy.deadSetting = true;
-            }
-          }
-        }
-      });
+      if (this.characterJumpAttack(enemy)) enemy.dead();
+      this.characterThrowAttack(enemy);
     });
+    this.collidedCoin();
+    this.collidedBottle();
+  }
 
+  characterGetHurtBy(enemy) {
+    return this.character.isColliding(enemy) && !this.jumpAttack && !enemy.deadSetting;
+  }
+
+  characterJumpAttack(enemy) {
+    return this.character.isColliding(enemy) && this.jumpAttack && (enemy instanceof Chicken || enemy instanceof ChickenNormal);
+  }
+
+  characterThrowAttack(enemy) {
+    this.throwableObjects.forEach((throwableObject) => {
+      if (throwableObject.isColliding(enemy)) {
+        if (!throwableObject.alreadyCollided && !enemy.deadSetting) {
+          throwableObject.throwableCondition("breaking", enemy.deadSetting);
+        }
+        if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
+          throwableObject.alreadyCollided = true;
+          enemy.dead();
+        } else if (enemy instanceof Endboss) {
+          throwableObject.alreadyCollided = true;
+          enemy.hit(5.4);
+          this.statusBar[2].setPercentage(enemy.energy, "boss");
+          if (enemy.energy <= 0) enemy.dead();
+        }
+      }
+    });
+  }
+
+  collidedCoin() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
         coin.collect("coin");
@@ -235,7 +241,9 @@ class World {
         this.statusBar[1].setPercentage(this.character.coin, "coin");
       }
     });
+  }
 
+  collidedBottle() {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
         bottle.collect("bottle");
