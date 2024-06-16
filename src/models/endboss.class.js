@@ -51,10 +51,11 @@ class Endboss extends MoveableObject {
   deadSetting = false;
 
   bossAlive;
-  moving;
   bossDead;
   count = 0;
   playKilledOnce = false;
+  endbossWalk = false;
+  playedSoundOnce = false;
 
   constructor(x) {
     super().loadImage("/assets/img/4_enemie_boss_chicken/2_alert/G5.png");
@@ -68,73 +69,69 @@ class Endboss extends MoveableObject {
     this.animate();
   }
   animate() {
-    let playOnce = false;
-    let endbossWalk = false;
-
     this.bossAlive = setInterval(() => {
       if (!this.isDead()) {
-        // console.log("bossAttack", this.bossAttack);
         if (this.bossAttack) {
-          this.playAnimation(this.IMAGES_ATTACK);
-          this.x = this.x - 20;
-          this.attack_sound.play();
+          this.attackAnimation();
         } else {
-          if (!this.isHurt() && endbossWalk == true) {
-            this.playAnimation(this.IMAGES_WALKING);
-          }
-          if (!this.isHurt() && endbossWalk == false) {
-            this.playAnimation(this.IMAGES_ALERT);
-            playOnce = false;
-          }
-          if (this.isHurt()) {
-            if (playOnce == false) {
-              this.hurt_sound.play();
-            }
-            this.playAnimation(this.IMAGES_HURT);
-          }
+          this.otherAnimations();
         }
       }
     }, 200);
+    this.moveAnimation();
+  }
 
-    this.moving = setInterval(() => {
+  moveAnimation() {
+    setInterval(() => {
       if (this.characterTooFar) {
         this.moveLeft();
-
-        endbossWalk = true;
+        this.endbossWalk = true;
       } else {
-        endbossWalk = false;
+        this.endbossWalk = false;
       }
     }, 1000 / 60);
   }
 
+  otherAnimations() {
+    if (!this.isHurt() && this.endbossWalk) this.playAnimation(this.IMAGES_WALKING);
+    if (!this.isHurt() && !this.endbossWalk) {
+      this.playAnimation(this.IMAGES_ALERT);
+      this.playedSoundOnce = false;
+    }
+    if (this.isHurt()) {
+      if (this.playedSoundOnce == false) {
+        this.hurt_sound.play();
+        this.playedSoundOnce = true;
+      }
+      this.playAnimation(this.IMAGES_HURT);
+    }
+  }
+
+  attackAnimation() {
+    this.playAnimation(this.IMAGES_ATTACK);
+    this.x = this.x - 20;
+    this.attack_sound.play();
+  }
+
   pause() {
     this.speed = 0;
-    // this.killed_sound.pause();
-    // this.attack_sound.pause();
-    // this.hurt_sound.pause();
   }
 
   dead() {
     this.bossDead = setInterval(() => {
       if (this.isDead()) {
-        // clearInterval(this.moving);
         this.speed = 0;
-        // clearInterval(this.bossAlive);
-        if (this.playKilledOnce == false) {
-          this.killed_sound.play();
-        }
+        this.deadSetting = true;
+        if (this.playKilledOnce == false) this.killed_sound.play();
         this.playKilledOnce = true;
         this.playAnimation(this.IMAGES_DEAD);
-        if (this.count >= 1) {
-          this.loadImage("/assets/img/4_enemie_boss_chicken/5_dead/G26.png");
-        }
+        if (this.count >= 1) this.loadImage("/assets/img/4_enemie_boss_chicken/5_dead/G26.png");
         this.count++;
       }
     }, 200);
   }
 
   checkingCharacter(status) {
-    // console.log(status);
     if (status == "tooFar") {
       this.characterTooFar = true;
       this.bossAttack = false;

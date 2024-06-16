@@ -3,7 +3,6 @@ class ChickenNormal extends MoveableObject {
   width = 70;
   y = 380;
   yCache = 380;
-  speed = 0.55 + Math.random() * 2;
   frameWidth = this.width;
   frameHeight = this.height;
   deadSetting = false;
@@ -13,7 +12,6 @@ class ChickenNormal extends MoveableObject {
     "/assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
 
-  buck_sound = new Audio("/assets/audio/chicken/normal-chicken/buck.mp3");
   killed_sound = new Audio("/assets/audio/chicken/normal-chicken/killed.wav");
 
   constructor(id, x) {
@@ -25,49 +23,29 @@ class ChickenNormal extends MoveableObject {
     this.animate();
   }
   animate() {
-    this.animateImgs = setInterval(() => {
-      // this.buck_sound.volume = 0.03;
-      // let resp = this.buck_sound.play();
-      // if (resp !== undefined) {
-      //   resp.then((_) => {}).catch((error) => {});
-      // }
-      if (!this.isDead()) {
-        let i = this.currentImage % this.IMAGES_WALKING.length;
-        let path = this.IMAGES_WALKING[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-      }
+    setInterval(() => {
+      if (!this.isDead()) this.playAnimation(this.IMAGES_WALKING);
     }, 130);
-
-    this.moving = setInterval(() => {
-      if (this.x < -200) {
-        this.buck_sound.pause();
+    setInterval(() => {
+      if (!this.isDead()) {
+        this.moveLeft();
       }
-      this.moveLeft();
     }, 1000 / 60);
   }
 
   dead() {
-    // console.log(this.isDead());
-    // this.chickenDead = setInterval(() => {
-    //   if (this.isDead()) {
-    this.buck_sound.pause();
     this.killed_sound.play();
     this.loadImage("/assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
-    // clearInterval(this.moving);
     this.speed = 0;
-    // clearInterval(this.animateImgs);
+    this.energy = 0;
+    this.deadSetting = true;
     setTimeout(() => {
       this.y = 600;
     }, 2000);
-    //   }
-    // }, 200);
   }
 
   pause() {
     this.speed = 0;
-    this.buck_sound.pause();
-    this.killed_sound.pause();
   }
 
   reset() {
@@ -79,12 +57,10 @@ class ChickenNormal extends MoveableObject {
   }
 
   mute() {
-    this.buck_sound.volume = 0;
     this.killed_sound.volume = 0;
   }
 
   unmute() {
-    this.buck_sound.volume = 1;
     this.killed_sound.volume = 1;
   }
 }
