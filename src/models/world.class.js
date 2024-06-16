@@ -296,19 +296,7 @@ class World extends WorldMenu {
       this.addToMap(this.statusBar[1]);
       this.addToMap(this.statusBar[3]);
 
-      if (this.character.x > 1400 || this.bossShown) {
-        this.background_music = false;
-        if (!this.background_music) {
-          this.boss_background_sound.play();
-          this.boss_background_sound.loop = true;
-          this.background_sound.volume = 0;
-          if (this.voice) {
-            this.boss_background_sound.volume = 1;
-          }
-        }
-        this.addToMap(this.statusBar[2]);
-        this.bossShown = true;
-      }
+      this.showGameBoss();
       this.ctx.translate(this.camera_x, 0);
       this.addToMap(this.character);
       this.ctx.translate(-this.camera_x, 0);
@@ -361,6 +349,20 @@ class World extends WorldMenu {
     this.enemies.forEach((enemy) => {
       enemy.pause();
     });
+  }
+
+  showGameBoss() {
+    if (this.character.x > 1400 || this.bossShown) {
+      this.background_music = false;
+      if (!this.background_music) {
+        this.boss_background_sound.play();
+        this.boss_background_sound.loop = true;
+        this.background_sound.volume = 0;
+        if (this.voice) this.boss_background_sound.volume = 1;
+      }
+      this.addToMap(this.statusBar[2]);
+      this.bossShown = true;
+    }
   }
 
   addObjectsToMap(objs) {
