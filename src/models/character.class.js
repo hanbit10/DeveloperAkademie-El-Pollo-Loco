@@ -69,6 +69,7 @@ class Character extends MoveableObject {
   walking_sound = new Audio("../assets/audio/character/walking.flac");
   jump_sound = new Audio("../assets/audio/character/jump.wav");
   gothit_sound = new Audio("../assets/audio/character/gothit2.wav");
+  snoring_sound = new Audio("../assets/audio/character/snoring.wav");
   frameWidth = 40;
   frameHeight = 120;
   jumpImage = 0;
@@ -131,8 +132,15 @@ class Character extends MoveableObject {
   playMovingAnimation() {
     setInterval(() => {
       if (!this.pauseGame) {
-        if (this.world.keyboard.KEYUSED) this.playAnimation(this.IMAGES_IDLE);
-        if (!this.world.keyboard.KEYUSED) this.playAnimation(this.IMAGES_IDLE_LONG);
+        if (this.world.keyboard.KEYUSED) {
+          this.playAnimation(this.IMAGES_IDLE);
+          this.snoring_sound.pause();
+        }
+
+        if (!this.world.keyboard.KEYUSED) {
+          this.playAnimation(this.IMAGES_IDLE_LONG);
+          this.snoring_sound.play();
+        }
         if (this.isCharacterMoving()) this.playAnimation(this.IMAGES_WALKING);
         if (this.isCharacterJumping()) {
           this.jump();
@@ -167,6 +175,7 @@ class Character extends MoveableObject {
     this.gothit_sound.volume = 0;
     this.walking_sound.volume = 0;
     this.jump_sound.volume = 0;
+    this.snoring_sound.volume = 0;
   }
 
   playJumpAnimation(images) {
@@ -181,11 +190,13 @@ class Character extends MoveableObject {
     this.gothit_sound.volume = 0;
     this.walking_sound.volume = 0;
     this.jump_sound.volume = 0;
+    this.snoring_sound.volume = 0;
   }
 
   unmute() {
     this.gothit_sound.volume = 1;
     this.walking_sound.volume = 1;
     this.jump_sound.volume = 1;
+    this.snoring_sound.volume = 1;
   }
 }
