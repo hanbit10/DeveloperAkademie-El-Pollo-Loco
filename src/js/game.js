@@ -31,7 +31,56 @@ function init() {
   voiceZero.addEventListener("click", unmuted);
   closeBtn.addEventListener("click", closeControls);
   controlsBtn.addEventListener("click", showControls);
+  checkMobileControls();
   checkGameFinished();
+}
+
+function checkMobileControls() {
+  let controlLeft = document.getElementById("control-left");
+  let controlRight = document.getElementById("control-right");
+  let controlJump = document.getElementById("control-jump");
+  let controlThrow = document.getElementById("control-throw");
+  let controlBuy = document.getElementById("control-buy");
+
+  controlLeft.addEventListener("touchstart", () => {
+    keyboard.LEFT = true;
+  });
+
+  controlLeft.addEventListener("touchend", () => {
+    keyboard.LEFT = false;
+  });
+
+  controlRight.addEventListener("touchstart", () => {
+    keyboard.RIGHT = true;
+  });
+
+  controlRight.addEventListener("touchend", () => {
+    keyboard.RIGHT = false;
+  });
+
+  controlJump.addEventListener("touchstart", () => {
+    keyboard.UP = true;
+  });
+
+  controlJump.addEventListener("touchend", () => {
+    keyboard.UP = false;
+  });
+
+  controlThrow.addEventListener("touchstart", () => {
+    keyboard.D = true;
+  });
+
+  controlThrow.addEventListener("touchend", () => {
+    keyboard.D = false;
+  });
+
+  controlBuy.addEventListener("touchstart", () => {
+    keyboard.B = true;
+  });
+
+  controlBuy.addEventListener("touchend", () => {
+    keyboard.B = false;
+  });
 }
 
 function checkGameFinished() {
@@ -84,6 +133,7 @@ function resetSketch() {
   world.gameMenu = false;
   world.reset();
 }
+
 document.addEventListener("keydown", (e) => {
   if (keyMap[e.key]) {
     keyboard[keyMap[e.key]] = true;

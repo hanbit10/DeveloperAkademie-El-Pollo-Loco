@@ -171,10 +171,12 @@ canvas {
 
   .control-container {
     width: 100%;
-    height: 30vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
   }
 
   .control-btn {
