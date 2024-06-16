@@ -51,7 +51,7 @@ class World {
     setTimeout(() => {
       this.gameWonTiming = false;
     }, 2000);
-
+    this.gameMenu = false;
     this.gameOverPlayed = false;
     this.gameWonPlayed = false;
     this.bossShown = false;
@@ -126,6 +126,10 @@ class World {
     this.boss_background_sound.volume = 0;
     this.gameover_sound.volume = 0;
     this.gamewon_sound.volume = 0;
+    this.muteObjects();
+  }
+
+  muteObjects() {
     this.character.mute();
     this.enemies.forEach((enemy) => {
       enemy.mute();
@@ -146,9 +150,13 @@ class World {
   unmute() {
     this.voice = true;
     this.background_sound.volume = 1;
-    this.boss_background_sound.muted;
+    this.boss_background_sound.volume = 0;
     this.gameover_sound.volume = 1;
     this.gamewon_sound.volume = 1;
+    this.unmuteObjects();
+  }
+
+  unmuteObjects() {
     this.character.unmute();
     this.enemies.forEach((enemy) => {
       enemy.unmute();
@@ -282,7 +290,6 @@ class World {
   }
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    console.log("this.gameMenu", this.gameMenu);
     if (!this.gameMenu) {
       if (this.background_music) {
         this.background_sound.play();
@@ -338,9 +345,6 @@ class World {
           this.addToMap(this.GAME_WON);
         }
       }
-
-      // console.log("gameOverTiming", this.gameOverTiming);
-
       if (this.gameOverSetting) {
         this.gameOver();
         if (!this.gameOverTiming)

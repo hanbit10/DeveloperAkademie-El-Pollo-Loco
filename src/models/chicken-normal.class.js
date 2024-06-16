@@ -26,10 +26,8 @@ class ChickenNormal extends MoveableObject {
     setInterval(() => {
       if (!this.isDead()) this.playAnimation(this.IMAGES_WALKING);
     }, 130);
-
     setInterval(() => {
       if (!this.isDead()) {
-        this.speed = 0.55 + Math.random() * 2;
         this.moveLeft();
       }
     }, 1000 / 60);
@@ -54,6 +52,7 @@ class ChickenNormal extends MoveableObject {
     this.deadSetting = false;
     this.x = this.xCache;
     this.y = this.yCache;
+    this.speed = 0.55 + Math.random() * 2;
     this.energy = 100;
   }
 

@@ -20,6 +20,7 @@ class Chicken extends MoveableObject {
     this.x = x + Math.random() * 100;
     this.xCache = x;
     this.id = id;
+    // this.speed = 0.25 + Math.random() * 0.6;
     this.animate();
   }
   animate() {
@@ -32,7 +33,6 @@ class Chicken extends MoveableObject {
   moveAnimation() {
     setInterval(() => {
       if (!this.isDead()) {
-        this.speed = 0.25 + Math.random() * 0.6;
         this.moveLeft();
       }
     }, 1000 / 60);
@@ -58,6 +58,7 @@ class Chicken extends MoveableObject {
     this.x = this.xCache + Math.random() * 100;
     this.y = this.yCache;
     this.energy = 100;
+    this.speed = 0.25 + Math.random() * 0.6;
   }
 
   mute() {
