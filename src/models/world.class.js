@@ -349,24 +349,42 @@ class World extends WorldMenu {
       }
     }
     if (this.gameMenu) {
-      this.addToMap(this.GAME_MENU);
-      this.background_sound.play();
-      this.background_sound.loop = true;
-      if (!this.voice) {
-        this.background_sound.volume = 0;
-      }
-      if (this.voice) {
-        this.background_sound.volume = 1;
-      }
-      this.character.pause();
-      this.enemies.forEach((enemy) => {
-        enemy.pause();
-      });
+      // this.addToMap(this.GAME_MENU);
+      // this.background_sound.play();
+      // this.background_sound.loop = true;
+      // if (!this.voice) {
+      //   this.background_sound.volume = 0;
+      // }
+      // if (this.voice) {
+      //   this.background_sound.volume = 1;
+      // }
+      // this.character.pause();
+      // this.enemies.forEach((enemy) => {
+      //   enemy.pause();
+      // });
+
+      this.showGameMenu();
     }
 
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
+    });
+  }
+
+  showGameMenu() {
+    this.addToMap(this.GAME_MENU);
+    this.background_sound.play();
+    this.background_sound.loop = true;
+    if (!this.voice) {
+      this.background_sound.volume = 0;
+    }
+    if (this.voice) {
+      this.background_sound.volume = 1;
+    }
+    this.character.pause();
+    this.enemies.forEach((enemy) => {
+      enemy.pause();
     });
   }
 
