@@ -72,9 +72,7 @@ class Character extends MoveableObject {
   frameWidth = 40;
   frameHeight = 120;
   jumpImage = 0;
-  animate1;
-  animate2;
-  animate3;
+  pauseGame = false;
   constructor() {
     super().loadImage("/assets/img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -87,8 +85,6 @@ class Character extends MoveableObject {
     this.animate();
   }
 
-  pauseGame = false;
-
   reset() {
     this.x = 100;
     this.energy = 100;
@@ -96,63 +92,69 @@ class Character extends MoveableObject {
     this.bottle = 0;
     this.speed = 5;
     this.pauseGame = false;
-    // this.gothit_sound.volume = 1;
-    // this.walking_sound.volume = 1;
-    // this.jump_sound.volume = 1;
   }
 
   animate() {
-    this.animate1 = setInterval(() => {
-      // console.log(this.movingLeft)
+    setInterval(() => {
       this.walking_sound.pause();
-      if (!this.pauseGame) {
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-          this.moveRight();
-          this.otherDirection = false;
-          this.walking_sound.play();
-        }
-        if (this.world.keyboard.LEFT && this.x > this.world.level.level_start_x) {
-          this.moveLeft();
-          this.otherDirection = true;
-          this.walking_sound.play();
-        }
-        if (this.isAboveGround()) {
-          this.walking_sound.pause();
-        }
-      }
+      this.playWalkSound();
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
+    this.playMovingAnimation();
+    this.playOtherAnimations();
+  }
 
-    this.animate2 = setInterval(() => {
+  playWalkSound() {
+    if (!this.pauseGame) {
+      if (this.maxMoveableMap()) {
+        this.moveRight();
+        this.otherDirection = false;
+        this.walking_sound.play();
+      }
+      if (this.minMoveableMap()) {
+        this.moveLeft();
+        this.otherDirection = true;
+        this.walking_sound.play();
+      }
+      if (this.isAboveGround()) this.walking_sound.pause();
+    }
+  }
+
+  maxMoveableMap() {
+    return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
+  }
+
+  minMoveableMap() {
+    return this.world.keyboard.LEFT && this.x > this.world.level.level_start_x;
+  }
+
+  playMovingAnimation() {
+    setInterval(() => {
       if (!this.pauseGame) {
-        if (this.world.keyboard.KEYUSED) {
-          this.playAnimation(this.IMAGES_IDLE);
-        } else if (!this.world.keyboard.KEYUSED) {
-          this.playAnimation(this.IMAGES_IDLE_LONG);
-        }
-
-        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-          this.playAnimation(this.IMAGES_WALKING);
-        }
-
-        if (this.world.keyboard.UP && !this.isAboveGround()) {
+        if (this.world.keyboard.KEYUSED) this.playAnimation(this.IMAGES_IDLE);
+        if (!this.world.keyboard.KEYUSED) this.playAnimation(this.IMAGES_IDLE_LONG);
+        if (this.isCharacterMoving()) this.playAnimation(this.IMAGES_WALKING);
+        if (this.isCharacterJumping()) {
           this.jump();
           this.jump_sound.play();
         }
       }
     }, 100);
+  }
 
-    this.animate3 = setInterval(() => {
-      if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD);
-      }
+  isCharacterJumping() {
+    return this.world.keyboard.UP && !this.isAboveGround();
+  }
 
-      if (this.isAboveGround()) {
-        this.playJumpAnimation(this.IMAGES_JUMPING);
-      }
+  isCharacterMoving() {
+    return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
+  }
 
+  playOtherAnimations() {
+    setInterval(() => {
+      if (this.isDead()) this.playAnimation(this.IMAGES_DEAD);
+      if (this.isAboveGround()) this.playJumpAnimation(this.IMAGES_JUMPING);
       if (this.isHurt()) {
-        // console.log(this.isHurt())
         this.playAnimation(this.IMAGES_HURT);
         this.gothit_sound.play();
       }
@@ -165,19 +167,14 @@ class Character extends MoveableObject {
     this.gothit_sound.volume = 0;
     this.walking_sound.volume = 0;
     this.jump_sound.volume = 0;
-    // this.walking_sound.pause();
-    // this.jump_sound.pause();
   }
 
   playJumpAnimation(images) {
-    // console.log(this.jumpImage)
     let i = this.jumpImage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];
     this.jumpImage++;
-    if (135 < this.y) {
-      this.jumpImage = 0;
-    }
+    if (135 < this.y) this.jumpImage = 0;
   }
 
   mute() {
