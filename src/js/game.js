@@ -24,6 +24,12 @@ const keyMap = {
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
+  addEventListeners();
+  checkMobileControls();
+  checkGameFinished();
+}
+
+function addEventListeners() {
   resetButton.addEventListener("click", resetSketch);
   menuButton.addEventListener("click", goMenu);
   startButton.addEventListener("click", start);
@@ -31,56 +37,30 @@ function init() {
   voiceZero.addEventListener("click", unmuted);
   closeBtn.addEventListener("click", closeControls);
   controlsBtn.addEventListener("click", showControls);
+}
 
-  checkMobileControls();
-  checkGameFinished();
+function addTouchListeners(element, key) {
+  element.addEventListener("touchstart", () => {
+    keyboard[key] = true;
+  });
+
+  element.addEventListener("touchend", () => {
+    keyboard[key] = false;
+  });
 }
 
 function checkMobileControls() {
-  let controlLeft = document.getElementById("control-left");
-  let controlRight = document.getElementById("control-right");
-  let controlJump = document.getElementById("control-jump");
-  let controlThrow = document.getElementById("control-throw");
-  let controlBuy = document.getElementById("control-buy");
+  const controls = [
+    { id: "control-left", key: "LEFT" },
+    { id: "control-right", key: "RIGHT" },
+    { id: "control-jump", key: "UP" },
+    { id: "control-throw", key: "D" },
+    { id: "control-buy", key: "B" },
+  ];
 
-  controlLeft.addEventListener("touchstart", () => {
-    keyboard.LEFT = true;
-  });
-
-  controlLeft.addEventListener("touchend", () => {
-    keyboard.LEFT = false;
-  });
-
-  controlRight.addEventListener("touchstart", () => {
-    keyboard.RIGHT = true;
-  });
-
-  controlRight.addEventListener("touchend", () => {
-    keyboard.RIGHT = false;
-  });
-
-  controlJump.addEventListener("touchstart", () => {
-    keyboard.UP = true;
-  });
-
-  controlJump.addEventListener("touchend", () => {
-    keyboard.UP = false;
-  });
-
-  controlThrow.addEventListener("touchstart", () => {
-    keyboard.D = true;
-  });
-
-  controlThrow.addEventListener("touchend", () => {
-    keyboard.D = false;
-  });
-
-  controlBuy.addEventListener("touchstart", () => {
-    keyboard.B = true;
-  });
-
-  controlBuy.addEventListener("touchend", () => {
-    keyboard.B = false;
+  controls.forEach((control) => {
+    const element = document.getElementById(control.id);
+    addTouchListeners(element, control.key);
   });
 }
 
