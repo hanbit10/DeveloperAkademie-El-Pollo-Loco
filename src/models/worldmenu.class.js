@@ -29,4 +29,21 @@ class WorldMenu {
       this.gameWonTiming = false;
     }, 2000);
   }
+
+  showGameWon() {
+    if (this.enemies[16].isDead()) this.gameWonSetting = true;
+    if (this.gameWonSetting) {
+      this.gameWon();
+      if (!this.gameWonTiming)
+        setTimeout(() => {
+          this.addObjectsToMap(this.backgroundObjects);
+          this.addToMap(this.GAME_WON);
+          this.gameWonTiming = true;
+        }, 2000);
+      else {
+        this.addObjectsToMap(this.backgroundObjects);
+        this.addToMap(this.GAME_WON);
+      }
+    }
+  }
 }

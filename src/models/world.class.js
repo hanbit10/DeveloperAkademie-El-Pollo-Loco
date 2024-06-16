@@ -301,35 +301,22 @@ class World extends WorldMenu {
       this.addToMap(this.character);
       this.ctx.translate(-this.camera_x, 0);
 
-      if (this.character.isDead()) this.gameOverSetting = true;
-      if (this.enemies[16].isDead()) this.gameWonSetting = true;
-
-      if (this.gameWonSetting) {
-        this.gameWon();
-        if (!this.gameWonTiming)
-          setTimeout(() => {
-            this.addObjectsToMap(this.backgroundObjects);
-            this.addToMap(this.GAME_WON);
-            this.gameWonTiming = true;
-          }, 2000);
-        else {
-          this.addObjectsToMap(this.backgroundObjects);
-          this.addToMap(this.GAME_WON);
-        }
-      }
-      if (this.gameOverSetting) {
-        this.gameOver();
-        if (!this.gameOverTiming)
-          setTimeout(() => {
-            this.addObjectsToMap(this.backgroundObjects);
-            this.addToMap(this.GAME_OVER);
-            this.gameOverTiming = true;
-          }, 2000);
-        else {
-          this.addObjectsToMap(this.backgroundObjects);
-          this.addToMap(this.GAME_OVER);
-        }
-      }
+      // if (this.enemies[16].isDead()) this.gameWonSetting = true;
+      // if (this.gameWonSetting) {
+      //   this.gameWon();
+      //   if (!this.gameWonTiming)
+      //     setTimeout(() => {
+      //       this.addObjectsToMap(this.backgroundObjects);
+      //       this.addToMap(this.GAME_WON);
+      //       this.gameWonTiming = true;
+      //     }, 2000);
+      //   else {
+      //     this.addObjectsToMap(this.backgroundObjects);
+      //     this.addToMap(this.GAME_WON);
+      //   }
+      // }
+      this.showGameWon();
+      this.showGameOver();
     }
     if (this.gameMenu) this.showGameMenu();
 
@@ -351,6 +338,22 @@ class World extends WorldMenu {
     });
   }
 
+  showGameOver() {
+    if (this.character.isDead()) this.gameOverSetting = true;
+    if (this.gameOverSetting) {
+      this.gameOver();
+      if (!this.gameOverTiming)
+        setTimeout(() => {
+          this.addObjectsToMap(this.backgroundObjects);
+          this.addToMap(this.GAME_OVER);
+          this.gameOverTiming = true;
+        }, 2000);
+      else {
+        this.addObjectsToMap(this.backgroundObjects);
+        this.addToMap(this.GAME_OVER);
+      }
+    }
+  }
   showGameBoss() {
     if (this.character.x > 1400 || this.bossShown) {
       this.background_music = false;
