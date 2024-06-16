@@ -161,6 +161,22 @@ canvas {
   .mute {
     margin-top: 15px;
   }
+
+  .control-btn {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 5px solid #5c5c5c69;
+  }
+
+  .control-big {
+    width: 80px;
+    height: 80px;
+  }
+
   h1 {
     display: none;
   }
