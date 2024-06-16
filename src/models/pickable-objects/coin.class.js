@@ -1,5 +1,5 @@
 class Coin extends PickableObject {
-  coin = "/assets/img/8_coin/coin_3.png";
+  coin = "../assets/img/8_coin/coin_3.png";
   height = 40;
   width = 40;
   frameWidth = this.width;

@@ -1,6 +1,6 @@
 class PickableObject extends DrawableObject {
-  coin_collect = new Audio("/assets/audio/pickable/coins.wav");
-  bottle_collect = new Audio("/assets/audio/pickable/bottles.wav");
+  coin_collect = new Audio("../assets/audio/pickable/coins.wav");
+  bottle_collect = new Audio("../assets/audio/pickable/bottles.wav");
   constructor() {
     super();
   }

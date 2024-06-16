@@ -1,5 +1,5 @@
 class Bottle extends PickableObject {
-  bottles = ["/assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png", "/assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"];
+  bottles = ["../assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png", "../assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"];
   random = Math.floor(Math.random() * this.bottles.length);
 
   height = 90;

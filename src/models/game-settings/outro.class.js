@@ -4,6 +4,6 @@ class Outro extends DrawableObject {
   height = 480;
   width = 720;
   constructor() {
-    super().loadImage("/assets/img/9_intro_outro_screens/game_over/game over.png");
+    super().loadImage("../assets/img/9_intro_outro_screens/game_over/game over.png");
   }
 }

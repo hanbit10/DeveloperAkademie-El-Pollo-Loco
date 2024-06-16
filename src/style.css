@@ -1,6 +1,6 @@
 @font-face {
   font-family: Zabars;
-  src: url(/assets/fonts/Zabars.ttf);
+  src: url(../assets/fonts/Zabars.ttf);
 }
 
 body {
@@ -9,7 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  background-image: url("/assets/img/full-background.svg");
+  background-image: url("../assets/img/full-background.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #000;
