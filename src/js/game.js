@@ -24,6 +24,7 @@ const keyMap = {
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
+
   addEventListeners();
   checkMobileControls();
   checkGameFinished();
@@ -65,11 +66,21 @@ function checkMobileControls() {
 }
 
 function checkGameFinished() {
+  const controlContainer = document.getElementById("control-container");
+  const policy = document.getElementById("policy");
   setInterval(() => {
     if (world.gameOverSetting || world.gameWonSetting) {
       menuButton.classList.remove("d-none");
       resetButton.classList.remove("d-none");
       startButton.classList.add("d-none");
+      controlContainer.classList.add("d-none");
+      policy.classList.add("d-none");
+    } else if (!world.gameMenu) {
+      policy.classList.add("d-none");
+      controlContainer.classList.remove("d-none");
+    } else if (world.gameMenu) {
+      policy.classList.remove("d-none");
+      controlContainer.classList.add("d-none");
     }
   }, 200);
 }
