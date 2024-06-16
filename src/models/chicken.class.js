@@ -43,6 +43,7 @@ class Chicken extends MoveableObject {
     this.loadImage("/assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png");
     this.speed = 0;
     this.energy = 0;
+    console.log(this.energy);
     this.deadSetting = true;
     setTimeout(() => {
       this.y = 600;

@@ -11,6 +11,23 @@ class World extends WorldMenu {
   coins = this.level.coins;
   bottles = this.level.bottles;
   backgroundObjects = this.level.backgroundObjects;
+  background_sound = new Audio("/assets/audio/game-background.wav");
+  boss_background_sound = new Audio("/assets/audio/boss-background.wav");
+  gameover_sound = new Audio("/assets/audio/gameover.wav");
+  gamewon_sound = new Audio("/assets/audio/youwon.mp3");
+  GAME_OVER = new Outro();
+  GAME_WON = new Intro();
+  GAME_MENU = new StartScreen();
+  playBackground = false;
+  background_music = true;
+  voice = true;
+  gameOverPlayed = false;
+  gameOverSetting = false;
+  gameOverTiming = false;
+  gameWonPlayed = false;
+  gameWonSetting = false;
+  gameWonTiming = false;
+  gameMenu = true;
 
   constructor(canvas, keyboard) {
     super();
@@ -190,20 +207,19 @@ class World extends WorldMenu {
     return this.character.isColliding(enemy) && !this.jumpAttack && !enemy.deadSetting;
   }
 
-  characterJumpAttack(enemy) {
-    return this.character.isColliding(enemy) && this.jumpAttack && this.enemiesChickens(enemy);
-  }
-
   enemiesChickens(enemy) {
     return enemy instanceof Chicken || enemy instanceof ChickenNormal;
+  }
+
+  characterJumpAttack(enemy) {
+    return this.character.isColliding(enemy) && this.jumpAttack && this.enemiesChickens(enemy);
   }
 
   characterThrowAttack(enemy) {
     this.throwableObjects.forEach((throwableObject) => {
       if (throwableObject.isColliding(enemy)) {
-        if (!throwableObject.alreadyCollided && !enemy.deadSetting) {
-          throwableObject.throwableCondition("breaking", enemy.deadSetting);
-        } else if (this.enemiesChickens(enemy)) {
+        if (!throwableObject.alreadyCollided && !enemy.deadSetting) throwableObject.throwableCondition("breaking", enemy.deadSetting);
+        if (this.enemiesChickens(enemy)) {
           throwableObject.alreadyCollided = true;
           enemy.dead();
         } else if (enemy instanceof Endboss) {
