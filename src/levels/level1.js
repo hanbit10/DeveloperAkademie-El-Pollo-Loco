@@ -63,6 +63,7 @@ function getLevel() {
       new Coin(2200, 350),
     ],
     [new Bottle(200), new Bottle(250), new Bottle(400), new Bottle(600), new Bottle(800)],
+    [new StatusBar("character"), new StatusBar("coin"), new StatusBar("endboss"), new StatusBar("bottle")],
     0,
     2940
   );

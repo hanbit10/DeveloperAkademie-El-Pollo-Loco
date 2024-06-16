@@ -1,70 +1,43 @@
-class World {
+class World extends WorldMenu {
   character = new Character();
-  statusBar = [new StatusBar("character"), new StatusBar("coin"), new StatusBar("endboss"), new StatusBar("bottle")];
   throwableObjects = [new ThrowableObject()];
   camera_x = 0;
   jumpAttack = false;
   bossShown = false;
-  background_sound = new Audio("/assets/audio/game-background.wav");
-  boss_background_sound = new Audio("/assets/audio/boss-background.wav");
-  gameover_sound = new Audio("/assets/audio/gameover.wav");
-  gamewon_sound = new Audio("/assets/audio/youwon.mp3");
-  GAME_OVER = new Outro();
-  GAME_WON = new Intro();
-  GAME_MENU = new StartScreen();
-
-  background_music = true;
   level = getLevel();
+  statusBar = this.level.statusBar;
   enemies = this.level.enemies;
   clouds = this.level.clouds;
   coins = this.level.coins;
   bottles = this.level.bottles;
   backgroundObjects = this.level.backgroundObjects;
-  playBackground = false;
-  voice = true;
+
   constructor(canvas, keyboard) {
+    super();
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    console.log(this.level);
     this.draw();
     this.setWorld();
     this.run();
   }
 
-  gameOverPlayed = false;
-  gameOverSetting = false;
-  gameOverTiming = false;
-
-  gameWonPlayed = false;
-  gameWonSetting = false;
-  gameWonTiming = false;
-
-  gameMenu = true;
-
   reset() {
-    this.gameOverSetting = false;
-    setTimeout(() => {
-      this.gameOverTiming = false;
-    }, 2000);
-
-    this.gameWonSetting = false;
-    setTimeout(() => {
-      this.gameWonTiming = false;
-    }, 2000);
-    this.gameMenu = false;
-    this.gameOverPlayed = false;
-    this.gameWonPlayed = false;
-    this.bossShown = false;
+    this.gameMenuSetting();
     this.character.reset();
     this.background_sound.currentTime = 0;
     this.boss_background_sound.currentTime = 0;
-    this.statusBar[0].setPercentage(this.character.energy, "character");
-    this.statusBar[1].setPercentage(this.character.coin, "coin");
-    this.statusBar[3].setPercentage(this.character.bottle, "bottle");
+    this.resetObjects();
+    this.resetStatusBar();
+    if (!this.voice) this.mute();
+    if (this.voice) this.unmute();
+  }
+
+  resetObjects() {
     this.enemies.forEach((enemy) => {
       enemy.reset();
     });
-    this.statusBar[2].setPercentage(this.enemies[16].energy, "boss");
     this.clouds.forEach((cloud) => {
       cloud.reset();
     });
@@ -74,14 +47,13 @@ class World {
     this.bottles.forEach((bottle) => {
       bottle.reset();
     });
-    if (!this.voice) {
-      // this.background_sound.volume = 0;
-      this.mute();
-    }
-    if (this.voice) {
-      // this.background_sound.volume = 1;
-      this.unmute();
-    }
+  }
+
+  resetStatusBar() {
+    this.statusBar[0].setPercentage(this.character.energy, "character");
+    this.statusBar[1].setPercentage(this.character.coin, "coin");
+    this.statusBar[2].setPercentage(this.enemies[16].energy, "boss");
+    this.statusBar[3].setPercentage(this.character.bottle, "bottle");
   }
 
   setWorld() {
@@ -219,7 +191,11 @@ class World {
   }
 
   characterJumpAttack(enemy) {
-    return this.character.isColliding(enemy) && this.jumpAttack && (enemy instanceof Chicken || enemy instanceof ChickenNormal);
+    return this.character.isColliding(enemy) && this.jumpAttack && this.enemiesChickens(enemy);
+  }
+
+  enemiesChickens(enemy) {
+    return enemy instanceof Chicken || enemy instanceof ChickenNormal;
   }
 
   characterThrowAttack(enemy) {
@@ -227,8 +203,7 @@ class World {
       if (throwableObject.isColliding(enemy)) {
         if (!throwableObject.alreadyCollided && !enemy.deadSetting) {
           throwableObject.throwableCondition("breaking", enemy.deadSetting);
-        }
-        if (enemy instanceof Chicken || enemy instanceof ChickenNormal) {
+        } else if (this.enemiesChickens(enemy)) {
           throwableObject.alreadyCollided = true;
           enemy.dead();
         } else if (enemy instanceof Endboss) {
@@ -264,12 +239,10 @@ class World {
   gameOver() {
     this.background_sound.volume = 0;
     this.boss_background_sound.volume = 0;
-
     if (!this.gameOverPlayed) {
       this.gameover_sound.play();
       this.gameOverPlayed = true;
     }
-
     this.character.pause();
     this.enemies.forEach((enemy) => {
       enemy.pause();
