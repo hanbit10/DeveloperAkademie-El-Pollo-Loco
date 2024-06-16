@@ -1,38 +1,38 @@
 class StatusBar extends DrawableObject {
   CHARACTER_HEALTH_BAR = [
-    "/assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
-    "/assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png",
-    "/assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/40.png",
-    "/assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/60.png",
-    "/assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png",
-    "/assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png",
+    "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
+    "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png",
+    "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/40.png",
+    "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/60.png",
+    "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png",
+    "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png",
   ];
 
   COIN_STATUS_BAR = [
-    "/assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png",
-    "/assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png",
-    "/assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/40.png",
-    "/assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/60.png",
-    "/assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/80.png",
-    "/assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/100.png",
+    "../assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png",
+    "../assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png",
+    "../assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/40.png",
+    "../assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/60.png",
+    "../assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/80.png",
+    "../assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/100.png",
   ];
 
   BOTTLE_STATUS_BAR = [
-    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png",
-    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/20.png",
-    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/40.png",
-    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/60.png",
-    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/80.png",
-    "/assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/100.png",
+    "../assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png",
+    "../assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/20.png",
+    "../assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/40.png",
+    "../assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/60.png",
+    "../assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/80.png",
+    "../assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/100.png",
   ];
 
   ENDBOSS_HEALTH_BAR = [
-    "/assets/img/7_statusbars/2_statusbar_endboss/green/green0.png",
-    "/assets/img/7_statusbars/2_statusbar_endboss/green/green20.png",
-    "/assets/img/7_statusbars/2_statusbar_endboss/green/green40.png",
-    "/assets/img/7_statusbars/2_statusbar_endboss/green/green60.png",
-    "/assets/img/7_statusbars/2_statusbar_endboss/green/green80.png",
-    "/assets/img/7_statusbars/2_statusbar_endboss/green/green100.png",
+    "../assets/img/7_statusbars/2_statusbar_endboss/green/green0.png",
+    "../assets/img/7_statusbars/2_statusbar_endboss/green/green20.png",
+    "../assets/img/7_statusbars/2_statusbar_endboss/green/green40.png",
+    "../assets/img/7_statusbars/2_statusbar_endboss/green/green60.png",
+    "../assets/img/7_statusbars/2_statusbar_endboss/green/green80.png",
+    "../assets/img/7_statusbars/2_statusbar_endboss/green/green100.png",
   ];
 
   positioning = {

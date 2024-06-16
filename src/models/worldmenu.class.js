@@ -1,8 +1,8 @@
 class WorldMenu {
-  background_sound = new Audio("/assets/audio/game-background.wav");
-  boss_background_sound = new Audio("/assets/audio/boss-background.wav");
-  gameover_sound = new Audio("/assets/audio/gameover.wav");
-  gamewon_sound = new Audio("/assets/audio/youwon.mp3");
+  background_sound = new Audio("../assets/audio/game-background.wav");
+  boss_background_sound = new Audio("../assets/audio/boss-background.wav");
+  gameover_sound = new Audio("../assets/audio/gameover.wav");
+  gamewon_sound = new Audio("../assets/audio/youwon.mp3");
   GAME_OVER = new Outro();
   GAME_WON = new Intro();
   GAME_MENU = new StartScreen();
@@ -63,7 +63,17 @@ class WorldMenu {
 
   showGameMenu() {
     this.addToMap(this.GAME_MENU);
-    this.background_sound.play();
+    let promise = this.background_sound.play();
+    if (promise !== undefined) {
+      promise
+        .then((_) => {
+          // Autoplay started!
+        })
+        .catch((error) => {
+          // Autoplay was prevented.
+          // Show a "Play" button so that user can start playback.
+        });
+    }
     this.background_sound.loop = true;
     if (!this.voice) this.background_sound.volume = 0;
     if (this.voice) this.background_sound.volume = 1;

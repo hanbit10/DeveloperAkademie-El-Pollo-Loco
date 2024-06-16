@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="/assets/img/2_character_pepe/Pepe.png" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/kaktus.png" />
     <title>El Pollo Loco</title>
   </head>
   <body onload="init()">
@@ -12,12 +12,35 @@
     <div class="container">
       <div class="content">
         <div class="row">
-          <img id="voice0" src="/assets/icons/mute.svg" class="mute d-none" alt="" />
-          <img id="voice1" src="/assets/icons/volume-on.svg" class="mute" alt="" />
+          <img id="voice0" src="../assets/icons/mute.svg" class="mute d-none" alt="" />
+          <img id="voice1" src="../assets/icons/volume-on.svg" class="mute" alt="" />
           <div id="reset-button" class="btn d-none">Restart</div>
           <div id="start-button" class="btn">Start</div>
           <div id="menu-button" class="btn d-none">Go To Menu</div>
           <div id="controls-button" class="btn">Controls</div>
+        </div>
+        <div class="control-container">
+          <div id="left-hand" class="left-hand">
+            <div id="control-left" class="control-btn control-big">
+              <div>Left</div>
+            </div>
+            <div id="control-right" class="control-btn control-big">
+              <div>Right</div>
+            </div>
+          </div>
+          <div id="right-hand">
+            <div id="control-items" class="control-items">
+              <div id="control-throw" class="control-btn">
+                <div>Throw</div>
+              </div>
+              <div id="control-buy" class="control-btn">
+                <div>Buy</div>
+              </div>
+            </div>
+            <div id="control-jump" class="control-btn control-big">
+              <div>Jump</div>
+            </div>
+          </div>
         </div>
         <div id="controls-menu" class="menu d-none">
           <div class="close-container"><div id="close-btn" class="controls close-btn">X</div></div>
@@ -27,36 +50,36 @@
               <div class="controls">B - Buy a Bottle</div>
             </div>
             <div class="column">
-              <div class="controls"><img class="controls-img" src="/assets/icons/arrow-up.svg" alt="" /> - Jump</div>
-              <div class="controls"><img class="controls-img" src="/assets/icons/arrow-left.svg" alt="" /> - Move Left</div>
-              <div class="controls"><img class="controls-img" src="/assets/icons/arrow-right.svg" alt="" /> - Move Right</div>
+              <div class="controls"><img class="controls-img" src="../assets/icons/arrow-up.svg" alt="" /> - Jump</div>
+              <div class="controls"><img class="controls-img" src="../assets/icons/arrow-left.svg" alt="" /> - Move Left</div>
+              <div class="controls"><img class="controls-img" src="../assets/icons/arrow-right.svg" alt="" /> - Move Right</div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <canvas id="canvas" width="720" height="480"> </canvas>
-    <script src="/src/models/drawable.class.js"></script>
-    <script src="/src/models/movable-object.class.js"></script>
-    <script src="/src/models/background-object.class.js"></script>
-    <script src="/src/models/statusbar.class.js"></script>
-    <script src="/src/models/character.class.js"></script>
-    <script src="/src/models/chicken.class.js"></script>
-    <script src="/src/models/chicken-normal.class.js"></script>
-    <script src="/src/models/endboss.class.js"></script>
-    <script src="/src/models/cloud.class.js"></script>
-    <script src="/src/models/worldmenu.class.js"></script>
-    <script src="/src/models/world.class.js"></script>
-    <script src="/src/models/keyboard.class.js"></script>
-    <script src="/src/models/throwable-object.class.js"></script>
-    <script src="/src/models/pickable-objects/pickable-object.class.js"></script>
-    <script src="/src/models/pickable-objects/bottle.class.js"></script>
-    <script src="/src/models/pickable-objects/coin.class.js"></script>
-    <script src="/src/models/level.class.js"></script>
-    <script src="/src/models/game-settings/intro.class.js"></script>
-    <script src="/src/models/game-settings/outro.class.js"></script>
-    <script src="/src/models/game-settings/startscreen.class.js"></script>
-    <script src="/src/levels/level1.js"></script>
-    <script src="/src/js/game.js"></script>
+    <script src="../src/models/drawable.class.js"></script>
+    <script src="../src/models/movable-object.class.js"></script>
+    <script src="../src/models/background-object.class.js"></script>
+    <script src="../src/models/statusbar.class.js"></script>
+    <script src="../src/models/character.class.js"></script>
+    <script src="../src/models/chicken.class.js"></script>
+    <script src="../src/models/chicken-normal.class.js"></script>
+    <script src="../src/models/endboss.class.js"></script>
+    <script src="../src/models/cloud.class.js"></script>
+    <script src="../src/models/worldmenu.class.js"></script>
+    <script src="../src/models/world.class.js"></script>
+    <script src="../src/models/keyboard.class.js"></script>
+    <script src="../src/models/throwable-object.class.js"></script>
+    <script src="../src/models/pickable-objects/pickable-object.class.js"></script>
+    <script src="../src/models/pickable-objects/bottle.class.js"></script>
+    <script src="../src/models/pickable-objects/coin.class.js"></script>
+    <script src="../src/models/level.class.js"></script>
+    <script src="../src/models/game-settings/intro.class.js"></script>
+    <script src="../src/models/game-settings/outro.class.js"></script>
+    <script src="../src/models/game-settings/startscreen.class.js"></script>
+    <script src="../src/levels/level1.js"></script>
+    <script src="../src/js/game.js"></script>
   </body>
 </html>

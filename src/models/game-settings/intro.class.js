@@ -4,6 +4,6 @@ class Intro extends DrawableObject {
   height = 480;
   width = 720;
   constructor() {
-    super().loadImage("/assets/img/9_intro_outro_screens/win/win_2.png");
+    super().loadImage("../assets/img/9_intro_outro_screens/win/win_2.png");
   }
 }

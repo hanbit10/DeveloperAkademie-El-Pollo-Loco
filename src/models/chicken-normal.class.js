@@ -7,15 +7,15 @@ class ChickenNormal extends MoveableObject {
   frameHeight = this.height;
   deadSetting = false;
   IMAGES_WALKING = [
-    "/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
-    "/assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
-    "/assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
+    "../assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+    "../assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
+    "../assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
 
-  killed_sound = new Audio("/assets/audio/chicken/normal-chicken/killed.wav");
+  killed_sound = new Audio("../assets/audio/chicken/normal-chicken/killed.wav");
 
   constructor(id, x) {
-    super().loadImage("/assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
+    super().loadImage("../assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.x = x;
     this.xCache = x;
@@ -35,7 +35,7 @@ class ChickenNormal extends MoveableObject {
 
   dead() {
     this.killed_sound.play();
-    this.loadImage("/assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
+    this.loadImage("../assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
     this.speed = 0;
     this.energy = 0;
     this.deadSetting = true;

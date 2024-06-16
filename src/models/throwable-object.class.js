@@ -1,21 +1,21 @@
 class ThrowableObject extends MoveableObject {
-  throw_sound = new Audio("/assets/audio/character/throw.wav");
-  break_sound = new Audio("/assets/audio/throwable/breaking-bottle.wav");
+  throw_sound = new Audio("../assets/audio/character/throw.wav");
+  break_sound = new Audio("../assets/audio/throwable/breaking-bottle.wav");
 
   BOTTLE_THROW = [
-    "/assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
-    "/assets/img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
-    "/assets/img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
-    "/assets/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
+    "../assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
+    "../assets/img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
+    "../assets/img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
+    "../assets/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
   ];
 
   BOTTLE_BREAK = [
-    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
-    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
-    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
-    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
-    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
-    "/assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
+    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
+    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
+    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
+    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+    "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
   ];
 
   throwCondition = "throwing";
@@ -30,7 +30,7 @@ class ThrowableObject extends MoveableObject {
    * @return {void} No return value
    */
   constructor(x, y) {
-    super().loadImage("/assets/img/6_salsa_bottle/salsa_bottle.png");
+    super().loadImage("../assets/img/6_salsa_bottle/salsa_bottle.png");
     this.loadImages(this.BOTTLE_THROW);
     this.loadImages(this.BOTTLE_BREAK);
     this.x = x + 30;

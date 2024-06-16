@@ -1,6 +1,6 @@
 @font-face {
   font-family: Zabars;
-  src: url(/assets/fonts/Zabars.ttf);
+  src: url(../assets/fonts/Zabars.ttf);
 }
 
 body {
@@ -9,7 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  background-image: url("/assets/img/full-background.svg");
+  background-image: url("../assets/img/full-background.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #000;
@@ -133,6 +133,10 @@ canvas {
   display: none;
 }
 
+.control-btn {
+  display: none;
+}
+
 @media only screen and (max-width: 1100px) {
   canvas {
     width: 100%;
@@ -140,6 +144,9 @@ canvas {
   }
 
   .content {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 0;
     width: 100%;
     height: auto;
@@ -161,6 +168,40 @@ canvas {
   .mute {
     margin-top: 15px;
   }
+
+  .control-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+  .control-btn {
+    width: 10vw;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 5px solid #5c5c5c69;
+  }
+
+  .control-big {
+    width: 15vw;
+    aspect-ratio: 1/1;
+  }
+
+  .control-items {
+    display: flex;
+  }
+
+  .left-hand {
+    display: flex;
+  }
+
   h1 {
     display: none;
   }

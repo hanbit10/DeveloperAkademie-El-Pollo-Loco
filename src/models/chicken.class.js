@@ -7,15 +7,15 @@ class Chicken extends MoveableObject {
   frameHeight = this.width;
 
   IMAGES_WALKING = [
-    "/assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
-    "/assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
-    "/assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
+    "../assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
+    "../assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
+    "../assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
   ];
 
-  killed_sound = new Audio("/assets/audio/chicken/small-chicken/killed.wav");
+  killed_sound = new Audio("../assets/audio/chicken/small-chicken/killed.wav");
   deadSetting = false;
   constructor(id, x) {
-    super().loadImage("/assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
+    super().loadImage("../assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.x = x + Math.random() * 100;
     this.xCache = x;
@@ -39,7 +39,7 @@ class Chicken extends MoveableObject {
 
   dead() {
     this.killed_sound.play();
-    this.loadImage("/assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png");
+    this.loadImage("../assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png");
     this.speed = 0;
     this.energy = 0;
     this.deadSetting = true;
