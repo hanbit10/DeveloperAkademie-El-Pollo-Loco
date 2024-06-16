@@ -11,30 +11,12 @@ class World extends WorldMenu {
   coins = this.level.coins;
   bottles = this.level.bottles;
   backgroundObjects = this.level.backgroundObjects;
-  // background_sound = new Audio("/assets/audio/game-background.wav");
-  // boss_background_sound = new Audio("/assets/audio/boss-background.wav");
-  // gameover_sound = new Audio("/assets/audio/gameover.wav");
-  // gamewon_sound = new Audio("/assets/audio/youwon.mp3");
-  // GAME_OVER = new Outro();
-  // GAME_WON = new Intro();
-  // GAME_MENU = new StartScreen();
-  // playBackground = false;
-  // background_music = true;
-  // voice = true;
-  // gameOverPlayed = false;
-  // gameOverSetting = false;
-  // gameOverTiming = false;
-  // gameWonPlayed = false;
-  // gameWonSetting = false;
-  // gameWonTiming = false;
-  // gameMenu = true;
 
   constructor(canvas, keyboard) {
     super();
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    console.log(this.level);
     this.draw();
     this.setWorld();
     this.run();
@@ -279,92 +261,47 @@ class World extends WorldMenu {
   }
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    if (!this.gameMenu) {
-      if (this.background_music) {
-        this.background_sound.play();
-        this.background_sound.loop = true;
-      }
-      this.ctx.translate(this.camera_x, 0);
-      this.addObjectsToMap(this.backgroundObjects);
-      this.addObjectsToMap(this.clouds);
-      this.addObjectsToMap(this.coins);
-      this.addObjectsToMap(this.bottles);
-      this.addObjectsToMap(this.enemies);
-      this.addObjectsToMap(this.throwableObjects);
-      this.ctx.translate(-this.camera_x, 0);
-      this.addToMap(this.statusBar[0]);
-      this.addToMap(this.statusBar[1]);
-      this.addToMap(this.statusBar[3]);
-
-      this.showGameBoss();
-      this.ctx.translate(this.camera_x, 0);
-      this.addToMap(this.character);
-      this.ctx.translate(-this.camera_x, 0);
-
-      // if (this.enemies[16].isDead()) this.gameWonSetting = true;
-      // if (this.gameWonSetting) {
-      //   this.gameWon();
-      //   if (!this.gameWonTiming)
-      //     setTimeout(() => {
-      //       this.addObjectsToMap(this.backgroundObjects);
-      //       this.addToMap(this.GAME_WON);
-      //       this.gameWonTiming = true;
-      //     }, 2000);
-      //   else {
-      //     this.addObjectsToMap(this.backgroundObjects);
-      //     this.addToMap(this.GAME_WON);
-      //   }
-      // }
-      this.showGameWon();
-      this.showGameOver();
-    }
+    if (!this.gameMenu) this.showGameContents();
     if (this.gameMenu) this.showGameMenu();
-
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
   }
 
-  showGameMenu() {
-    this.addToMap(this.GAME_MENU);
-    this.background_sound.play();
-    this.background_sound.loop = true;
-    if (!this.voice) this.background_sound.volume = 0;
-    if (this.voice) this.background_sound.volume = 1;
-    this.character.pause();
-    this.enemies.forEach((enemy) => {
-      enemy.pause();
-    });
+  showGameContents() {
+    this.playBackgroundSound();
+    this.ctx.translate(this.camera_x, 0);
+    this.showObjects();
+    this.showStatusBar();
+    this.addToMap(this.character);
+    this.ctx.translate(-this.camera_x, 0);
+    this.showGameBoss();
+    this.showGameWon();
+    this.showGameOver();
   }
 
-  showGameOver() {
-    if (this.character.isDead()) this.gameOverSetting = true;
-    if (this.gameOverSetting) {
-      this.gameOver();
-      if (!this.gameOverTiming)
-        setTimeout(() => {
-          this.addObjectsToMap(this.backgroundObjects);
-          this.addToMap(this.GAME_OVER);
-          this.gameOverTiming = true;
-        }, 2000);
-      else {
-        this.addObjectsToMap(this.backgroundObjects);
-        this.addToMap(this.GAME_OVER);
-      }
-    }
+  showObjects() {
+    this.addObjectsToMap(this.backgroundObjects);
+    this.addObjectsToMap(this.clouds);
+    this.addObjectsToMap(this.coins);
+    this.addObjectsToMap(this.bottles);
+    this.addObjectsToMap(this.enemies);
+    this.addObjectsToMap(this.throwableObjects);
   }
-  showGameBoss() {
-    if (this.character.x > 1400 || this.bossShown) {
-      this.background_music = false;
-      if (!this.background_music) {
-        this.boss_background_sound.play();
-        this.boss_background_sound.loop = true;
-        this.background_sound.volume = 0;
-        if (this.voice) this.boss_background_sound.volume = 1;
-      }
-      this.addToMap(this.statusBar[2]);
-      this.bossShown = true;
+
+  showStatusBar() {
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusBar[0]);
+    this.addToMap(this.statusBar[1]);
+    this.addToMap(this.statusBar[3]);
+    this.ctx.translate(this.camera_x, 0);
+  }
+
+  playBackgroundSound() {
+    if (this.background_music) {
+      this.background_sound.play();
+      this.background_sound.loop = true;
     }
   }
 

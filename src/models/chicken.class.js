@@ -20,7 +20,6 @@ class Chicken extends MoveableObject {
     this.x = x + Math.random() * 100;
     this.xCache = x;
     this.id = id;
-    // this.speed = 0.25 + Math.random() * 0.6;
     this.animate();
   }
   animate() {
@@ -43,7 +42,6 @@ class Chicken extends MoveableObject {
     this.loadImage("/assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png");
     this.speed = 0;
     this.energy = 0;
-    console.log(this.energy);
     this.deadSetting = true;
     setTimeout(() => {
       this.y = 600;

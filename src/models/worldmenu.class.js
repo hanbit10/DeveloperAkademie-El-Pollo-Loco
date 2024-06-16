@@ -46,4 +46,47 @@ class WorldMenu {
       }
     }
   }
+
+  showGameBoss() {
+    if (this.character.x > 1400 || this.bossShown) {
+      this.background_music = false;
+      if (!this.background_music) {
+        this.boss_background_sound.play();
+        this.boss_background_sound.loop = true;
+        this.background_sound.volume = 0;
+        if (this.voice) this.boss_background_sound.volume = 1;
+      }
+      this.addToMap(this.statusBar[2]);
+      this.bossShown = true;
+    }
+  }
+
+  showGameMenu() {
+    this.addToMap(this.GAME_MENU);
+    this.background_sound.play();
+    this.background_sound.loop = true;
+    if (!this.voice) this.background_sound.volume = 0;
+    if (this.voice) this.background_sound.volume = 1;
+    this.character.pause();
+    this.enemies.forEach((enemy) => {
+      enemy.pause();
+    });
+  }
+
+  showGameOver() {
+    if (this.character.isDead()) this.gameOverSetting = true;
+    if (this.gameOverSetting) {
+      this.gameOver();
+      if (!this.gameOverTiming)
+        setTimeout(() => {
+          this.addObjectsToMap(this.backgroundObjects);
+          this.addToMap(this.GAME_OVER);
+          this.gameOverTiming = true;
+        }, 2000);
+      else {
+        this.addObjectsToMap(this.backgroundObjects);
+        this.addToMap(this.GAME_OVER);
+      }
+    }
+  }
 }
