@@ -313,13 +313,8 @@ class World extends WorldMenu {
       this.addToMap(this.character);
       this.ctx.translate(-this.camera_x, 0);
 
-      if (this.character.isDead()) {
-        this.gameOverSetting = true;
-      }
-
-      if (this.enemies[16].isDead()) {
-        this.gameWonSetting = true;
-      }
+      if (this.character.isDead()) this.gameOverSetting = true;
+      if (this.enemies[16].isDead()) this.gameWonSetting = true;
 
       if (this.gameWonSetting) {
         this.gameWon();
