@@ -6,6 +6,12 @@ class Bottle extends PickableObject {
   width = 40;
   frameWidth = this.width;
   frameHeight = this.height;
+  /**
+   * Constructor for the Bottle class.
+   *
+   * @param {number} x - The x-coordinate position
+   * @return {void} No return value
+   */
   constructor(x) {
     super();
     this.loadImage(this.bottles[this.random]);

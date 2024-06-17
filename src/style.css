@@ -122,8 +122,20 @@ canvas {
   justify-content: flex-end;
   padding: 12px;
 }
+
 .close-btn {
   cursor: pointer;
+}
+
+.how-to-play-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.how-to-play {
+  width: 30px;
+  height: 30px;
 }
 
 .menu {

@@ -4,6 +4,13 @@ class Coin extends PickableObject {
   width = 40;
   frameWidth = this.width;
   frameHeight = this.height;
+  /**
+   * Constructor for the Coin class.
+   *
+   * @param {number} x - The x-coordinate position
+   * @param {number} y - The y-coordinate position
+   * @return {void} No return value
+   */
   constructor(x, y) {
     super();
     this.x = x;
