@@ -34,7 +34,7 @@ class DrawableObject {
     if (this.gameInstances()) {
       ctx.beginPath();
       ctx.lineWidth = "2";
-      ctx.strokeStyle = "blue";
+      ctx.strokeStyle = "transparent";
       ctx.rect(this.x, this.y, mo.width, mo.height);
       ctx.stroke();
     }
@@ -55,7 +55,7 @@ class DrawableObject {
     if (this.gameInstances()) {
       ctx.beginPath();
       ctx.lineWidth = "2";
-      ctx.strokeStyle = "red";
+      ctx.strokeStyle = "transparent";
       ctx.rect(
         this.x + this.offset.left,
         this.y + this.offset.top,

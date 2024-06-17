@@ -206,7 +206,7 @@ class World extends WorldMenu {
           enemy.dead();
         } else if (enemy instanceof Endboss) {
           throwableObject.alreadyCollided = true;
-          enemy.hit(5.4);
+          enemy.hit(1.4);
           this.statusBar[2].setPercentage(enemy.energy, "boss");
           if (enemy.energy <= 0) enemy.dead();
         }
