@@ -23,14 +23,17 @@ class World extends WorldMenu {
   }
 
   reset() {
+    if (!this.voice) this.mute();
+    if (this.voice) {
+      console.log("is it working");
+      this.unmute();
+    }
     this.gameMenuSetting();
     this.character.reset();
     this.background_sound.currentTime = 0;
     this.boss_background_sound.currentTime = 0;
     this.resetObjects();
     this.resetStatusBar();
-    if (!this.voice) this.mute();
-    if (this.voice) this.unmute();
   }
 
   resetObjects() {
@@ -206,7 +209,7 @@ class World extends WorldMenu {
           enemy.dead();
         } else if (enemy instanceof Endboss) {
           throwableObject.alreadyCollided = true;
-          enemy.hit(5.4);
+          enemy.hit(1.4);
           this.statusBar[2].setPercentage(enemy.energy, "boss");
           if (enemy.energy <= 0) enemy.dead();
         }
@@ -241,6 +244,7 @@ class World extends WorldMenu {
       this.gameover_sound.play();
       this.gameOverPlayed = true;
     }
+    this.muteObjects();
     this.character.pause();
     this.enemies.forEach((enemy) => {
       enemy.pause();
@@ -254,11 +258,23 @@ class World extends WorldMenu {
       this.gamewon_sound.play();
       this.gameWonPlayed = true;
     }
+    this.gameWonMute();
     this.character.pause();
     this.enemies.forEach((enemy) => {
       enemy.pause();
     });
   }
+
+  gameWonMute() {
+    this.throwableObjects.forEach((object) => {
+      object.mute();
+    });
+
+    this.enemies.forEach((enemy) => {
+      if (enemy instanceof Chicken || enemy instanceof ChickenNormal) enemy.mute();
+    });
+  }
+
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (!this.gameMenu) this.showGameContents();
