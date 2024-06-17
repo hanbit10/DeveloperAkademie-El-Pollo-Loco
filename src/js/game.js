@@ -21,9 +21,24 @@ const keyMap = {
   d: "D",
   b: "B",
 };
+
+const controls = [
+  { id: "control-left", key: "LEFT" },
+  { id: "control-right", key: "RIGHT" },
+  { id: "control-jump", key: "UP" },
+  { id: "control-throw", key: "D" },
+  { id: "control-buy", key: "B" },
+];
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
+
+  addEventListeners();
+  checkMobileControls();
+  checkGameFinished();
+}
+
+function addEventListeners() {
   resetButton.addEventListener("click", resetSketch);
   menuButton.addEventListener("click", goMenu);
   startButton.addEventListener("click", start);
@@ -31,65 +46,44 @@ function init() {
   voiceZero.addEventListener("click", unmuted);
   closeBtn.addEventListener("click", closeControls);
   controlsBtn.addEventListener("click", showControls);
+}
 
-  checkMobileControls();
-  checkGameFinished();
+function addTouchListeners(element, key) {
+  element.addEventListener("touchstart", () => {
+    keyboard[key] = true;
+  });
+
+  element.addEventListener("touchend", () => {
+    keyboard[key] = false;
+    clearTimeout(clickedTime);
+    keyboard.KEYUSED = true;
+    startTimer();
+  });
 }
 
 function checkMobileControls() {
-  let controlLeft = document.getElementById("control-left");
-  let controlRight = document.getElementById("control-right");
-  let controlJump = document.getElementById("control-jump");
-  let controlThrow = document.getElementById("control-throw");
-  let controlBuy = document.getElementById("control-buy");
-
-  controlLeft.addEventListener("touchstart", () => {
-    keyboard.LEFT = true;
-  });
-
-  controlLeft.addEventListener("touchend", () => {
-    keyboard.LEFT = false;
-  });
-
-  controlRight.addEventListener("touchstart", () => {
-    keyboard.RIGHT = true;
-  });
-
-  controlRight.addEventListener("touchend", () => {
-    keyboard.RIGHT = false;
-  });
-
-  controlJump.addEventListener("touchstart", () => {
-    keyboard.UP = true;
-  });
-
-  controlJump.addEventListener("touchend", () => {
-    keyboard.UP = false;
-  });
-
-  controlThrow.addEventListener("touchstart", () => {
-    keyboard.D = true;
-  });
-
-  controlThrow.addEventListener("touchend", () => {
-    keyboard.D = false;
-  });
-
-  controlBuy.addEventListener("touchstart", () => {
-    keyboard.B = true;
-  });
-
-  controlBuy.addEventListener("touchend", () => {
-    keyboard.B = false;
+  controls.forEach((control) => {
+    const element = document.getElementById(control.id);
+    addTouchListeners(element, control.key);
   });
 }
 
 function checkGameFinished() {
+  const controlContainer = document.getElementById("control-container");
+  const policy = document.getElementById("policy");
   setInterval(() => {
     if (world.gameOverSetting || world.gameWonSetting) {
       menuButton.classList.remove("d-none");
       resetButton.classList.remove("d-none");
       startButton.classList.add("d-none");
+      controlContainer.classList.add("d-none");
+      policy.classList.add("d-none");
+    } else if (!world.gameMenu) {
+      policy.classList.add("d-none");
+      controlContainer.classList.remove("d-none");
+    } else if (world.gameMenu) {
+      policy.classList.remove("d-none");
+      controlContainer.classList.add("d-none");
     }
   }, 200);
 }

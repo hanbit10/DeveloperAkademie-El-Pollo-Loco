@@ -139,10 +139,6 @@ canvas {
   justify-content: center;
 }
 
-.d-none {
-  display: none;
-}
-
 .control-btn {
   display: none;
 }
@@ -274,4 +270,8 @@ canvas {
   .controls {
     font-size: 30px;
   }
+}
+
+.d-none {
+  display: none;
 }

@@ -42,7 +42,7 @@ class MoveableObject extends DrawableObject {
       this.x + this.width - 40 >= mo.x &&
       this.y + this.height >= mo.y + mo.height / 2 - 50 &&
       this.x <= mo.x + mo.width - 30 &&
-      this.y < mo.y + mo.height
+      this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
     );
   }
 
