@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ThrowableObject</title>
+    <title>JSDoc: Class: Endboss</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ThrowableObject</h1>
+    <h1 class="page-title">Class: Endboss</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ThrowableObject<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {void}</span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Endboss<span class="signature">(x)</span><span class="type-signature"> &rarr; {void}</span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="ThrowableObject"><span class="type-signature"></span>new ThrowableObject<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="Endboss"><span class="type-signature"></span>new Endboss<span class="signature">(x)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    Constructor for creating a ThrowableObject at a specific position.
+    Initializes a new instance of the Endboss class with the specified x position.
 </div>
 
 
@@ -101,30 +101,7 @@
 
             
 
-            <td class="description last">The x-coordinate position</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The y-coordinate position</td>
+            <td class="description last">The initial x position of the endboss.</td>
         </tr>
 
     
@@ -165,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line32">line 32</a>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line73">line 73</a>
     </li></ul></dd>
     
 
@@ -193,10 +170,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    No return value
-</div>
-
 
 
 <dl>
@@ -243,7 +216,7 @@
     
 
     
-    <h4 class="name" id="breakAnimation"><span class="type-signature"></span>breakAnimation<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="animate"><span class="type-signature"></span>animate<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -251,13 +224,7 @@
 
 
 <div class="description">
-    Executes the break animation for the ThrowableObject.
-
-This function sets the `bottleBroken` property to true, plays the `break_sound`,
-sets the `speedY` property to 0, and starts an interval that plays the animation
-using the `playAnimation` method with the `BOTTLE_BREAK` array as the argument.
-After 6 iterations, it loads the last image from the `BOTTLE_BREAK` array using
-the `loadImage` method.
+    Animates the endboss by periodically checking if it's alive and triggering attack or other animations accordingly.
 </div>
 
 
@@ -301,7 +268,7 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line68">line 68</a>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line89">line 89</a>
     </li></ul></dd>
     
 
@@ -359,7 +326,7 @@ the `loadImage` method.
     
 
     
-    <h4 class="name" id="isBreaking"><span class="type-signature"></span>isBreaking<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="attackAnimation"><span class="type-signature"></span>attackAnimation<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -367,7 +334,7 @@ the `loadImage` method.
 
 
 <div class="description">
-    Checks if the object is currently breaking.
+    Executes the attack animation by playing the attack animation images, moving the endboss character to the left, and playing the attack sound.
 </div>
 
 
@@ -411,7 +378,7 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line109">line 109</a>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line143">line 143</a>
     </li></ul></dd>
     
 
@@ -440,7 +407,7 @@ the `loadImage` method.
 
         
 <div class="param-desc">
-    True if the object is currently breaking, false otherwise.
+    This function does not return anything.
 </div>
 
 
@@ -451,7 +418,7 @@ the `loadImage` method.
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type">void</span>
 
 
     </dd>
@@ -469,7 +436,7 @@ the `loadImage` method.
     
 
     
-    <h4 class="name" id="isThrowing"><span class="type-signature"></span>isThrowing<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="checkingCharacter"><span class="type-signature"></span>checkingCharacter<span class="signature">(status)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -477,7 +444,166 @@ the `loadImage` method.
 
 
 <div class="description">
-    Determines if the object is currently in the process of being thrown.
+    Checks the character's status and updates the corresponding properties.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The status of the character.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line182">line 182</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This function does not return anything.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="dead"><span class="type-signature"></span>dead<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Executes the dead animation when the endboss character is dead by setting the speed to 0, playing the dead animation images, and loading the dead image.
 </div>
 
 
@@ -521,7 +647,95 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line100">line 100</a>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line162">line 162</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="moveAnimation"><span class="type-signature"></span>moveAnimation<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Animates the movement of the endboss based on the character's proximity.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line107">line 107</a>
     </li></ul></dd>
     
 
@@ -550,7 +764,7 @@ the `loadImage` method.
 
         
 <div class="param-desc">
-    True if the object is currently being thrown or being thrown to the left, false otherwise.
+    This function does not return anything.
 </div>
 
 
@@ -561,7 +775,7 @@ the `loadImage` method.
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type">void</span>
 
 
     </dd>
@@ -587,7 +801,7 @@ the `loadImage` method.
 
 
 <div class="description">
-    Mutes the break and throw sounds by setting their volume to 0.
+    Mutes the sounds of the end boss by setting their volumes to 0.
 </div>
 
 
@@ -631,7 +845,227 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line134">line 134</a>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line212">line 212</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This function does not return a value.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="otherAnimations"><span class="type-signature"></span>otherAnimations<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Executes different animations based on the endboss's state. Plays walking, alert, or hurt animations accordingly.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line123">line 123</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Does not return anything.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pause"><span class="type-signature"></span>pause<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Pauses the execution by setting the speed to 0.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line154">line 154</a>
     </li></ul></dd>
     
 
@@ -689,7 +1123,7 @@ the `loadImage` method.
     
 
     
-    <h4 class="name" id="throwAnimation"><span class="type-signature"></span>throwAnimation<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="reset"><span class="type-signature"></span>reset<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -697,7 +1131,7 @@ the `loadImage` method.
 
 
 <div class="description">
-    Plays the throw sound, sets the speedY property to 10, applies gravity, and starts an interval that plays the animation using the playAnimation method with the BOTTLE_THROW array as the argument. If the object is breaking, the interval is cleared.
+    Resets the state of the end boss to its initial values.
 </div>
 
 
@@ -741,348 +1175,7 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line85">line 85</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    This function does not return anything.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="throwXAchse"><span class="type-signature"></span>throwXAchse<span class="signature">(enemyDead)</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Determines the x-coordinate movement based on the throw condition and enemy status.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>enemyDead</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Indicates if the enemy is dead.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line119">line 119</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    This function does not return anything.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="throwableCondition"><span class="type-signature"></span>throwableCondition<span class="signature">(condition, enemyDead)</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Updates the throw condition and triggers the corresponding animation or break animation based on the condition.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>condition</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The throw condition to set.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>enemyDead</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Indicates if the enemy is dead.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line48">line 48</a>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line199">line 199</a>
     </li></ul></dd>
     
 
@@ -1148,7 +1241,7 @@ the `loadImage` method.
 
 
 <div class="description">
-    Mutes the break and throw sounds by setting their volume to 0.
+    Sets the volume of the hurt_sound, killed_sound, and attack_sound to 1 to unmute the end boss.
 </div>
 
 
@@ -1192,7 +1285,7 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line144">line 144</a>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line223">line 223</a>
     </li></ul></dd>
     
 
@@ -1221,7 +1314,7 @@ the `loadImage` method.
 
         
 <div class="param-desc">
-    This function does not return anything.
+    This function does not return a value.
 </div>
 
 

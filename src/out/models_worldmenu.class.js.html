@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/worldmenu.class.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/worldmenu.class.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>class WorldMenu {
+  background_sound = new Audio("../assets/audio/game-background.wav");
+  boss_background_sound = new Audio("../assets/audio/boss-background.wav");
+  gameover_sound = new Audio("../assets/audio/gameover.wav");
+  gamewon_sound = new Audio("../assets/audio/youwon.mp3");
+  GAME_OVER = new Outro();
+  GAME_WON = new Intro();
+  GAME_MENU = new StartScreen();
+  playBackground = false;
+  background_music = true;
+  voice = true;
+  gameOverPlayed = false;
+  gameOverSetting = false;
+  gameOverTiming = false;
+  gameWonPlayed = false;
+  gameWonSetting = false;
+  gameWonTiming = false;
+  gameMenu = true;
+
+  /**
+   * Resets the game menu settings and timers.
+   *
+   * This function sets the gameOverSetting, gameWonSetting, gameMenu, gameOverPlayed,
+   * gameWonPlayed, and bossShown properties to false. It also sets the gameOverTiming
+   * and gameWonTiming properties to false after a delay of 2000 milliseconds.
+   *
+   * @return {void} This function does not return anything.
+   */
+  gameMenuSetting() {
+    this.gameOverSetting = false;
+    this.gameWonSetting = false;
+    this.gameMenu = false;
+    this.gameOverPlayed = false;
+    this.gameWonPlayed = false;
+    this.bossShown = false;
+    setTimeout(() => {
+      this.gameOverTiming = false;
+      this.gameWonTiming = false;
+    }, 2000);
+  }
+
+  /**
+   * Checks if the enemy at index 16 is dead and sets the gameWonSetting flag accordingly.
+   * If gameWonSetting is true, it calls the gameWon() function and adds the necessary objects to the map.
+   * If gameWonTiming is false, it sets a timeout to add the GAME_WON object to the map after 2000 milliseconds.
+   * If gameWonTiming is true, it immediately adds the GAME_WON object to the map.
+   *
+   * @return {void} This function does not return anything.
+   */
+  showGameWon() {
+    if (this.enemies[16].isDead()) this.gameWonSetting = true;
+    if (this.gameWonSetting) {
+      this.gameWon();
+      if (!this.gameWonTiming)
+        setTimeout(() => {
+          this.addObjectsToMap(this.backgroundObjects);
+          this.addToMap(this.GAME_WON);
+          this.gameWonTiming = true;
+        }, 2000);
+      else {
+        this.addObjectsToMap(this.backgroundObjects);
+        this.addToMap(this.GAME_WON);
+      }
+    }
+  }
+
+  /**
+   * Checks if the character's x position is greater than 2100 or the boss has already been shown.
+   * If conditions are met, stops the background music, plays the boss background sound, sets volume,
+   * adds an element to the map, and updates the bossShown flag.
+   *
+   * @return {void} This function does not return anything.
+   */
+  showGameBoss() {
+    if (this.character.x > 2100 || this.bossShown) {
+      this.background_music = false;
+      if (!this.background_music) {
+        this.boss_background_sound.play();
+        this.boss_background_sound.loop = true;
+        this.background_sound.volume = 0;
+        if (this.voice) this.boss_background_sound.volume = 1;
+      }
+      this.addToMap(this.statusBar[2]);
+      this.bossShown = true;
+    }
+  }
+
+  /**
+   * Adds the GAME_MENU object to the map and sets up the background sound for autoplay.
+   * Pauses the character and enemies.
+   *
+   * @return {void} This function does not return anything.
+   */
+  showGameMenu() {
+    this.addToMap(this.GAME_MENU);
+    let promise = this.background_sound.play();
+    if (promise !== undefined) {
+      promise.then((_) => {}).catch((error) => {});
+    }
+    this.background_sound.loop = true;
+    if (!this.voice) this.background_sound.volume = 0;
+    if (this.voice) this.background_sound.volume = 1;
+    this.character.pause();
+    this.enemies.forEach((enemy) => {
+      enemy.pause();
+    });
+  }
+
+  /**
+   * Checks if the character is dead and sets the gameOverSetting flag accordingly.
+   * If gameOverSetting is true, it calls the gameOver() function and adds the necessary objects to the map.
+   * If gameOverTiming is false, it sets a timeout to add the GAME_OVER object to the map after 2000 milliseconds.
+   * If gameOverTiming is true, it immediately adds the GAME_OVER object to the map.
+   *
+   * @return {void} This function does not return anything.
+   */
+  showGameOver() {
+    if (this.character.isDead()) this.gameOverSetting = true;
+    if (this.gameOverSetting) {
+      this.gameOver();
+      if (!this.gameOverTiming)
+        setTimeout(() => {
+          this.addObjectsToMap(this.backgroundObjects);
+          this.addToMap(this.GAME_OVER);
+          this.gameOverTiming = true;
+        }, 2000);
+      else {
+        this.addObjectsToMap(this.backgroundObjects);
+        this.addToMap(this.GAME_OVER);
+      }
+    }
+  }
+
+  /**
+   * Mutes all throwable objects and enemies of type Chicken or ChickenNormal.
+   *
+   * @return {void} This function does not return anything.
+   */
+  gameWonMute() {
+    this.throwableObjects.forEach((object) => {
+      object.mute();
+    });
+
+    this.enemies.forEach((enemy) => {
+      if (enemy instanceof Chicken || enemy instanceof ChickenNormal) enemy.mute();
+    });
+  }
+
+  /**
+   * Stops the game by muting the background sounds, playing the game won sound if it hasn't been played yet,
+   * muting the game objects, and pausing the character and enemies.
+   *
+   * @return {void} This function does not return anything.
+   */
+  gameWon() {
+    this.background_sound.volume = 0;
+    this.boss_background_sound.volume = 0;
+    if (!this.gameWonPlayed) {
+      this.gamewon_sound.play();
+      this.gameWonPlayed = true;
+    }
+    this.gameWonMute();
+    this.character.pause();
+    this.enemies.forEach((enemy) => {
+      enemy.pause();
+    });
+  }
+
+  /**
+   * Stops the game by muting the background sounds, playing the game over sound if it hasn't been played yet,
+   * pausing the character and enemies, and muting all game objects.
+   *
+   * @return {void} This function does not return anything.
+   */
+  gameOver() {
+    this.background_sound.volume = 0;
+    this.boss_background_sound.volume = 0;
+    if (!this.gameOverPlayed) {
+      this.gameover_sound.play();
+      this.gameOverPlayed = true;
+    }
+    this.muteObjects();
+    this.character.pause();
+    this.enemies.forEach((enemy) => {
+      enemy.pause();
+    });
+  }
+
+  /**
+   * Unmutes all the audio elements of the game objects.
+   *
+   * This function iterates through the `enemies`, `coins`, `bottles`, and `throwableObjects` arrays
+   * and calls the `unmute` method on each object. It also calls the `unmute` method on the `character`
+   * object.
+   *
+   * @return {void} This function does not return anything.
+   */
+  unmuteObjects() {
+    this.character.unmute();
+    this.enemies.forEach((enemy) => {
+      enemy.unmute();
+    });
+    this.coins.forEach((coin) => {
+      coin.unmute();
+    });
+    this.bottles.forEach((bottle) => {
+      bottle.unmute();
+    });
+    this.throwableObjects.forEach((object) => {
+      object.unmute();
+    });
+  }
+
+  /**
+   * Mutes all the character, enemies, coins, bottles, and throwable objects in the game.
+   *
+   * @return {void} This function does not return anything.
+   */
+  muteObjects() {
+    this.character.mute();
+    this.enemies.forEach((enemy) => {
+      enemy.mute();
+    });
+    this.coins.forEach((coin) => {
+      coin.mute();
+    });
+    this.bottles.forEach((bottle) => {
+      bottle.mute();
+    });
+    setInterval(() => {
+      this.throwableObjects.forEach((object) => {
+        object.mute();
+      });
+    });
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Character.html">Character</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="ChickenNormal.html">ChickenNormal</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Intro.html">Intro</a></li><li><a href="Level.html">Level</a></li><li><a href="Outro.html">Outro</a></li><li><a href="PickableObject.html">PickableObject</a></li><li><a href="StartScreen.html">StartScreen</a></li><li><a href="StatusBar.html">StatusBar</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addEventListeners">addEventListeners</a></li><li><a href="global.html#addTouchListeners">addTouchListeners</a></li><li><a href="global.html#checkGameFinished">checkGameFinished</a></li><li><a href="global.html#checkMobileControls">checkMobileControls</a></li><li><a href="global.html#closeControls">closeControls</a></li><li><a href="global.html#enterFullscreen">enterFullscreen</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#fullScreenEventListeners">fullScreenEventListeners</a></li><li><a href="global.html#getLevel">getLevel</a></li><li><a href="global.html#goMenu">goMenu</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#muted">muted</a></li><li><a href="global.html#resetSketch">resetSketch</a></li><li><a href="global.html#showControls">showControls</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#startTimer">startTimer</a></li><li><a href="global.html#unmuted">unmuted</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jun 17 2024 17:37:39 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

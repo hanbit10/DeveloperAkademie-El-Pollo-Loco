@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ThrowableObject</title>
+    <title>JSDoc: Class: ChickenNormal</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ThrowableObject</h1>
+    <h1 class="page-title">Class: ChickenNormal</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ThrowableObject<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {void}</span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ChickenNormal<span class="signature">(id, x)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="ThrowableObject"><span class="type-signature"></span>new ThrowableObject<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="ChickenNormal"><span class="type-signature"></span>new ChickenNormal<span class="signature">(id, x)</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    Constructor for creating a ThrowableObject at a specific position.
+    Constructs a new ChickenNormal object with the specified id and initial x position.
 </div>
 
 
@@ -85,6 +85,29 @@
 
         <tr>
             
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The unique identifier for the chicken.</td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>x</code></td>
             
 
@@ -101,30 +124,7 @@
 
             
 
-            <td class="description last">The x-coordinate position</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The y-coordinate position</td>
+            <td class="description last">The initial x position of the chicken.</td>
         </tr>
 
     
@@ -165,7 +165,115 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line32">line 32</a>
+        <a href="models_chicken-normal.class.js.html">models/chicken-normal.class.js</a>, <a href="models_chicken-normal.class.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="animate"><span class="type-signature"></span>animate<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Animate the chicken's movement and actions at regular intervals.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_chicken-normal.class.js.html">models/chicken-normal.class.js</a>, <a href="models_chicken-normal.class.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -217,33 +325,13 @@
 
 
 
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
         
             
 
     
 
     
-    <h4 class="name" id="breakAnimation"><span class="type-signature"></span>breakAnimation<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="dead"><span class="type-signature"></span>dead<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -251,13 +339,8 @@
 
 
 <div class="description">
-    Executes the break animation for the ThrowableObject.
-
-This function sets the `bottleBroken` property to true, plays the `break_sound`,
-sets the `speedY` property to 0, and starts an interval that plays the animation
-using the `playAnimation` method with the `BOTTLE_BREAK` array as the argument.
-After 6 iterations, it loads the last image from the `BOTTLE_BREAK` array using
-the `loadImage` method.
+    Plays the killed sound, loads the dead image, sets the speed and energy to 0,
+sets the deadSetting flag to true, and moves the chicken to the bottom of the screen after 2 seconds.
 </div>
 
 
@@ -301,7 +384,7 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line68">line 68</a>
+        <a href="models_chicken-normal.class.js.html">models/chicken-normal.class.js</a>, <a href="models_chicken-normal.class.js.html#line57">line 57</a>
     </li></ul></dd>
     
 
@@ -330,7 +413,7 @@ the `loadImage` method.
 
         
 <div class="param-desc">
-    This function does not return anything.
+    No return value
 </div>
 
 
@@ -342,226 +425,6 @@ the `loadImage` method.
     <dd>
         
 <span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="isBreaking"><span class="type-signature"></span>isBreaking<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Checks if the object is currently breaking.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line109">line 109</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    True if the object is currently breaking, false otherwise.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="isThrowing"><span class="type-signature"></span>isThrowing<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Determines if the object is currently in the process of being thrown.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line100">line 100</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    True if the object is currently being thrown or being thrown to the left, false otherwise.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
 
 
     </dd>
@@ -587,7 +450,7 @@ the `loadImage` method.
 
 
 <div class="description">
-    Mutes the break and throw sounds by setting their volume to 0.
+    Mutes the sound of the killed_sound property by setting its volume to 0.
 </div>
 
 
@@ -631,7 +494,7 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line134">line 134</a>
+        <a href="models_chicken-normal.class.js.html">models/chicken-normal.class.js</a>, <a href="models_chicken-normal.class.js.html#line100">line 100</a>
     </li></ul></dd>
     
 
@@ -660,7 +523,7 @@ the `loadImage` method.
 
         
 <div class="param-desc">
-    This function does not return anything.
+    This function does not return a value.
 </div>
 
 
@@ -689,7 +552,7 @@ the `loadImage` method.
     
 
     
-    <h4 class="name" id="throwAnimation"><span class="type-signature"></span>throwAnimation<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="pause"><span class="type-signature"></span>pause<span class="signature">(paramName)</span><span class="type-signature"> &rarr; {type}</span></h4>
     
 
     
@@ -697,117 +560,7 @@ the `loadImage` method.
 
 
 <div class="description">
-    Plays the throw sound, sets the speedY property to 10, applies gravity, and starts an interval that plays the animation using the playAnimation method with the BOTTLE_THROW array as the argument. If the object is breaking, the interval is cleared.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line85">line 85</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    This function does not return anything.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="throwXAchse"><span class="type-signature"></span>throwXAchse<span class="signature">(enemyDead)</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Determines the x-coordinate movement based on the throw condition and enemy status.
+    A description of the entire function.
 </div>
 
 
@@ -843,13 +596,13 @@ the `loadImage` method.
 
         <tr>
             
-                <td class="name"><code>enemyDead</code></td>
+                <td class="name"><code>paramName</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">boolean</span>
+<span class="param-type">type</span>
 
 
             
@@ -859,7 +612,7 @@ the `loadImage` method.
 
             
 
-            <td class="description last">Indicates if the enemy is dead.</td>
+            <td class="description last">description of parameter</td>
         </tr>
 
     
@@ -900,7 +653,7 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line119">line 119</a>
+        <a href="models_chicken-normal.class.js.html">models/chicken-normal.class.js</a>, <a href="models_chicken-normal.class.js.html#line74">line 74</a>
     </li></ul></dd>
     
 
@@ -929,7 +682,7 @@ the `loadImage` method.
 
         
 <div class="param-desc">
-    This function does not return anything.
+    description of return value
 </div>
 
 
@@ -940,7 +693,7 @@ the `loadImage` method.
     </dt>
     <dd>
         
-<span class="param-type">void</span>
+<span class="param-type">type</span>
 
 
     </dd>
@@ -958,7 +711,7 @@ the `loadImage` method.
     
 
     
-    <h4 class="name" id="throwableCondition"><span class="type-signature"></span>throwableCondition<span class="signature">(condition, enemyDead)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="reset"><span class="type-signature"></span>reset<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -966,7 +719,11 @@ the `loadImage` method.
 
 
 <div class="description">
-    Updates the throw condition and triggers the corresponding animation or break animation based on the condition.
+    Resets the state of the chicken to its initial values.
+
+This function sets the `deadSetting` flag to `false`, and resets the `x`, `y`, `speed`, and `energy` properties
+to their initial values. The `x` and `y` properties are reset to their cached values, and the `speed` property
+is set to a random value between 0.55 and 2.55. The `energy` property is set to 100.
 </div>
 
 
@@ -975,78 +732,6 @@ the `loadImage` method.
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>condition</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The throw condition to set.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>enemyDead</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Indicates if the enemy is dead.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -1082,7 +767,7 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line48">line 48</a>
+        <a href="models_chicken-normal.class.js.html">models/chicken-normal.class.js</a>, <a href="models_chicken-normal.class.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -1111,7 +796,7 @@ the `loadImage` method.
 
         
 <div class="param-desc">
-    This function does not return anything.
+    This function does not return a value.
 </div>
 
 
@@ -1148,7 +833,7 @@ the `loadImage` method.
 
 
 <div class="description">
-    Mutes the break and throw sounds by setting their volume to 0.
+    A description of the entire function.
 </div>
 
 
@@ -1192,7 +877,7 @@ the `loadImage` method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_throwable-object.class.js.html">models/throwable-object.class.js</a>, <a href="models_throwable-object.class.js.html#line144">line 144</a>
+        <a href="models_chicken-normal.class.js.html">models/chicken-normal.class.js</a>, <a href="models_chicken-normal.class.js.html#line109">line 109</a>
     </li></ul></dd>
     
 
@@ -1221,7 +906,7 @@ the `loadImage` method.
 
         
 <div class="param-desc">
-    This function does not return anything.
+    This function does not return a value
 </div>
 
 

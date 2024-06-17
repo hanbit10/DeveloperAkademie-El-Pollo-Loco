@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: models/background-object.class.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,35 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: models/background-object.class.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>class BackgroundObject extends MoveableObject {
+  width = 720;
+  height = 480;
+  y = 0;
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  /**
+   * Constructor for the BackgroundObject class.
+   *
+   * @param {string} imagePath - The path to the image to be loaded.
+   * @param {number} x - The x-coordinate position.
+   * @return {void} No return value.
+   */
+  constructor(imagePath, x) {
+    super().loadImage(imagePath);
+    this.x = x;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -65,6 +65,14 @@
     this.y = y + 50;
     this.height = 100;
   }
+
+  /**
+   * Updates the throw condition and triggers the corresponding animation or break animation based on the condition.
+   *
+   * @param {string} condition - The throw condition to set.
+   * @param {boolean} enemyDead - Indicates if the enemy is dead.
+   * @return {void} This function does not return anything.
+   */
   throwableCondition(condition, enemyDead) {
     this.throwCondition = condition;
     if (this.isBreaking() &amp;&amp; !enemyDead) this.breakAnimation();
@@ -74,6 +82,17 @@
     }, 25);
   }
 
+  /**
+   * Executes the break animation for the ThrowableObject.
+   *
+   * This function sets the `bottleBroken` property to true, plays the `break_sound`,
+   * sets the `speedY` property to 0, and starts an interval that plays the animation
+   * using the `playAnimation` method with the `BOTTLE_BREAK` array as the argument.
+   * After 6 iterations, it loads the last image from the `BOTTLE_BREAK` array using
+   * the `loadImage` method.
+   *
+   * @return {void} This function does not return anything.
+   */
   breakAnimation() {
     this.bottleBroken = true;
     this.break_sound.play();
@@ -86,6 +105,11 @@
     }, 150);
   }
 
+  /**
+   * Plays the throw sound, sets the speedY property to 10, applies gravity, and starts an interval that plays the animation using the playAnimation method with the BOTTLE_THROW array as the argument. If the object is breaking, the interval is cleared.
+   *
+   * @return {void} This function does not return anything.
+   */
   throwAnimation() {
     this.throw_sound.play();
     this.speedY = 10;
@@ -96,14 +120,30 @@
     }, 100);
   }
 
+  /**
+   * Determines if the object is currently in the process of being thrown.
+   *
+   * @return {boolean} True if the object is currently being thrown or being thrown to the left, false otherwise.
+   */
   isThrowing() {
     return this.throwCondition == "throwing" || this.throwCondition == "throwingLeft";
   }
 
+  /**
+   * Checks if the object is currently breaking.
+   *
+   * @return {boolean} True if the object is currently breaking, false otherwise.
+   */
   isBreaking() {
     return this.throwCondition == "breaking";
   }
 
+  /**
+   * Determines the x-coordinate movement based on the throw condition and enemy status.
+   *
+   * @param {boolean} enemyDead - Indicates if the enemy is dead.
+   * @return {void} This function does not return anything.
+   */
   throwXAchse(enemyDead) {
     if (this.throwCondition == "throwing" || enemyDead) {
       this.x += 15;
@@ -114,11 +154,21 @@
     }
   }
 
+  /**
+   * Mutes the break and throw sounds by setting their volume to 0.
+   *
+   * @return {void} This function does not return anything.
+   */
   mute() {
     this.break_sound.volume = 0;
     this.throw_sound.volume = 0;
   }
 
+  /**
+   * Mutes the break and throw sounds by setting their volume to 0.
+   *
+   * @return {void} This function does not return anything.
+   */
   unmute() {
     this.break_sound.volume = 1;
     this.throw_sound.volume = 1;
@@ -134,13 +184,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ThrowableObject.html">ThrowableObject</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addEventListeners">addEventListeners</a></li><li><a href="global.html#addTouchListeners">addTouchListeners</a></li><li><a href="global.html#checkGameFinished">checkGameFinished</a></li><li><a href="global.html#checkMobileControls">checkMobileControls</a></li><li><a href="global.html#closeControls">closeControls</a></li><li><a href="global.html#enterFullscreen">enterFullscreen</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#fullScreenEventListeners">fullScreenEventListeners</a></li><li><a href="global.html#getLevel">getLevel</a></li><li><a href="global.html#goMenu">goMenu</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#muted">muted</a></li><li><a href="global.html#resetSketch">resetSketch</a></li><li><a href="global.html#showControls">showControls</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#startTimer">startTimer</a></li><li><a href="global.html#unmuted">unmuted</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Character.html">Character</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="ChickenNormal.html">ChickenNormal</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Intro.html">Intro</a></li><li><a href="Level.html">Level</a></li><li><a href="Outro.html">Outro</a></li><li><a href="PickableObject.html">PickableObject</a></li><li><a href="StartScreen.html">StartScreen</a></li><li><a href="StatusBar.html">StatusBar</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addEventListeners">addEventListeners</a></li><li><a href="global.html#addTouchListeners">addTouchListeners</a></li><li><a href="global.html#checkGameFinished">checkGameFinished</a></li><li><a href="global.html#checkMobileControls">checkMobileControls</a></li><li><a href="global.html#closeControls">closeControls</a></li><li><a href="global.html#enterFullscreen">enterFullscreen</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#fullScreenEventListeners">fullScreenEventListeners</a></li><li><a href="global.html#getLevel">getLevel</a></li><li><a href="global.html#goMenu">goMenu</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#muted">muted</a></li><li><a href="global.html#resetSketch">resetSketch</a></li><li><a href="global.html#showControls">showControls</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#startTimer">startTimer</a></li><li><a href="global.html#unmuted">unmuted</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jun 17 2024 15:50:42 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jun 17 2024 17:37:39 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

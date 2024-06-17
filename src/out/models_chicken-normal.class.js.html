@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/chicken-normal.class.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/chicken-normal.class.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>class ChickenNormal extends MoveableObject {
+  height = 70;
+  width = 70;
+  y = 380;
+  yCache = 380;
+  frameWidth = this.width;
+  frameHeight = this.height;
+  deadSetting = false;
+  IMAGES_WALKING = [
+    "../assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+    "../assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
+    "../assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
+  ];
+
+  killed_sound = new Audio("../assets/audio/chicken/normal-chicken/killed.wav");
+
+  /**
+   * Constructs a new ChickenNormal object with the specified id and initial x position.
+   *
+   * @param {number} id - The unique identifier for the chicken.
+   * @param {number} x - The initial x position of the chicken.
+   */
+  constructor(id, x) {
+    super().loadImage("../assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
+    this.loadImages(this.IMAGES_WALKING);
+    this.x = x;
+    this.xCache = x;
+    this.id = id;
+    this.animate();
+  }
+  /**
+   * Animate the chicken's movement and actions at regular intervals.
+   *
+   * @return {void} No return value
+   */ /**
+   * Animate the chicken's movement and actions at regular intervals.
+   *
+   * @return {void} No return value
+   */
+  animate() {
+    setInterval(() => {
+      if (!this.isDead()) this.playAnimation(this.IMAGES_WALKING);
+    }, 130);
+    setInterval(() => {
+      if (!this.isDead()) {
+        this.moveLeft();
+      }
+    }, 1000 / 60);
+  }
+
+  /**
+   * Plays the killed sound, loads the dead image, sets the speed and energy to 0,
+   * sets the deadSetting flag to true, and moves the chicken to the bottom of the screen after 2 seconds.
+   *
+   * @return {void} No return value
+   */
+  dead() {
+    this.killed_sound.play();
+    this.loadImage("../assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
+    this.speed = 0;
+    this.energy = 0;
+    this.deadSetting = true;
+    setTimeout(() => {
+      this.y = 600;
+    }, 2000);
+  }
+
+  /**
+   * A description of the entire function.
+   *
+   * @param {type} paramName - description of parameter
+   * @return {type} description of return value
+   */
+  pause() {
+    this.speed = 0;
+  }
+
+  /**
+   * Resets the state of the chicken to its initial values.
+   *
+   * This function sets the `deadSetting` flag to `false`, and resets the `x`, `y`, `speed`, and `energy` properties
+   * to their initial values. The `x` and `y` properties are reset to their cached values, and the `speed` property
+   * is set to a random value between 0.55 and 2.55. The `energy` property is set to 100.
+   *
+   * @return {void} This function does not return a value.
+   */
+  reset() {
+    this.deadSetting = false;
+    this.x = this.xCache;
+    this.y = this.yCache;
+    this.speed = 0.55 + Math.random() * 2;
+    this.energy = 100;
+  }
+
+  /**
+   * Mutes the sound of the killed_sound property by setting its volume to 0.
+   *
+   * @return {void} This function does not return a value.
+   */
+  mute() {
+    this.killed_sound.volume = 0;
+  }
+
+  /**
+   * A description of the entire function.
+   *
+   * @return {void} This function does not return a value
+   */
+  unmute() {
+    this.killed_sound.volume = 1;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Character.html">Character</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="ChickenNormal.html">ChickenNormal</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Intro.html">Intro</a></li><li><a href="Level.html">Level</a></li><li><a href="Outro.html">Outro</a></li><li><a href="PickableObject.html">PickableObject</a></li><li><a href="StartScreen.html">StartScreen</a></li><li><a href="StatusBar.html">StatusBar</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addEventListeners">addEventListeners</a></li><li><a href="global.html#addTouchListeners">addTouchListeners</a></li><li><a href="global.html#checkGameFinished">checkGameFinished</a></li><li><a href="global.html#checkMobileControls">checkMobileControls</a></li><li><a href="global.html#closeControls">closeControls</a></li><li><a href="global.html#enterFullscreen">enterFullscreen</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#fullScreenEventListeners">fullScreenEventListeners</a></li><li><a href="global.html#getLevel">getLevel</a></li><li><a href="global.html#goMenu">goMenu</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#muted">muted</a></li><li><a href="global.html#resetSketch">resetSketch</a></li><li><a href="global.html#showControls">showControls</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#startTimer">startTimer</a></li><li><a href="global.html#unmuted">unmuted</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jun 17 2024 17:37:39 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

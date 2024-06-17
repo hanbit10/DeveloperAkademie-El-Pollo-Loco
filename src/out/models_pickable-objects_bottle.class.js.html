@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: models/pickable-objects/bottle.class.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,40 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: models/pickable-objects/bottle.class.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>class Bottle extends PickableObject {
+  bottles = ["../assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png", "../assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"];
+  random = Math.floor(Math.random() * this.bottles.length);
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  height = 90;
+  width = 40;
+  frameWidth = this.width;
+  frameHeight = this.height;
+  /**
+   * Constructor for the Bottle class.
+   *
+   * @param {number} x - The x-coordinate position
+   * @return {void} No return value
+   */
+  constructor(x) {
+    super();
+    this.loadImage(this.bottles[this.random]);
+    this.x = x + Math.random() * 1000;
+    this.y = 340;
+    this.yCache = 340;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 
