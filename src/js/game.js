@@ -11,6 +11,8 @@ const voiceOne = document.getElementById("voice1");
 const closeBtn = document.getElementById("close-btn");
 const controlsMenu = document.getElementById("controls-menu");
 const controlsBtn = document.getElementById("controls-button");
+const fullScreenBtn = document.getElementById("fullscreen-button");
+const exitFullScreenBtn = document.getElementById("ext-fullscreen-button");
 
 const keyMap = {
   ArrowRight: "RIGHT",
@@ -39,6 +41,7 @@ function init() {
 }
 
 function addEventListeners() {
+  const fullScreen = document.getElementById("fullscreen");
   resetButton.addEventListener("click", resetSketch);
   menuButton.addEventListener("click", goMenu);
   startButton.addEventListener("click", start);
@@ -46,6 +49,38 @@ function addEventListeners() {
   voiceZero.addEventListener("click", unmuted);
   closeBtn.addEventListener("click", closeControls);
   controlsBtn.addEventListener("click", showControls);
+  fullScreenBtn.addEventListener("click", () => {
+    enterFullscreen(fullScreen);
+    fullScreenBtn.classList.add("d-none");
+    exitFullScreenBtn.classList.remove("d-none");
+  });
+  exitFullScreenBtn.addEventListener("click", () => {
+    exitFullscreen();
+    fullScreenBtn.classList.remove("d-none");
+    exitFullScreenBtn.classList.add("d-none");
+  });
+}
+
+function exitFullscreen() {
+  try {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  } catch (e) {}
+}
+
+function enterFullscreen(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    // for IE11 (remove June 15, 2022)
+    element.msRequestFullscreen();
+  } else if (element.webkitRequestFullscreen) {
+    // iOS Safari
+    element.webkitRequestFullscreen();
+  }
 }
 
 function addTouchListeners(element, key) {

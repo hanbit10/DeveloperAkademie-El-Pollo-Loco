@@ -145,22 +145,25 @@ class Character extends MoveableObject {
   playMovingAnimation() {
     setInterval(() => {
       if (!this.pauseGame) {
-        if (this.world.keyboard.KEYUSED) {
-          this.playAnimation(this.IMAGES_IDLE);
-          this.snoring_sound.pause();
-        }
-
-        if (!this.world.keyboard.KEYUSED) {
-          this.playAnimation(this.IMAGES_IDLE_LONG);
-          this.snoring_sound.play();
-        }
-        if (this.isCharacterMoving()) this.playAnimation(this.IMAGES_WALKING);
-        if (this.isCharacterJumping()) {
-          this.jump();
-          this.jump_sound.play();
-        }
+        this.checkKeyboard();
       }
     }, 100);
+  }
+
+  checkKeyboard() {
+    if (this.world.keyboard.KEYUSED) {
+      this.playAnimation(this.IMAGES_IDLE);
+      this.snoring_sound.pause();
+    }
+    if (!this.world.keyboard.KEYUSED) {
+      this.playAnimation(this.IMAGES_IDLE_LONG);
+      this.snoring_sound.play();
+    }
+    if (this.isCharacterMoving()) this.playAnimation(this.IMAGES_WALKING);
+    if (this.isCharacterJumping()) {
+      this.jump();
+      this.jump_sound.play();
+    }
   }
 
   isCharacterJumping() {
