@@ -82,6 +82,12 @@ class Character extends MoveableObject {
     left: 30,
     right: 30,
   };
+
+  /**
+   * Initializes a new instance of the Character class.
+   * Loads the necessary images for the character's animations and applies gravity.
+   * Starts the character's animation loop.
+   */
   constructor() {
     super();
     this.loadImage("../assets/img/2_character_pepe/2_walk/W-21.png");
@@ -95,6 +101,15 @@ class Character extends MoveableObject {
     this.animate();
   }
 
+  /**
+   * Resets the character's properties to their initial values.
+   * Sets the character's position to (100, 0).
+   * Resets the character's energy to 100.
+   * Resets the character's coin and bottle counts to 0.
+   * Resets the character's speed to 5.
+   * Resets the pauseGame flag to false.
+   * Sets the world's keyboard RIGHT key to true and then to false after 20ms.
+   */
   reset() {
     this.x = 100;
     this.energy = 100;
@@ -108,6 +123,17 @@ class Character extends MoveableObject {
     }, 20);
   }
 
+  /**
+   * Animate the character by playing the walking sound, updating the camera position,
+   * and playing moving and other animations.
+   *
+   * This function runs a setInterval to repeatedly execute the following actions:
+   * - Pause the walking sound
+   * - Play the walking sound using the playWalkSound method
+   * - Update the camera position based on the character's x position
+   *
+   * @return {void} This function does not return anything.
+   */
   animate() {
     setInterval(() => {
       this.walking_sound.pause();
@@ -118,6 +144,11 @@ class Character extends MoveableObject {
     this.playOtherAnimations();
   }
 
+  /**
+   * Plays a walking sound based on game conditions.
+   *
+   * @return {void} Does not return anything.
+   */
   playWalkSound() {
     if (!this.pauseGame) {
       if (this.maxMoveableMap()) {
@@ -134,14 +165,34 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Determines if the character can move to the right on the map.
+   *
+   * @return {boolean} Indicates if the character can move to the right.
+   */
   maxMoveableMap() {
     return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
   }
 
+  /**
+   * Determines if the character can move to the left on the map.
+   *
+   * @return {boolean} Indicates if the character can move to the left.
+   */
   minMoveableMap() {
     return this.world.keyboard.LEFT && this.x > this.world.level.level_start_x;
   }
 
+  /**
+   * Plays the moving animation by continuously checking the keyboard input.
+   *
+   * This function sets up a setInterval to repeatedly execute the checkKeyboard
+   * method every 100 milliseconds. The checkKeyboard method is called only if
+   * the pauseGame flag is false. This ensures that the animation is paused when
+   * needed.
+   *
+   * @return {void} This function does not return anything.
+   */
   playMovingAnimation() {
     setInterval(() => {
       if (!this.pauseGame) {
@@ -150,6 +201,18 @@ class Character extends MoveableObject {
     }, 100);
   }
 
+  /**
+   * Checks the keyboard input and updates the character's animation and sounds accordingly.
+   *
+   * This function checks the keyboard input to determine if the character should be idle,
+   * walking, or jumping. If the KEYUSED flag is true, the character is set to idle and the
+   * snoring sound is paused. If the KEYUSED flag is false, the character is set to idle for a
+   * long time and the snoring sound is played. If the character is moving, the walking animation
+   * is played. If the character is jumping, the jump function is called and the jump sound is
+   * played.
+   *
+   * @return {void} This function does not return anything.
+   */
   checkKeyboard() {
     if (this.world.keyboard.KEYUSED) {
       this.playAnimation(this.IMAGES_IDLE);
@@ -166,10 +229,24 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Checks if the character is currently jumping.
+   *
+   * This function checks if the UP key is pressed in the keyboard input and if the character
+   * is not above the ground. If both conditions are true, it returns true indicating that the
+   * character is jumping. Otherwise, it returns false.
+   *
+   * @return {boolean} True if the character is jumping, false otherwise.
+   */
   isCharacterJumping() {
     return this.world.keyboard.UP && !this.isAboveGround();
   }
 
+  /**
+   * Checks if the character is currently moving by checking if the RIGHT or LEFT key is pressed.
+   *
+   * @return {boolean} True if the character is moving, false otherwise.
+   */
   isCharacterMoving() {
     return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
   }
