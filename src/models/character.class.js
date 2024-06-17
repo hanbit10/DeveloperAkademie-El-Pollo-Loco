@@ -251,6 +251,16 @@ class Character extends MoveableObject {
     return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
   }
 
+  /**
+   * Plays other animations for the character.
+   *
+   * This function continuously checks the character's state and plays corresponding animations and audio effects.
+   * It checks if the character is dead and plays the DEAD animation if true.
+   * It checks if the character is above ground and plays the JUMPING animation if true.
+   * It checks if the character is hurt and plays the HURT animation and plays the gothit_sound if true.
+   *
+   * @return {void} This function does not return anything.
+   */
   playOtherAnimations() {
     setInterval(() => {
       if (this.isDead()) this.playAnimation(this.IMAGES_DEAD);
@@ -262,6 +272,15 @@ class Character extends MoveableObject {
     }, 100);
   }
 
+  /**
+   * Pauses the character's movement and audio effects.
+   *
+   * This function sets the character's speed to 0, sets the pauseGame flag to true,
+   * and sets the volume of the gothit_sound, walking_sound, jump_sound, and snoring_sound
+   * audio effects to 0, effectively pausing them.
+   *
+   * @return {void} This function does not return anything.
+   */
   pause() {
     this.speed = 0;
     this.pauseGame = true;
@@ -271,6 +290,12 @@ class Character extends MoveableObject {
     this.snoring_sound.volume = 0;
   }
 
+  /**
+   * Plays the jump animation using the provided images.
+   *
+   * @param {Array<string>} images - An array of image paths for the jump animation.
+   * @return {void} This function does not return anything.
+   */
   playJumpAnimation(images) {
     let i = this.jumpImage % images.length;
     let path = images[i];
@@ -279,6 +304,14 @@ class Character extends MoveableObject {
     if (135 < this.y) this.jumpImage = 0;
   }
 
+  /**
+   * Mutes all audio effects for the character.
+   *
+   * This function sets the volume of the gothit_sound, walking_sound, jump_sound, and
+   * snoring_sound audio effects to 0, effectively muting them.
+   *
+   * @return {void} This function does not return anything.
+   */
   mute() {
     this.gothit_sound.volume = 0;
     this.walking_sound.volume = 0;
@@ -286,6 +319,14 @@ class Character extends MoveableObject {
     this.snoring_sound.volume = 0;
   }
 
+  /**
+   * Unmutes all audio effects for the character.
+   *
+   * This function sets the volume of the gothit_sound, walking_sound, jump_sound, and
+   * snoring_sound audio effects to 1, effectively unmutes them.
+   *
+   * @return {void} This function does not return anything.
+   */
   unmute() {
     this.gothit_sound.volume = 1;
     this.walking_sound.volume = 1;
