@@ -1,4 +1,10 @@
 let level1;
+
+/**
+ * Creates a new Level object with the specified parameters for the Level 1 game.
+ *
+ * @return {Level} The Level object representing Level 1.
+ */
 function getLevel() {
   level1 = new Level(
     new Character(),
