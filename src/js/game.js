@@ -13,6 +13,7 @@ const controlsMenu = document.getElementById("controls-menu");
 const controlsBtn = document.getElementById("controls-button");
 const fullScreenBtn = document.getElementById("fullscreen-button");
 const exitFullScreenBtn = document.getElementById("ext-fullscreen-button");
+const howToPlay = document.getElementById("how-to-play");
 
 const keyMap = {
   ArrowRight: "RIGHT",
@@ -224,6 +225,7 @@ function goMenu() {
   resetButton.classList.add("d-none");
   menuButton.classList.add("d-none");
   startButton.classList.remove("d-none");
+  howToPlay.classList.remove("d-none");
 }
 
 /**
@@ -235,6 +237,7 @@ function goMenu() {
  */
 function start() {
   startButton.classList.add("d-none");
+  howToPlay.classList.add("d-none");
   world.gameMenu = false;
   world.reset();
   clearTimeout(clickedTime);
