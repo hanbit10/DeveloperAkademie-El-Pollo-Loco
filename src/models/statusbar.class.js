@@ -51,6 +51,11 @@ class StatusBar extends DrawableObject {
 
   percentage;
 
+  /**
+   * Constructs a new instance of the StatusBar class.
+   *
+   * @param {string} type - The type of status bar to create.
+   */
   constructor(type) {
     super();
     const positions = this.positioning;
@@ -64,6 +69,14 @@ class StatusBar extends DrawableObject {
     }
   }
 
+  /**
+   * Loads all the images for the status bar.
+   *
+   * This function loads the images for the character health bar, coin status bar, bottle status bar, and end boss health bar.
+   * It uses the `loadImages` method to load each image.
+   *
+   * @return {void} This function does not return anything.
+   */
   loadAllImages() {
     this.loadImages(this.CHARACTER_HEALTH_BAR);
     this.loadImages(this.COIN_STATUS_BAR);
@@ -71,16 +84,34 @@ class StatusBar extends DrawableObject {
     this.loadImages(this.ENDBOSS_HEALTH_BAR);
   }
 
+  /**
+   * Sets the percentage and image path for the status bar.
+   *
+   * @param {type} percentage - The percentage value to set.
+   * @param {type} imgPath - The path of the image.
+   * @return {type} This function does not return anything.
+   */
   setPercentage(percentage, imgPath) {
     this.percentage = percentage;
     let path = this.getStatusImages(imgPath);
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Returns the image path for the given status bar image based on the current percentage.
+   *
+   * @param {string} img - The key of the status bar image in the statusBars object.
+   * @return {string} The image path for the current percentage.
+   */
   getStatusImages(img) {
     return this.statusBars[img][this.resolveImageIndex()];
   }
 
+  /**
+   * A description of the entire function.
+   *
+   * @return {number} The minimum of 5 and the floor value of this.percentage divided by 20.
+   */
   resolveImageIndex() {
     return Math.min(5, Math.floor(this.percentage / 20));
   }

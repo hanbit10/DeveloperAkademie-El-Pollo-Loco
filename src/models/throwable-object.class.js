@@ -37,6 +37,14 @@ class ThrowableObject extends MoveableObject {
     this.y = y + 50;
     this.height = 100;
   }
+
+  /**
+   * Updates the throw condition and triggers the corresponding animation or break animation based on the condition.
+   *
+   * @param {string} condition - The throw condition to set.
+   * @param {boolean} enemyDead - Indicates if the enemy is dead.
+   * @return {void} This function does not return anything.
+   */
   throwableCondition(condition, enemyDead) {
     this.throwCondition = condition;
     if (this.isBreaking() && !enemyDead) this.breakAnimation();
@@ -46,6 +54,17 @@ class ThrowableObject extends MoveableObject {
     }, 25);
   }
 
+  /**
+   * Executes the break animation for the ThrowableObject.
+   *
+   * This function sets the `bottleBroken` property to true, plays the `break_sound`,
+   * sets the `speedY` property to 0, and starts an interval that plays the animation
+   * using the `playAnimation` method with the `BOTTLE_BREAK` array as the argument.
+   * After 6 iterations, it loads the last image from the `BOTTLE_BREAK` array using
+   * the `loadImage` method.
+   *
+   * @return {void} This function does not return anything.
+   */
   breakAnimation() {
     this.bottleBroken = true;
     this.break_sound.play();
@@ -58,6 +77,11 @@ class ThrowableObject extends MoveableObject {
     }, 150);
   }
 
+  /**
+   * Plays the throw sound, sets the speedY property to 10, applies gravity, and starts an interval that plays the animation using the playAnimation method with the BOTTLE_THROW array as the argument. If the object is breaking, the interval is cleared.
+   *
+   * @return {void} This function does not return anything.
+   */
   throwAnimation() {
     this.throw_sound.play();
     this.speedY = 10;
@@ -68,14 +92,30 @@ class ThrowableObject extends MoveableObject {
     }, 100);
   }
 
+  /**
+   * Determines if the object is currently in the process of being thrown.
+   *
+   * @return {boolean} True if the object is currently being thrown or being thrown to the left, false otherwise.
+   */
   isThrowing() {
     return this.throwCondition == "throwing" || this.throwCondition == "throwingLeft";
   }
 
+  /**
+   * Checks if the object is currently breaking.
+   *
+   * @return {boolean} True if the object is currently breaking, false otherwise.
+   */
   isBreaking() {
     return this.throwCondition == "breaking";
   }
 
+  /**
+   * Determines the x-coordinate movement based on the throw condition and enemy status.
+   *
+   * @param {boolean} enemyDead - Indicates if the enemy is dead.
+   * @return {void} This function does not return anything.
+   */
   throwXAchse(enemyDead) {
     if (this.throwCondition == "throwing" || enemyDead) {
       this.x += 15;
@@ -86,11 +126,21 @@ class ThrowableObject extends MoveableObject {
     }
   }
 
+  /**
+   * Mutes the break and throw sounds by setting their volume to 0.
+   *
+   * @return {void} This function does not return anything.
+   */
   mute() {
     this.break_sound.volume = 0;
     this.throw_sound.volume = 0;
   }
 
+  /**
+   * Mutes the break and throw sounds by setting their volume to 0.
+   *
+   * @return {void} This function does not return anything.
+   */
   unmute() {
     this.break_sound.volume = 1;
     this.throw_sound.volume = 1;

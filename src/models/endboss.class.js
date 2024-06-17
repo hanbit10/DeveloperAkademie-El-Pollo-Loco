@@ -64,6 +64,12 @@ class Endboss extends MoveableObject {
   endbossWalk = false;
   playedSoundOnce = false;
 
+  /**
+   * Initializes a new instance of the Endboss class with the specified x position.
+   *
+   * @param {number} x - The initial x position of the endboss.
+   * @return {void}
+   */
   constructor(x) {
     super().loadImage("../assets/img/4_enemie_boss_chicken/2_alert/G5.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -75,6 +81,11 @@ class Endboss extends MoveableObject {
     this.xCache = x;
     this.animate();
   }
+  /**
+   * Animates the endboss by periodically checking if it's alive and triggering attack or other animations accordingly.
+   *
+   * @return {void} This function does not return anything.
+   */
   animate() {
     this.bossAlive = setInterval(() => {
       if (!this.isDead()) {
@@ -88,6 +99,11 @@ class Endboss extends MoveableObject {
     this.moveAnimation();
   }
 
+  /**
+   * Animates the movement of the endboss based on the character's proximity.
+   *
+   * @return {void} This function does not return anything.
+   */
   moveAnimation() {
     setInterval(() => {
       if (this.characterTooFar) {
@@ -99,6 +115,11 @@ class Endboss extends MoveableObject {
     }, 1000 / 60);
   }
 
+  /**
+   * Executes different animations based on the endboss's state. Plays walking, alert, or hurt animations accordingly.
+   *
+   * @return {void} Does not return anything.
+   */
   otherAnimations() {
     if (!this.isHurt() && this.endbossWalk) this.playAnimation(this.IMAGES_WALKING);
     if (!this.isHurt() && !this.endbossWalk) {
@@ -114,16 +135,30 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * Executes the attack animation by playing the attack animation images, moving the endboss character to the left, and playing the attack sound.
+   *
+   * @return {void} This function does not return anything.
+   */
   attackAnimation() {
     this.playAnimation(this.IMAGES_ATTACK);
     this.x = this.x - 20;
     this.attack_sound.play();
   }
 
+  /**
+   * Pauses the execution by setting the speed to 0.
+   *
+   * @return {void} This function does not return anything.
+   */
   pause() {
     this.speed = 0;
   }
 
+  /**
+   * Executes the dead animation when the endboss character is dead by setting the speed to 0, playing the dead animation images, and loading the dead image.
+   *
+   */
   dead() {
     this.bossDead = setInterval(() => {
       if (this.isDead()) {
@@ -138,6 +173,12 @@ class Endboss extends MoveableObject {
     }, 200);
   }
 
+  /**
+   * Checks the character's status and updates the corresponding properties.
+   *
+   * @param {string} status - The status of the character.
+   * @return {void} This function does not return anything.
+   */
   checkingCharacter(status) {
     if (status == "tooFar") {
       this.characterTooFar = true;
@@ -150,6 +191,11 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * Resets the state of the end boss to its initial values.
+   *
+   * @return {void} This function does not return anything.
+   */
   reset() {
     this.deadSetting = false;
     this.x = this.xCache;
@@ -158,12 +204,22 @@ class Endboss extends MoveableObject {
     this.speed = 0.85 + Math.random() * 0.2;
   }
 
+  /**
+   * Mutes the sounds of the end boss by setting their volumes to 0.
+   *
+   * @return {void} This function does not return a value.
+   */
   mute() {
     this.hurt_sound.volume = 0;
     this.killed_sound.volume = 0;
     this.attack_sound.volume = 0;
   }
 
+  /**
+   * Sets the volume of the hurt_sound, killed_sound, and attack_sound to 1 to unmute the end boss.
+   *
+   * @return {void} This function does not return a value.
+   */
   unmute() {
     this.hurt_sound.volume = 1;
     this.killed_sound.volume = 1;
