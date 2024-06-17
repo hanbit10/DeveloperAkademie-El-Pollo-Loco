@@ -75,6 +75,13 @@ class Character extends MoveableObject {
   frameHeight = 120;
   jumpImage = 0;
   pauseGame = false;
+
+  offset = {
+    top: 120,
+    bottom: 10,
+    left: 30,
+    right: 30,
+  };
   constructor() {
     super();
     this.loadImage("../assets/img/2_character_pepe/2_walk/W-21.png");
@@ -86,7 +93,6 @@ class Character extends MoveableObject {
     this.loadImages(this.IMAGES_IDLE_LONG);
     this.applyGravity();
     this.animate();
-    this.offset.top = 70;
   }
 
   reset() {
