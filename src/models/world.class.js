@@ -237,10 +237,14 @@ class World extends WorldMenu {
   gameOver() {
     this.background_sound.volume = 0;
     this.boss_background_sound.volume = 0;
+
     if (!this.gameOverPlayed) {
       this.gameover_sound.play();
       this.gameOverPlayed = true;
     }
+    setTimeout(() => {
+      this.muteObjects();
+    }, 2000);
     this.character.pause();
     this.enemies.forEach((enemy) => {
       enemy.pause();
@@ -254,6 +258,9 @@ class World extends WorldMenu {
       this.gamewon_sound.play();
       this.gameWonPlayed = true;
     }
+    setTimeout(() => {
+      this.muteObjects();
+    }, 2000);
     this.character.pause();
     this.enemies.forEach((enemy) => {
       enemy.pause();

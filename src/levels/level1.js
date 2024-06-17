@@ -21,7 +21,7 @@ function getLevel() {
       new ChickenNormal(15, 2800),
       new Endboss(2800),
     ],
-    [new Cloud(), new Cloud(), new Cloud()],
+    [new Cloud(300), new Cloud(1000), new Cloud(1700)],
     [
       new BackgroundObject("../assets/img/5_background/layers/air.png", -719),
       new BackgroundObject("../assets/img/5_background/layers/air.png", 0),
@@ -64,7 +64,7 @@ function getLevel() {
       new Coin(2600, 300),
       new Coin(2600, 350),
     ],
-    [new Bottle(200), new Bottle(250), new Bottle(600), new Bottle(900), new Bottle(1200)],
+    [new Bottle(200), new Bottle(450), new Bottle(700), new Bottle(900), new Bottle(1200)],
     [new StatusBar("character"), new StatusBar("coin"), new StatusBar("endboss"), new StatusBar("bottle")],
     0,
     2940
