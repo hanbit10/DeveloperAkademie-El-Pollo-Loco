@@ -314,7 +314,7 @@ class World extends WorldMenu {
     if (mo.otherDirection) this.flipImage(mo);
     mo.draw(this.ctx);
     mo.drawFrame(this.ctx, mo);
-
+    mo.drawOffsetFrame(this.ctx, mo);
     if (mo.otherDirection) this.flipImageBack(mo);
   }
 

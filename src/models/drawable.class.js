@@ -7,10 +7,10 @@ class DrawableObject {
   width = 100;
   currentImage = 0;
   offset = {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    top: 5,
+    left: 5,
+    right: 5,
+    bottom: 5,
   };
 
   loadImage(path) {
@@ -33,25 +33,36 @@ class DrawableObject {
   drawFrame(ctx, mo) {
     if (this.gameInstances()) {
       ctx.beginPath();
-      ctx.lineWidth = "5";
+      ctx.lineWidth = "2";
       ctx.strokeStyle = "blue";
-      ctx.rect(this.x, this.y, mo.frameWidth, mo.frameHeight);
+      ctx.rect(this.x, this.y, mo.width, mo.height);
       ctx.stroke();
     }
-    if (this instanceof Character) this.setCharacterFrame(ctx, mo);
   }
 
   gameInstances() {
     return (
-      this instanceof Chicken || this instanceof Endboss || this instanceof ChickenNormal || this instanceof Coin || this instanceof Bottle
+      this instanceof Chicken ||
+      this instanceof Endboss ||
+      this instanceof ChickenNormal ||
+      this instanceof Coin ||
+      this instanceof Bottle ||
+      this instanceof Character
     );
   }
 
-  setCharacterFrame(ctx, mo) {
-    ctx.beginPath();
-    ctx.lineWidth = "2";
-    ctx.strokeStyle = "blue";
-    ctx.rect(this.x + this.offset.bottom, this.y + this.offset.top, mo.frameWidth, mo.frameHeight);
-    ctx.stroke();
+  drawOffsetFrame(ctx, mo) {
+    if (this.gameInstances()) {
+      ctx.beginPath();
+      ctx.lineWidth = "2";
+      ctx.strokeStyle = "red";
+      ctx.rect(
+        this.x + this.offset.left,
+        this.y + this.offset.top,
+        mo.width - this.offset.left - this.offset.right,
+        mo.height - this.offset.top - this.offset.bottom
+      );
+      ctx.stroke();
+    }
   }
 }
