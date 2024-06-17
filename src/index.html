@@ -9,60 +9,65 @@
   </head>
   <body onload="init()">
     <h1>El Pollo Loco</h1>
-    <div class="container">
-      <div class="content">
-        <div class="row">
-          <div id="policy" class="policy">
-            <a href="../src/legal-notice.html">legal notice</a>
-            <a href="../src/privacy-policy.html">privacy policy</a>
-          </div>
-          <img id="voice0" src="../assets/icons/mute.svg" class="mute d-none" alt="" />
-          <img id="voice1" src="../assets/icons/volume-on.svg" class="mute" alt="" />
-          <div id="reset-button" class="btn d-none">Restart</div>
-          <div id="start-button" class="btn">Start</div>
-          <div id="menu-button" class="btn d-none">Go To Menu</div>
-          <div id="controls-button" class="btn">Controls</div>
-        </div>
-        <div id="control-container" class="control-container">
-          <div id="left-hand" class="left-hand">
-            <div id="control-left" class="control-btn control-big">
-              <div>Left</div>
-            </div>
-            <div id="control-right" class="control-btn control-big">
-              <div>Right</div>
-            </div>
-          </div>
-          <div id="right-hand">
-            <div id="control-items" class="control-items">
-              <div id="control-throw" class="control-btn">
-                <div>Throw</div>
-              </div>
-              <div id="control-buy" class="control-btn">
-                <div>Buy</div>
-              </div>
-            </div>
-            <div id="control-jump" class="control-btn control-big">
-              <div>Jump</div>
-            </div>
-          </div>
-        </div>
-        <div id="controls-menu" class="menu d-none">
-          <div class="close-container"><div id="close-btn" class="controls close-btn">X</div></div>
+    <div id="fullscreen" class="fullscreen">
+      <div class="container">
+        <div class="content">
           <div class="row">
-            <div class="column">
-              <div class="controls">D - Throw a Bottle</div>
-              <div class="controls">B - Buy a Bottle</div>
+            <div id="policy" class="policy">
+              <a href="../src/legal-notice.html">legal notice</a>
+              <a href="../src/privacy-policy.html">privacy policy</a>
             </div>
-            <div class="column">
-              <div class="controls"><img class="controls-img" src="../assets/icons/arrow-up.svg" alt="" /> - Jump</div>
-              <div class="controls"><img class="controls-img" src="../assets/icons/arrow-left.svg" alt="" /> - Move Left</div>
-              <div class="controls"><img class="controls-img" src="../assets/icons/arrow-right.svg" alt="" /> - Move Right</div>
+            <div id="reset-button" class="btn d-none">Restart</div>
+            <div id="start-button" class="btn">Start</div>
+            <div id="menu-button" class="btn d-none">Go To Menu</div>
+            <img id="voice0" src="../assets/icons/mute.svg" class="mute d-none" alt="" />
+            <img id="voice1" src="../assets/icons/volume-on.svg" class="mute" alt="" />
+            <img id="fullscreen-button" src="../assets/icons/expand-solid.svg" class="mute" />
+            <img id="ext-fullscreen-button" src="../assets/icons/compress-solid.svg" class="mute d-none" />
+            <img id="controls-button" src="../assets/icons/keyboard-regular.svg" class="mute" />
+          </div>
+          <div id="control-container" class="control-container">
+            <div id="left-hand" class="left-hand">
+              <div id="control-left" class="control-btn control-big">
+                <div>Left</div>
+              </div>
+              <div id="control-right" class="control-btn control-big">
+                <div>Right</div>
+              </div>
+            </div>
+            <div id="right-hand">
+              <div id="control-items" class="control-items">
+                <div id="control-throw" class="control-btn">
+                  <div>Throw</div>
+                </div>
+                <div id="control-buy" class="control-btn">
+                  <div>Buy</div>
+                </div>
+              </div>
+              <div id="control-jump" class="control-btn control-big">
+                <div>Jump</div>
+              </div>
+            </div>
+          </div>
+          <div id="controls-menu" class="menu d-none">
+            <div class="close-container"><div id="close-btn" class="controls close-btn">X</div></div>
+            <div class="row">
+              <div class="column">
+                <div class="controls">D - Throw a Bottle</div>
+                <div class="controls">B - Buy a Bottle</div>
+              </div>
+              <div class="column">
+                <div class="controls"><img class="controls-img" src="../assets/icons/arrow-up.svg" alt="" /> - Jump</div>
+                <div class="controls"><img class="controls-img" src="../assets/icons/arrow-left.svg" alt="" /> - Move Left</div>
+                <div class="controls"><img class="controls-img" src="../assets/icons/arrow-right.svg" alt="" /> - Move Right</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <canvas id="canvas" width="720" height="480"> </canvas>
     </div>
-    <canvas id="canvas" width="720" height="480"> </canvas>
+
     <script src="../src/models/drawable.class.js"></script>
     <script src="../src/models/movable-object.class.js"></script>
     <script src="../src/models/background-object.class.js"></script>
