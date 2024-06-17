@@ -1,6 +1,7 @@
 class Character extends MoveableObject {
   height = 270;
   y = 80;
+
   IMAGES_WALKING = [
     "../assets/img/2_character_pepe/2_walk/W-21.png",
     "../assets/img/2_character_pepe/2_walk/W-22.png",
@@ -75,7 +76,8 @@ class Character extends MoveableObject {
   jumpImage = 0;
   pauseGame = false;
   constructor() {
-    super().loadImage("../assets/img/2_character_pepe/2_walk/W-21.png");
+    super();
+    this.loadImage("../assets/img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_DEAD);
@@ -84,6 +86,7 @@ class Character extends MoveableObject {
     this.loadImages(this.IMAGES_IDLE_LONG);
     this.applyGravity();
     this.animate();
+    this.offset.top = 70;
   }
 
   reset() {
