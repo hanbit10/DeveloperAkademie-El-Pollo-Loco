@@ -55,6 +55,9 @@ function addTouchListeners(element, key) {
 
   element.addEventListener("touchend", () => {
     keyboard[key] = false;
+    clearTimeout(clickedTime);
+    keyboard.KEYUSED = true;
+    startTimer();
   });
 }
 
@@ -63,9 +66,6 @@ function checkMobileControls() {
     const element = document.getElementById(control.id);
     addTouchListeners(element, control.key);
   });
-  clearTimeout(clickedTime);
-  keyboard.KEYUSED = true;
-  startTimer();
 }
 
 function checkGameFinished() {
