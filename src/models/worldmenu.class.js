@@ -48,7 +48,7 @@ class WorldMenu {
   }
 
   showGameBoss() {
-    if (this.character.x > 1400 || this.bossShown) {
+    if (this.character.x > 2100 || this.bossShown) {
       this.background_music = false;
       if (!this.background_music) {
         this.boss_background_sound.play();
