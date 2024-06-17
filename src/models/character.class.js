@@ -93,6 +93,10 @@ class Character extends MoveableObject {
     this.bottle = 0;
     this.speed = 5;
     this.pauseGame = false;
+    this.world.keyboard.RIGHT = true;
+    setTimeout(() => {
+      this.world.keyboard.RIGHT = false;
+    }, 20);
   }
 
   animate() {

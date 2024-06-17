@@ -1,10 +1,10 @@
 class World extends WorldMenu {
-  character = new Character();
   throwableObjects = [new ThrowableObject()];
   camera_x = 0;
   jumpAttack = false;
   bossShown = false;
   level = getLevel();
+  character = this.level.character;
   statusBar = this.level.statusBar;
   enemies = this.level.enemies;
   clouds = this.level.clouds;

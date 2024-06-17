@@ -1,5 +1,7 @@
+let level1;
 function getLevel() {
-  const level1 = new Level(
+  level1 = new Level(
+    new Character(),
     [
       new Chicken(0, 500),
       new Chicken(1, 700),

@@ -21,6 +21,14 @@ const keyMap = {
   d: "D",
   b: "B",
 };
+
+const controls = [
+  { id: "control-left", key: "LEFT" },
+  { id: "control-right", key: "RIGHT" },
+  { id: "control-jump", key: "UP" },
+  { id: "control-throw", key: "D" },
+  { id: "control-buy", key: "B" },
+];
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
@@ -51,18 +59,13 @@ function addTouchListeners(element, key) {
 }
 
 function checkMobileControls() {
-  const controls = [
-    { id: "control-left", key: "LEFT" },
-    { id: "control-right", key: "RIGHT" },
-    { id: "control-jump", key: "UP" },
-    { id: "control-throw", key: "D" },
-    { id: "control-buy", key: "B" },
-  ];
-
   controls.forEach((control) => {
     const element = document.getElementById(control.id);
     addTouchListeners(element, control.key);
   });
+  clearTimeout(clickedTime);
+  keyboard.KEYUSED = true;
+  startTimer();
 }
 
 function checkGameFinished() {
