@@ -1,7 +1,4 @@
 class Character extends MoveableObject {
-  height = 270;
-  y = 80;
-
   IMAGES_WALKING = [
     "../assets/img/2_character_pepe/2_walk/W-21.png",
     "../assets/img/2_character_pepe/2_walk/W-22.png",
@@ -71,8 +68,6 @@ class Character extends MoveableObject {
   jump_sound = new Audio("../assets/audio/character/jump.wav");
   gothit_sound = new Audio("../assets/audio/character/gothit2.wav");
   snoring_sound = new Audio("../assets/audio/character/snoring.wav");
-  frameWidth = 40;
-  frameHeight = 120;
   jumpImage = 0;
   pauseGame = false;
 
@@ -99,6 +94,9 @@ class Character extends MoveableObject {
     this.loadImages(this.IMAGES_IDLE_LONG);
     this.applyGravity();
     this.animate();
+    this.height = 270;
+    this.y = 160;
+    this.x = 250;
   }
 
   /**
@@ -111,7 +109,7 @@ class Character extends MoveableObject {
    * Sets the world's keyboard RIGHT key to true and then to false after 20ms.
    */
   reset() {
-    this.x = 100;
+    this.x = 250;
     this.energy = 100;
     this.coin = 0;
     this.bottle = 0;
@@ -138,7 +136,7 @@ class Character extends MoveableObject {
     setInterval(() => {
       this.walking_sound.pause();
       this.playWalkSound();
-      this.world.camera_x = -this.x + 100;
+      this.world.camera_x = -this.x + 200;
     }, 1000 / 60);
     this.playMovingAnimation();
     this.playOtherAnimations();
@@ -301,7 +299,7 @@ class Character extends MoveableObject {
     let path = images[i];
     this.img = this.imageCache[path];
     this.jumpImage++;
-    if (135 < this.y) this.jumpImage = 0;
+    if (130 < this.y) this.jumpImage = 0;
   }
 
   /**

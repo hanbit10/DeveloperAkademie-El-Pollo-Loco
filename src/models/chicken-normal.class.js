@@ -1,8 +1,8 @@
 class ChickenNormal extends MoveableObject {
   height = 70;
   width = 70;
-  y = 380;
-  yCache = 380;
+  y = 350;
+  yCache = 350;
   frameWidth = this.width;
   frameHeight = this.height;
   deadSetting = false;
