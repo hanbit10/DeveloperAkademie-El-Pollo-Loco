@@ -127,7 +127,6 @@ class Endboss extends MoveableObject {
       this.playedSoundOnce = false;
     }
     if (this.isHurt()) {
-      console.log(this.playedSoundOnce);
       if (this.playedSoundOnce == false) {
         this.hurt_sound.play();
         this.playedSoundOnce = true;

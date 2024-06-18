@@ -180,6 +180,13 @@ canvas {
   display: none;
 }
 
+.controls-text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 @media screen and (max-width: 1200px) {
   canvas {
     width: 100%;

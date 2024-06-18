@@ -3,6 +3,7 @@ let clickedTime;
 let level;
 let world;
 let canvas;
+let keyboardsShown = true;
 const resetButton = document.getElementById("reset-button");
 const menuButton = document.getElementById("menu-button");
 const startButton = document.getElementById("start-button");
@@ -14,6 +15,7 @@ const controlsBtn = document.getElementById("controls-button");
 const fullScreenBtn = document.getElementById("fullscreen-button");
 const exitFullScreenBtn = document.getElementById("ext-fullscreen-button");
 const howToPlay = document.getElementById("how-to-play");
+const keyboardsBtn = document.getElementById("keyboards-button");
 
 const keyMap = {
   ArrowRight: "RIGHT",
@@ -61,7 +63,18 @@ function addEventListeners() {
   voiceZero.addEventListener("click", unmuted);
   closeBtn.addEventListener("click", closeControls);
   controlsBtn.addEventListener("click", showControls);
+  keyboardsBtn.addEventListener("click", showKeyboards);
   fullScreenEventListeners();
+}
+
+function showKeyboards() {
+  const controlContainer = document.getElementById("control-container");
+  controlContainer.classList.toggle("d-none");
+  if (keyboardsShown) {
+    keyboardsShown = false;
+  } else {
+    keyboardsShown = true;
+  }
 }
 
 /**
@@ -123,9 +136,11 @@ function enterFullscreen(element) {
  */
 function addTouchListeners(element, key) {
   element.addEventListener("touchstart", () => {
+    element.classList.add("control-btn-touch");
     keyboard[key] = true;
   });
   element.addEventListener("touchend", () => {
+    element.classList.remove("control-btn-touch");
     keyboard[key] = false;
     clearTimeout(clickedTime);
     keyboard.KEYUSED = true;
@@ -155,19 +170,26 @@ function checkGameFinished() {
   const policy = document.getElementById("policy");
   setInterval(() => {
     if (world.gameOverSetting || world.gameWonSetting) {
-      menuButton.classList.remove("d-none");
-      resetButton.classList.remove("d-none");
-      startButton.classList.add("d-none");
-      controlContainer.classList.add("d-none");
-      policy.classList.add("d-none");
+      setGameOverWon(policy, controlContainer);
     } else if (!world.gameMenu) {
       policy.classList.add("d-none");
-      controlContainer.classList.remove("d-none");
+      keyboardsBtn.classList.remove("d-none");
+      if (keyboardsShown) controlContainer.classList.remove("d-none");
     } else if (world.gameMenu) {
       policy.classList.remove("d-none");
       controlContainer.classList.add("d-none");
+      keyboardsBtn.classList.add("d-none");
     }
   }, 200);
+}
+
+function setGameOverWon(policy, controlContainer) {
+  menuButton.classList.remove("d-none");
+  resetButton.classList.remove("d-none");
+  startButton.classList.add("d-none");
+  controlContainer.classList.add("d-none");
+  keyboardsBtn.classList.add("d-none");
+  policy.classList.add("d-none");
 }
 
 /**

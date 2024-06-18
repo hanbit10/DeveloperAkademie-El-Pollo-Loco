@@ -1,4 +1,4 @@
-@media screen and (orientation: landscape) and (max-height: 1400px) {
+@media screen and (orientation: landscape) and (max-height: 1024px) {
   canvas {
     height: 100%;
   }
@@ -28,28 +28,44 @@
   .left-hand {
     display: flex;
     align-items: flex-end;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
   }
   .right-hand {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
   }
 
   .control-btn {
-    width: 7vw;
-    height: 7vw;
+    width: 70px;
+    height: 70px;
     aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     border: 5px solid #5c5c5c69;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
   }
 
   .control-big {
-    width: 9vw;
-    height: 9vw;
+    width: 90px;
+    height: 90px;
     aspect-ratio: 1/1;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+  .control-btn-touch {
+    background-color: #6e6e6e69;
   }
 
   .control-items {
@@ -57,7 +73,7 @@
   }
 }
 
-@media screen and (orientation: landscape) and (max-height: 1200px) {
+@media screen and (orientation: landscape) and (max-height: 767px) {
   h1 {
     display: none;
   }
@@ -83,13 +99,16 @@
   }
 
   .control-btn {
-    width: 5vw;
-    height: 5vw;
+    width: 7vw;
+    height: 7vw;
+    margin-right: 4px;
+    /* margin-bottom: 4px; */
   }
 
   .control-big {
-    width: 7vw;
-    height: 7vw;
+    width: 9vw;
+    height: 9vw;
+    margin: 0px 4px 0px 2px;
   }
 }
 

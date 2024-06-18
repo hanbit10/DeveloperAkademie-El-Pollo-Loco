@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" translate="no">
+<html class="notranslate" translate="no">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google" content="notranslate" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="landscape.css" />
     <link rel="icon" type="image/x-icon" href="../assets/img/kaktus.png" />
@@ -25,31 +26,32 @@
             <img id="voice1" src="../assets/icons/volume-on.svg" class="mute" alt="" />
             <img id="fullscreen-button" src="../assets/icons/expand-solid.svg" class="mute" />
             <img id="ext-fullscreen-button" src="../assets/icons/compress-solid.svg" class="mute d-none" />
-            <img id="controls-button" src="../assets/icons/keyboard-regular.svg" class="mute" />
+            <img id="keyboards-button" src="../assets/icons/keyboard-regular.svg" class="mute" alt="" />
+            <img id="controls-button" src="../assets/icons/scroll-solid.svg" class="mute" />
             <div id="how-to-play" class="how-to-play-container">
               <img class="how-to-play" src="../assets/icons/how-to-play.svg" alt="" />
               <h2>how to play</h2>
             </div>
           </div>
-          <div id="control-container" class="control-container">
+          <div id="control-container" class="control-container notranslate">
             <div id="left-hand" class="left-hand">
-              <div id="control-left" class="control-btn control-big">
+              <div id="control-left" class="control-btn control-big notranslate">
                 <div>Left</div>
               </div>
-              <div id="control-right" class="control-btn control-big">
+              <div id="control-right" class="control-btn control-big notranslate">
                 <div>Right</div>
               </div>
             </div>
-            <div id="right-hand" class="right-hand">
+            <div id="right-hand" class="right-hand notranslate">
               <div id="control-items" class="control-items">
-                <div id="control-throw" class="control-btn">
+                <div id="control-throw" class="control-btn notranslate">
                   <div>Throw</div>
                 </div>
-                <div id="control-buy" class="control-btn">
+                <div id="control-buy" class="control-btn notranslate">
                   <div>Buy</div>
                 </div>
               </div>
-              <div id="control-jump" class="control-btn control-big">
+              <div id="control-jump" class="control-btn control-big notranslate">
                 <div>Jump</div>
               </div>
             </div>
@@ -60,6 +62,10 @@
               <div class="column">
                 <div class="controls">D - Throw a Bottle</div>
                 <div class="controls">B - Buy a Bottle</div>
+                <div class="controls-text-container">
+                  <img src="../assets/icons/keyboard-regular.svg" class="mute" alt="" />
+                  <div class="controls">- Show/Hide Controls</div>
+                </div>
               </div>
               <div class="column">
                 <div class="controls"><img class="controls-img" src="../assets/icons/arrow-up.svg" alt="" /> - Jump</div>
