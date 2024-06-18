@@ -287,7 +287,7 @@ canvas {
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (orientation: portrait) and (max-width: 1500px) {
   .orientation-warning {
     position: absolute;
     width: 100%;
@@ -336,94 +336,6 @@ canvas {
   .menu {
     justify-content: flex-start;
     gap: 0;
-  }
-}
-
-@media screen and (max-height: 821px) {
-  h1 {
-    display: none;
-  }
-  canvas {
-    height: 100vh;
-  }
-
-  .content {
-    height: 100vh;
-    width: 100%;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  .control-container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: space-between;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-  }
-
-  .left-hand {
-    display: flex;
-    align-items: flex-end;
-  }
-  .right-hand {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .control-btn {
-    width: 7vw;
-    height: 7vw;
-    aspect-ratio: 1/1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: 5px solid #5c5c5c69;
-  }
-
-  .control-big {
-    width: 10vw;
-    height: 10vw;
-    aspect-ratio: 1/1;
-  }
-
-  .control-items {
-    display: flex;
-  }
-}
-
-@media only screen and (max-height: 480px) {
-  canvas {
-    height: 100vh;
-  }
-
-  .content {
-    height: 100vh;
-  }
-
-  .mute {
-    width: 30px;
-    height: 30px;
-    margin-top: 15px;
-  }
-
-  .controls {
-    font-size: 12px;
-  }
-
-  .control-btn {
-    width: 5vw;
-    height: 5vw;
-  }
-
-  .control-big {
-    width: 7vw;
-    height: 7vw;
   }
 }
 
