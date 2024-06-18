@@ -69,7 +69,7 @@ class Character extends MoveableObject {
   gothit_sound = new Audio("../assets/audio/character/gothit2.wav");
   snoring_sound = new Audio("../assets/audio/character/snoring.wav");
   jumpImage = 0;
-  pauseGame = false;
+  paused = false;
 
   offset = {
     top: 120,
@@ -114,7 +114,7 @@ class Character extends MoveableObject {
     this.coin = 0;
     this.bottle = 0;
     this.speed = 5;
-    this.pauseGame = false;
+    this.paused = false;
     this.world.keyboard.RIGHT = true;
     setTimeout(() => {
       this.world.keyboard.RIGHT = false;
@@ -148,7 +148,7 @@ class Character extends MoveableObject {
    * @return {void} Does not return anything.
    */
   playWalkSound() {
-    if (!this.pauseGame) {
+    if (!this.paused) {
       if (this.maxMoveableMap()) {
         this.moveRight();
         this.otherDirection = false;
@@ -193,7 +193,7 @@ class Character extends MoveableObject {
    */
   playMovingAnimation() {
     setInterval(() => {
-      if (!this.pauseGame) {
+      if (!this.paused) {
         this.checkKeyboard();
       }
     }, 100);
@@ -281,11 +281,16 @@ class Character extends MoveableObject {
    */
   pause() {
     this.speed = 0;
-    this.pauseGame = true;
+    this.paused = true;
     this.gothit_sound.volume = 0;
     this.walking_sound.volume = 0;
     this.jump_sound.volume = 0;
     this.snoring_sound.volume = 0;
+  }
+
+  continue() {
+    this.speed = 5;
+    this.paused = false;
   }
 
   /**
