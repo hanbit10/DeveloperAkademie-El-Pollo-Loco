@@ -95,7 +95,7 @@ class Character extends MoveableObject {
     this.applyGravity();
     this.animate();
     this.height = 270;
-    this.y = 130;
+    this.y = 160;
     this.x = 250;
   }
 
