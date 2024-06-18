@@ -2,7 +2,7 @@ class DrawableObject {
   img;
   imageCache = [];
   x = 100;
-  y = 280;
+  y = 0;
   height = 150;
   width = 100;
   currentImage = 0;
@@ -59,7 +59,7 @@ class DrawableObject {
     if (this.gameInstances()) {
       ctx.beginPath();
       ctx.lineWidth = "2";
-      ctx.strokeStyle = "transparent";
+      ctx.strokeStyle = "blue";
       ctx.rect(this.x, this.y, mo.width, mo.height);
       ctx.stroke();
     }

@@ -31,7 +31,7 @@ class MoveableObject extends DrawableObject {
     if (this instanceof ThrowableObject || this instanceof Chicken) {
       return true;
     } else {
-      return this.y < 180;
+      return this.y < 150;
     }
   }
 

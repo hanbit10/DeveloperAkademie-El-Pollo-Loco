@@ -1,7 +1,7 @@
 class Endboss extends MoveableObject {
   height = 340;
   width = 300;
-  y = 140;
+  y = 95;
   speed = 0.85 + Math.random() * 0.2;
   frameWidth = this.height;
   frameHeight = this.width;
@@ -127,6 +127,7 @@ class Endboss extends MoveableObject {
       this.playedSoundOnce = false;
     }
     if (this.isHurt()) {
+      console.log(this.playedSoundOnce);
       if (this.playedSoundOnce == false) {
         this.hurt_sound.play();
         this.playedSoundOnce = true;

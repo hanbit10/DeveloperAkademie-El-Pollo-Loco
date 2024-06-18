@@ -1,8 +1,8 @@
 class Chicken extends MoveableObject {
-  height = 60;
-  width = 60;
-  y = 380;
-  yCache = 380;
+  height = 50;
+  width = 50;
+  y = 367;
+  yCache = 367;
   frameWidth = this.height;
   frameHeight = this.width;
 
