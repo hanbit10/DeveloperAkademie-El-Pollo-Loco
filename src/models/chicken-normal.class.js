@@ -13,7 +13,7 @@ class ChickenNormal extends MoveableObject {
   ];
 
   killed_sound = new Audio("../assets/audio/chicken/normal-chicken/killed.wav");
-
+  paused = false;
   /**
    * Constructs a new ChickenNormal object with the specified id and initial x position.
    *
@@ -39,10 +39,10 @@ class ChickenNormal extends MoveableObject {
    */
   animate() {
     setInterval(() => {
-      if (!this.isDead()) this.playAnimation(this.IMAGES_WALKING);
+      if (!this.isDead() && !this.paused) this.playAnimation(this.IMAGES_WALKING);
     }, 130);
     setInterval(() => {
-      if (!this.isDead()) {
+      if (!this.isDead() && !this.paused) {
         this.moveLeft();
       }
     }, 1000 / 60);
@@ -73,6 +73,12 @@ class ChickenNormal extends MoveableObject {
    */
   pause() {
     this.speed = 0;
+    this.paused = true;
+  }
+
+  continue() {
+    this.speed = 0.55 + Math.random() * 2;
+    this.paused = false;
   }
 
   /**
@@ -90,6 +96,7 @@ class ChickenNormal extends MoveableObject {
     this.y = this.yCache;
     this.speed = 0.55 + Math.random() * 2;
     this.energy = 100;
+    this.continue();
   }
 
   /**

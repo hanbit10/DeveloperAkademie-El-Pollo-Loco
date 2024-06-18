@@ -48,6 +48,16 @@ function init() {
   addEventListeners();
   checkMobileControls();
   checkGameFinished();
+
+  window.matchMedia("(orientation: portrait)").addEventListener("change", (e) => {
+    const portrait = e.matches;
+
+    if (portrait) {
+      world.pauseGame();
+    } else {
+      world.continueGame();
+    }
+  });
 }
 
 /**
