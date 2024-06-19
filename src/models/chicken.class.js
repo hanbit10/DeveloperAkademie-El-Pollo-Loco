@@ -72,6 +72,10 @@ class Chicken extends MoveableObject {
    */
   dead() {
     this.killed_sound.play();
+    setTimeout(() => {
+      this.killed_sound.volume = 0;
+    }, 1000);
+
     this.loadImage("../assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png");
     this.speed = 0;
     this.energy = 0;

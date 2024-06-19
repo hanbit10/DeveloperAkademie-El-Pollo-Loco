@@ -53,6 +53,9 @@ class ChickenNormal extends MoveableObject {
    */
   dead() {
     this.killed_sound.play();
+    setTimeout(() => {
+      this.killed_sound.volume = 0;
+    }, 1000);
     this.loadImage("../assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
     this.speed = 0;
     this.energy = 0;
