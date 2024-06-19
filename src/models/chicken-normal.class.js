@@ -13,7 +13,7 @@ class ChickenNormal extends MoveableObject {
   ];
 
   killed_sound = new Audio("../assets/audio/chicken/normal-chicken/killed.wav");
-
+  paused = false;
   /**
    * Constructs a new ChickenNormal object with the specified id and initial x position.
    *
@@ -28,21 +28,18 @@ class ChickenNormal extends MoveableObject {
     this.id = id;
     this.animate();
   }
+
   /**
-   * Animate the chicken's movement and actions at regular intervals.
-   *
-   * @return {void} No return value
-   */ /**
    * Animate the chicken's movement and actions at regular intervals.
    *
    * @return {void} No return value
    */
   animate() {
     setInterval(() => {
-      if (!this.isDead()) this.playAnimation(this.IMAGES_WALKING);
+      if (!this.isDead() && !this.paused) this.playAnimation(this.IMAGES_WALKING);
     }, 130);
     setInterval(() => {
-      if (!this.isDead()) {
+      if (!this.isDead() && !this.paused) {
         this.moveLeft();
       }
     }, 1000 / 60);
@@ -66,13 +63,25 @@ class ChickenNormal extends MoveableObject {
   }
 
   /**
-   * A description of the entire function.
+   * Pauses the execution of the function by setting the speed to 0 and
+   * setting the paused flag to true.
    *
-   * @param {type} paramName - description of parameter
-   * @return {type} description of return value
+   * @return {void} No return value
    */
   pause() {
     this.speed = 0;
+    this.paused = true;
+  }
+
+  /**
+   * Resumes the execution of the function by setting the speed to a random value between 0.55 and 2.55,
+   * and setting the paused flag to false.
+   *
+   * @return {void} No return value
+   */
+  continue() {
+    this.speed = 0.55 + Math.random() * 2;
+    this.paused = false;
   }
 
   /**
@@ -90,6 +99,7 @@ class ChickenNormal extends MoveableObject {
     this.y = this.yCache;
     this.speed = 0.55 + Math.random() * 2;
     this.energy = 100;
+    this.continue();
   }
 
   /**

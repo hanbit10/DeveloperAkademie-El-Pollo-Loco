@@ -63,6 +63,7 @@ class Endboss extends MoveableObject {
   playKilledOnce = false;
   endbossWalk = false;
   playedSoundOnce = false;
+  paused = false;
 
   /**
    * Initializes a new instance of the Endboss class with the specified x position.
@@ -88,7 +89,7 @@ class Endboss extends MoveableObject {
    */
   animate() {
     this.bossAlive = setInterval(() => {
-      if (!this.isDead()) {
+      if (!this.isDead() && !this.paused) {
         if (this.bossAttack) {
           this.attackAnimation();
         } else {
@@ -147,12 +148,23 @@ class Endboss extends MoveableObject {
   }
 
   /**
-   * Pauses the execution by setting the speed to 0.
+   * Pauses the execution by setting the speed to 0 and marking the object as paused.
    *
    * @return {void} This function does not return anything.
    */
   pause() {
     this.speed = 0;
+    this.paused = true;
+  }
+
+  /**
+   * Continues the execution by setting the speed to a random value between 0.85 and 0.95 and marking the object as not paused.
+   *
+   * @return {void} This function does not return anything.
+   */
+  continue() {
+    this.speed = 0.85 + Math.random() * 0.2;
+    this.paused = false;
   }
 
   /**
@@ -202,6 +214,7 @@ class Endboss extends MoveableObject {
     this.energy = 100;
     this.count = 0;
     this.speed = 0.85 + Math.random() * 0.2;
+    this.continue();
   }
 
   /**

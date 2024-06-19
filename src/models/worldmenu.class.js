@@ -233,4 +233,19 @@ class WorldMenu {
       });
     });
   }
+
+  pauseGame() {
+    this.enemies.forEach((enemy) => {
+      enemy.pause();
+    });
+    this.character.pause();
+  }
+
+  continueGame() {
+    this.enemies.forEach((enemy) => {
+      enemy.continue();
+    });
+
+    this.character.continue();
+  }
 }

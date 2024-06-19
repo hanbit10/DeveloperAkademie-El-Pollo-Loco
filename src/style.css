@@ -187,7 +187,7 @@ canvas {
   width: 100%;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (orientation: portrait) and (max-width: 1200px) {
   canvas {
     width: 100%;
   }
@@ -254,7 +254,7 @@ canvas {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) and (max-width: 768px) {
   .control-container {
     width: 100%;
     display: flex;
@@ -294,7 +294,7 @@ canvas {
   }
 }
 
-@media only screen and (orientation: portrait) and (max-width: 1500px) {
+@media only screen and (orientation: portrait) {
   .orientation-warning {
     position: absolute;
     width: 100%;
@@ -312,7 +312,7 @@ canvas {
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (orientation: portrait) and (max-width: 480px) {
   a {
     font-size: 12px;
     margin-right: 8px;
