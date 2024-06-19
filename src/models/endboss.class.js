@@ -148,7 +148,7 @@ class Endboss extends MoveableObject {
   }
 
   /**
-   * Pauses the execution by setting the speed to 0.
+   * Pauses the execution by setting the speed to 0 and marking the object as paused.
    *
    * @return {void} This function does not return anything.
    */
@@ -157,6 +157,11 @@ class Endboss extends MoveableObject {
     this.paused = true;
   }
 
+  /**
+   * Continues the execution by setting the speed to a random value between 0.85 and 0.95 and marking the object as not paused.
+   *
+   * @return {void} This function does not return anything.
+   */
   continue() {
     this.speed = 0.85 + Math.random() * 0.2;
     this.paused = false;

@@ -48,13 +48,18 @@ function init() {
   addEventListeners();
   checkMobileControls();
   checkGameFinished();
+  addPause();
+}
 
+function addPause() {
+  document.addEventListener("keydown", handleKeyDown);
   window.matchMedia("(orientation: portrait)").addEventListener("change", (e) => {
     const portrait = e.matches;
-
     if (portrait) {
+      document.removeEventListener("keydown", handleKeyDown);
       world.pauseGame();
     } else {
+      document.addEventListener("keydown", handleKeyDown);
       world.continueGame();
     }
   });
@@ -294,14 +299,22 @@ function resetSketch() {
   startTimer();
 }
 
-document.addEventListener("keydown", (e) => {
+/**
+ * Handles the keydown event by setting the corresponding keyboard key to true,
+ * clearing the clickedTime variable, setting the keyboard.KEYUSED to true,
+ * and starting the timer.
+ *
+ * @param {Event} e - The keydown event object.
+ * @return {void} This function does not return anything.
+ */
+function handleKeyDown(e) {
   if (keyMap[e.key]) {
     keyboard[keyMap[e.key]] = true;
   }
   clearTimeout(clickedTime);
   keyboard.KEYUSED = true;
   startTimer();
-});
+}
 
 document.addEventListener("keyup", (e) => {
   if (keyMap[e.key]) {

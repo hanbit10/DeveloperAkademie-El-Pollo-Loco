@@ -238,7 +238,6 @@ class WorldMenu {
     this.enemies.forEach((enemy) => {
       enemy.pause();
     });
-
     this.character.pause();
   }
 

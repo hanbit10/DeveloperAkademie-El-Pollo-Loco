@@ -273,10 +273,6 @@ class Character extends MoveableObject {
   /**
    * Pauses the character's movement and audio effects.
    *
-   * This function sets the character's speed to 0, sets the pauseGame flag to true,
-   * and sets the volume of the gothit_sound, walking_sound, jump_sound, and snoring_sound
-   * audio effects to 0, effectively pausing them.
-   *
    * @return {void} This function does not return anything.
    */
   pause() {
@@ -288,6 +284,11 @@ class Character extends MoveableObject {
     this.snoring_sound.volume = 0;
   }
 
+  /**
+   * Continues the character's movement and audio effects.
+   *
+   * @return {void} This function does not return anything.
+   */
   continue() {
     this.speed = 5;
     this.paused = false;

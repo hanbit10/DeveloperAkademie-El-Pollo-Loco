@@ -14,6 +14,7 @@ class Chicken extends MoveableObject {
   paused = false;
   killed_sound = new Audio("../assets/audio/chicken/small-chicken/killed.wav");
   deadSetting = false;
+
   /**
    * Constructs a new instance of the Chicken class with the given id and x position.
    *
@@ -81,9 +82,9 @@ class Chicken extends MoveableObject {
   }
 
   /**
-   * Pauses the movement of the chicken by setting its speed to 0.
+   * Pauses the movement of the object by setting its speed to 0.
    *
-   * This function sets the `speed` property of the chicken to 0, effectively pausing its movement.
+   * This function sets the `speed` property of the object to 0, effectively pausing its movement. It also sets the `paused` property to `true` to indicate that the object is currently paused.
    *
    * @return {void} This function does not return a value.
    */
@@ -92,6 +93,11 @@ class Chicken extends MoveableObject {
     this.paused = true;
   }
 
+  /**
+   * Resumes the object's movement by setting its speed to a random value between 0.25 and 0.85.
+   *
+   * @return {void} This function does not return a value.
+   */
   continue() {
     this.paused = false;
     this.speed = 0.25 + Math.random() * 0.6;

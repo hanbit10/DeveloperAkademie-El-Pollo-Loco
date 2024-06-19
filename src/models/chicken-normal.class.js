@@ -28,11 +28,8 @@ class ChickenNormal extends MoveableObject {
     this.id = id;
     this.animate();
   }
+
   /**
-   * Animate the chicken's movement and actions at regular intervals.
-   *
-   * @return {void} No return value
-   */ /**
    * Animate the chicken's movement and actions at regular intervals.
    *
    * @return {void} No return value
@@ -66,16 +63,22 @@ class ChickenNormal extends MoveableObject {
   }
 
   /**
-   * A description of the entire function.
+   * Pauses the execution of the function by setting the speed to 0 and
+   * setting the paused flag to true.
    *
-   * @param {type} paramName - description of parameter
-   * @return {type} description of return value
+   * @return {void} No return value
    */
   pause() {
     this.speed = 0;
     this.paused = true;
   }
 
+  /**
+   * Resumes the execution of the function by setting the speed to a random value between 0.55 and 2.55,
+   * and setting the paused flag to false.
+   *
+   * @return {void} No return value
+   */
   continue() {
     this.speed = 0.55 + Math.random() * 2;
     this.paused = false;
