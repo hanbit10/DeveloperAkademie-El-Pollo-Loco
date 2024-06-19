@@ -171,7 +171,7 @@ class World extends WorldMenu {
     if (this.character.isAboveGround()) {
       setTimeout(() => {
         this.jumpAttack = true;
-      }, 250);
+      }, 220);
     } else {
       this.jumpAttack = false;
     }
