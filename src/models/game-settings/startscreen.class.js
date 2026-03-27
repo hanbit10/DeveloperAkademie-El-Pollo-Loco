@@ -9,6 +9,6 @@ class StartScreen extends DrawableObject {
    * @return {void}
    */
   constructor() {
-    super().loadImage("../assets/img/9_intro_outro_screens/start/startscreen_1.png");
+    super().loadImage("assets/img/9_intro_outro_screens/start/startscreen_1.png");
   }
 }

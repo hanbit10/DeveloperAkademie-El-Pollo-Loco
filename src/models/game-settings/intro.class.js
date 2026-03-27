@@ -9,6 +9,6 @@ class Intro extends DrawableObject {
    * @return {void}
    */
   constructor() {
-    super().loadImage("../assets/img/9_intro_outro_screens/win/win_2.png");
+    super().loadImage("assets/img/9_intro_outro_screens/win/win_2.png");
   }
 }
